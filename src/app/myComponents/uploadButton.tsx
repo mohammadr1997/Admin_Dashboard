@@ -1,8 +1,10 @@
 'use client'
 import React from 'react'
+import { Context } from './Contextprovider';
+import { useContext } from 'react';
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "../lib/utils";
-import SideBar from './SideBar';
+import { cn } from "@/lib/utils";
+import { usePost } from '../hooks/usePost';
 const buttonVariants = cva(
   "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
@@ -27,10 +29,43 @@ const buttonVariants = cva(
   }
 );
 import { Upload } from 'lucide-react'
+import axios from 'axios';
+import { darken } from '@mui/material/styles';
 
 export default function UploadButton() {
+  const context=useContext(Context)
+  const setSelectedImgs=context?.setSelectedImages
+  const setDates=context?.setDate
+   const {postData}=usePost()
+  // const postData=async(data)=>{
+  //   const response=await axios.post('/api/data',data)
+  //   return response.data.data
+  // }
     const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
-        console.log('e',e)
+        if(e.target.files){
+          const url=e.target.files[0]
+          const name=url.name
+          const src=URL.createObjectURL(url)
+            if(setSelectedImgs && setDates){
+               const now=new Date();
+              
+              const day=now.toLocaleString("en-us",{day:'2-digit'})
+              const month=now.toLocaleString("en-us",{month:'long'})
+              const year=now.toLocaleString("en-us",{year:'numeric'})
+             const realDate=`${day} ${month} ${year}`
+              const dateResult=`${day} ${month}`
+              const objectImage={
+                imageName:name,
+                src,
+                date:dateResult,
+                realDate
+              }
+              setSelectedImgs((prev)=>[...prev,objectImage])
+              postData(objectImage)
+             
+              // setDates((prevDates)=>[...prevDates,dateResult])
+            }
+        }
     }
   return (
     
@@ -38,7 +73,7 @@ export default function UploadButton() {
         <input onChange={handleChange} id='trigger-upload' type="file" className='hidden' />
         <label className='cursor-pointer  flex flex-row' htmlFor='trigger-upload'>  <Upload className='mt-2'/>
       <span 
-  className={`text-white font-bold text-center w-full  text-sm lg:text-lg ${buttonVariants({ variant: 'ghost', size: 'lg' })}`}
+  className={`text-white   font-bold text-center   text-sm lg:text-lg hover:!bg-transparent hover:!text-inherit ${buttonVariants({ variant: 'ghost', size: 'lg' })}`}
 >
   Upload New Image
 </span></label>
