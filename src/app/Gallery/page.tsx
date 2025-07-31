@@ -2,6 +2,7 @@
 import React, { useContext } from 'react'
 import axios from 'axios'
 import Image from 'next/image'
+import { usePost } from '../myComponents/hooks/usePost'
 import { Context } from '../myComponents/Contextprovider'
 import { useState } from 'react'
 import { selectedImageType } from '../myComponents/Contextprovider'
@@ -15,7 +16,9 @@ import { CardDescription } from '../Components/ui/Card'
 import { CardContent } from '../Components/ui/Card'
 import { CardHeader } from '@/components/ui/card'
 import Button from '@mui/material/Button'
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '../../components/ui/dialog'
 export default function Page() {
+  const {postData}=usePost();
   const context=useContext(Context)
   const selectedImgs=context?.selectedImages
   const setSelectedImgs=context?.setSelectedImages
@@ -34,6 +37,15 @@ export default function Page() {
     setSelectedImgs(data.products)
     }
   },[data])
+  const handleDelete=(id:number)=>{
+    if(selectedImgs && selectedImgs.length > 0){
+      const newUpdatedImages=selectedImgs.filter((_,index)=>id!==index)
+      if(newUpdatedImages && setSelectedImgs){
+        setSelectedImgs(newUpdatedImages)
+        postData(newUpdatedImages)
+      }
+    }    
+  }
   return (
     <section className='  overflow-x-hidden  grid grid-cols-1  lg:flex-nowrap  w-full text-white '>
 <SideBar/>
@@ -62,8 +74,17 @@ export default function Page() {
         </CardDescription>
         <CardFooter className='grid grid-cols-1'>
         <div className='grid grid-cols-2 gap-8'>
-          <Button className='!text-black !font-bold !text-md !lg:text-lg !px-4 !py-2 !rounded-2xl !border-3 !border-white'>Preview</Button>
-          <Button className='!text-black !font-bold !text-md !lg:text-lg !px-4 !py-2 !rounded-2xl !border-3 !border-white'>Delete</Button>
+          <Dialog>
+            <DialogTrigger asChild>
+               <Button className='!text-black !font-bold !text-md !lg:text-lg !px-4 !py-2 !rounded-2xl !border-3 !border-white'>Preview</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogTitle></DialogTitle>
+              <Image className='w-[450px] mx-auto h-[450px]' src={img.src} alt={img.imageName} width={600} height={600}/>
+            </DialogContent>
+          </Dialog>
+         
+          <Button onClick={()=>handleDelete(key)} className='!text-black !font-bold !text-md !lg:text-lg !px-4 !py-2 !rounded-2xl !border-3 !border-white'>Delete</Button>
         </div>
         <div>
           <span className='text-left p-2'>

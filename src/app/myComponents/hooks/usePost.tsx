@@ -6,7 +6,7 @@ date:string,
 realDate:string
 }
 export function usePost() {
-  const postData = async (data:dataProp) => {
+  const postData = async (data:dataProp | dataProp[]) => {
     try {
       const response = await axios.post("/api/data", data);
       return response.data.data;
