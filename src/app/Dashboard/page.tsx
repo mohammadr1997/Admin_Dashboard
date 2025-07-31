@@ -32,7 +32,7 @@ export default function Page() {
        
           <div className='w-full'>
         <p className="text-sm font-medium ">Mohammad Rezaei</p>
-        <p className="text-sm text-muted-foreground">Manager</p>
+        <p className="text-sm text-white">Manager</p>
       </div>
     
           </div>
