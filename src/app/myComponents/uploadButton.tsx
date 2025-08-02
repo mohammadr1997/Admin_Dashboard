@@ -61,12 +61,13 @@ export default function UploadButton() {
 
       const objectImage = {
         imageName: name,
-        src: base64String, // اینجا به‌جای URL موقت، base64 ذخیره می‌کنیم
+        src: base64String, 
         date: dateResult,
         realDate,
       };
 
       setSelectedImgs?.((prev) => [...prev, objectImage]);
+      
       postData(objectImage);
     };
   }

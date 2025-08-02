@@ -27,16 +27,19 @@ export default function Page() {
     const response= await axios.get('api/data')
     return response.data.data
   }
-  const {data}=useQuery({
+  const {data,refetch}=useQuery({
     queryKey:['products'],
     queryFn:getProducts
   })
   useEffect(()=>{
     if(data && setSelectedImgs){
-      localStorage.setItem('productsImages',JSON.stringify(data))
-    setSelectedImgs(data.products)
+      localStorage.setItem('productsImages',JSON.stringify(data.products))
+    // setSelectedImgs(data.products)
+    
     }
-  },[data])
+    refetch()
+    
+  },[data,selectedImgs])
   const handleDelete=(id:number)=>{
     if(selectedImgs && selectedImgs.length > 0){
       const newUpdatedImages=selectedImgs.filter((_,index)=>id!==index)
