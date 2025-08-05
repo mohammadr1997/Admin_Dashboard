@@ -18,19 +18,19 @@ import {
 export const menuItem = [
   {
     mainItem: [
-      { name: "Dashboard", icon: LayoutDashboard },
-      { name: "News", icon: Newspaper },
+      { name: "Dashboard", icon: LayoutDashboard, url: "dashboard" },
+      { name: "News", icon: Newspaper, url: "news" },
 
-      { name: "Gallery", icon: GalleryHorizontal },
-      { name: "Slide Banner", icon: SlidersHorizontal },
+      { name: "Gallery", icon: GalleryHorizontal, url: "gallery" },
+      { name: "Slide Banner", icon: SlidersHorizontal, url: "banner" },
     ],
     restItem: [
-      { name: "Sitemap", icon: Map },
-      { name: "FAQ", icon: MailQuestionMark },
+      { name: "Sitemap", icon: Map, url: "SiteMap" },
+      { name: "FAQ", icon: MailQuestionMark, url: "faq" },
 
-      { name: "Message", icon: MessageCircle },
-      { name: "DataBase", icon: Database },
-      { name: "Setting", icon: Settings },
+      { name: "Message", icon: MessageCircle, url: "message" },
+      { name: "DataBase", icon: Database, url: "dataBase" },
+      { name: "Setting", icon: Settings, url: "setting" },
     ],
   },
 ];

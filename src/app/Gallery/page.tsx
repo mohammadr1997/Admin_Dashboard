@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { selectedImageType } from '../myComponents/Contextprovider'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
+import useFetch from '../myComponents/hooks/useFetch'
 import UploadButton from '../myComponents/uploadButton'
 import SideBar from '../myComponents/SideBar'
 import { SelectDemo } from '../myComponents/Select'
@@ -23,23 +24,33 @@ export default function Page() {
   const selectedImgs=context?.selectedImages
   const setSelectedImgs=context?.setSelectedImages
   const [allImages,setAllImages]=useState<selectedImageType[]>([])
-  const getProducts=async()=>{
-    const response= await axios.get('api/data')
-    return response.data.data
-  }
-  const {data,refetch}=useQuery({
-    queryKey:['products'],
-    queryFn:getProducts
-  })
+  const{data,refetch} =useFetch()
+  //  const getProducts=async()=>{
+  //   const response= await axios.get('api/data')
+  //   return response.data.data
+  // }
+  // const {data,refetch}=useQuery({
+  //   queryKey:['products'],
+  //   queryFn:getProducts
+  // })
   useEffect(()=>{
     if(data && setSelectedImgs){
-      localStorage.setItem('productsImages',JSON.stringify(data.products))
-    // setSelectedImgs(data.products)
+      // localStorage.setItem('productsImages',JSON.stringify(data.products))
+      setSelectedImgs(data.products)
     
     }
     refetch()
     
-  },[data,selectedImgs])
+  },[data])
+  //  useEffect(()=>{
+  //   if(data && setSelectedImgs){
+  //     localStorage.setItem('productsImages',JSON.stringify(data.products))
+     
+    
+  //   }
+  //   refetch()
+    
+  // },[selectedImgs])
   const handleDelete=(id:number)=>{
     if(selectedImgs && selectedImgs.length > 0){
       const newUpdatedImages=selectedImgs.filter((_,index)=>id!==index)
@@ -67,7 +78,7 @@ export default function Page() {
 
     {selectedImgs && selectedImgs?.length > 0 ?
     selectedImgs?.map((img,key:number)=>{
-     return <Card className='w-[300px] mx-auto rounded-3xl' key={key}>
+     return <Card className='w-[300px]  overflow-hidden mx-auto rounded-3xl' key={key}>
       
         <CardContent className='w-[300px] overflow-hidden '>
           <Image className=' cursor-pointer transition-all duration-700 hover:scale-110 w-[300px] h-[300px] mx-auto p-0' src={img.src} alt={img.imageName} width={600} height={600}/>
@@ -76,10 +87,10 @@ export default function Page() {
           {img.imageName}
         </CardDescription>
         <CardFooter className='grid grid-cols-1'>
-        <div className='grid grid-cols-2 gap-8'>
+        <div className='grid grid-cols-2 gap-8 mb-2'>
           <Dialog>
             <DialogTrigger asChild>
-               <Button className='!text-black !font-bold !text-md !lg:text-lg !px-4 !py-2 !rounded-2xl !border-3 !border-white'>Preview</Button>
+               <Button className='!text-black !font-bold !text-md !lg:text-lg !px-4 !py-2 !rounded-2xl !border-1 !border-gray'>Preview</Button>
             </DialogTrigger>
             <DialogContent>
               <DialogTitle></DialogTitle>
@@ -87,10 +98,10 @@ export default function Page() {
             </DialogContent>
           </Dialog>
          
-          <Button onClick={()=>handleDelete(key)} className='!text-black !font-bold !text-md !lg:text-lg !px-4 !py-2 !rounded-2xl !border-3 !border-white'>Delete</Button>
+          <Button onClick={()=>handleDelete(key)} className='!text-black !font-bold !text-md !lg:text-lg !px-4 !py-2 !rounded-2xl !border-1 !border-gray'>Delete</Button>
         </div>
         <div>
-          <span className='text-left p-2'>
+          <span className='text-left p-2 mt-4 mb-'>
             {img.date}
           </span>
         </div>

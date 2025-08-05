@@ -1,8 +1,10 @@
 import * as React from "react"
 import { useState,useEffect } from "react"
+import useFetch from "./hooks/useFetch"
 import { selectedImageType } from "./Contextprovider"
 import { Context } from "./Contextprovider"
 import { useContext } from "react"
+import { useQuery } from "@tanstack/react-query"
 import {
   Select,
   SelectContent,
@@ -22,17 +24,21 @@ const newest=['newest','oldest']
 export function SelectDemo({title}:titleType) {
   const context=useContext(Context)
   const selectedImgs=context?.selectedImages
-  const allImgs=context?.allImgs
-  const setAllImgs=context?.setAllImgs
+    const [allImgs,setAllImgs]=useState<[]>([])
   const setSelectedImgs=context?.setSelectedImages
     const [dayValue,setDayValue]=useState<string>('')
     const [sortValue,setSortValue]=useState<string>('')
+    const {data,refetch}=useFetch()
     useEffect(()=>{
-      const allProducts=localStorage.getItem("productsImages")
-      if(allProducts){
-        const allProductsImgs=JSON.parse(allProducts)
-        console.log('all',allProductsImgs)
-         const updatedImgs=allProductsImgs.filter((img:any)=>{
+      // const allProducts=localStorage.getItem("productsImages")
+      refetch()
+      console.log('data',data?.products)
+    
+      if(selectedImgs && setSelectedImgs){
+
+        // const allProductsImgs=JSON.parse(allProducts)
+        // console.log('all',allProductsImgs)
+         const updatedImgs=data?.products.filter((img:any)=>{
           const now=new Date()
          const secondsNow=now.getTime() / 1000
           const imgDate=new Date(img.realDate)
@@ -59,18 +65,22 @@ export function SelectDemo({title}:titleType) {
           setSelectedImgs(updatedImgs)
         }
       }
-      
-       
-        
-       
-       
-       
-     
-        // if(allProducts){
-        //     const products=JSON.parse(allProducts)
-        //     console.log('allproducts',products.products)
-        // }
     },[dayValue])
+    useEffect(()=>{
+      if (!selectedImgs ||!setSelectedImgs) return ;
+      const sortImages=(selectedImages:any,sort:string)=>{
+          const sortImages=[...selectedImages]
+        sortImages.sort((a:any,b:any)=>{
+            const aDate=new Date(a.realDate)
+            const bDate=new Date(b.realDate)
+            return sort==='oldest'? aDate.getTime() - bDate.getTime() : bDate.getTime() - aDate.getTime()
+          })
+         setSelectedImgs(sortImages)
+      }
+      sortImages(selectedImgs,sortValue)
+     
+
+    },[sortValue])
   return (
     <div>
         {title==='days'?   <Select value={dayValue} onValueChange={setDayValue}>

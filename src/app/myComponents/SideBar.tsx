@@ -20,7 +20,8 @@ import {
 export default function SideBar() {
     type items={
   name:string,
-  icon:LucideIcon
+  icon:LucideIcon,
+  url:string
 }
       const [menuOpen,setMenuOpen]=useState<boolean>(false);
       const pathName=usePathname();
@@ -56,7 +57,7 @@ export default function SideBar() {
       {menuItem[0].mainItem.map((item:items,key:Key)=>{
         
         const Icon=item.icon
-        return <CommandItem className={`${item.name===path? 'bg-white text-black ' :'text-black'} hover:text-black hover:!bg-white mt-1 text-white`}  key={key} ><Link className={`flex flex-row gap-2 ${item.name===path ? 'text-black ' :''}  cursor-pointer text-black`} href={`/${item.name}`}><Icon/>&nbsp;{item.name}</Link></CommandItem>
+        return <CommandItem className={`${item.name===path? 'bg-white text-black ' :'text-black'} hover:text-black hover:!bg-white mt-1 text-white`}  key={key} ><Link className={`flex flex-row gap-2 ${item.name===path ? 'text-black ' :''}  cursor-pointer text-black`} href={`/${item.url}`}><Icon/>&nbsp;{item.name}</Link></CommandItem>
       })}
     </CommandGroup>
     <CommandSeparator />
@@ -68,7 +69,7 @@ export default function SideBar() {
     <CommandGroup className='w-44' heading="">
        {menuItem[0].restItem.map((item:items,key:Key)=>{
         const Icon=item.icon
-        return <CommandItem className={` cursor-pointer ${item.name===path? 'bg-white text-black ' :'text-black'} hover:text-black hover:!bg-white group mt-1 `} key={key} ><Link className={`flex flex-row gap-2  cursor-pointer ${item.name===path ? 'text-black' :''}text-black`} href={`/${item.name}`}><Icon/>&nbsp;{item.name}</Link></CommandItem>
+        return <CommandItem className={` cursor-pointer ${item.name===path? 'bg-white text-black ' :'text-black'} hover:text-black hover:!bg-white group mt-1 `} key={key} ><Link className={`flex flex-row gap-2  cursor-pointer ${item.name===path ? 'text-black' :''}text-black`} href={`/${item.url}`}><Icon/>&nbsp;{item.name}</Link></CommandItem>
       })}
     </CommandGroup>
   </CommandList>
@@ -85,7 +86,7 @@ export default function SideBar() {
     <CommandGroup className='' heading="">
       {menuItem[0].mainItem.map((item:items,key:Key)=>{
         const Icon=item.icon
-        return <CommandItem className={` cursor-pointer ${item.name===path? 'bg-white ' :''} group hover:!text-black hover:!bg-white mt-1 text-white`}    key={key} ><Link className={`flex flex-row gap-2  cursor-pointer ${item.name===path ? 'text-black' :''} text-lg`} href={`/${item.name}`}><Icon className={`w-7 h-7  group-hover:!text-black ${item.name===path?'text-black':'text-white'}`}/>&nbsp;{item.name}</Link></CommandItem>
+        return <CommandItem className={` cursor-pointer ${item.name===path? 'bg-white ' :''} group hover:!text-black hover:!bg-white mt-1 text-white`}    key={key} ><Link className={`flex flex-row gap-2  cursor-pointer ${item.name===path ? 'text-black' :''} text-lg`} href={`/${item.url}`}><Icon className={`w-7 h-7  group-hover:!text-black ${item.name===path?'text-black':'text-white'}`}/>&nbsp;{item.name}</Link></CommandItem>
       })}
     </CommandGroup>
     <CommandSeparator />
@@ -97,7 +98,7 @@ export default function SideBar() {
     <CommandGroup heading="">
        {menuItem[0].restItem.map((item:items,key:Key)=>{
         const Icon=item.icon
-        return <CommandItem className={` cursor-pointer ${item.name===path? 'bg-white ' :''} group hover:text-black hover:bg-white mt-1 text-white`}  key={key}><Link className={`flex flex-row gap-2  cursor-pointer text-lg `} href={`/${item.name}`}> <Icon className={`w-7 h-7  group-hover:text-black  ${item.name===path?'text-black':'text-white'}`}/>&nbsp;{item.name} </Link></CommandItem>
+        return <CommandItem className={` cursor-pointer ${item.name===path? 'bg-white ' :''} group hover:text-black hover:bg-white mt-1 text-white`}  key={key}><Link className={`flex flex-row gap-2  cursor-pointer text-lg `} href={`/${item.url}`}> <Icon className={`w-7 h-7  group-hover:text-black  ${item.name===path?'text-black':'text-white'}`}/>&nbsp;{item.name} </Link></CommandItem>
       })}
     </CommandGroup>
   </CommandList>
