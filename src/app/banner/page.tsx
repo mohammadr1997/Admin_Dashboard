@@ -43,6 +43,7 @@ interface bannerType {
   date: string;
   isActive: boolean;
   type: string;
+  id:number
 }
 export default function Page() {
   const [filteredByType, setFilteredByType] = useState<bannerType[] | null>(
@@ -55,7 +56,7 @@ export default function Page() {
   const context = useContext(Context);
   const selectedBanners = context?.selectedBanner;
   const setSelectedBanner = context?.setSelectedBanner;
-  const [editBanner, setEditBanner] = useState<bannerType | null>([]);
+  const [editBanner, setEditBanner] = useState<bannerType | null>(null);
   useEffect(() => {
     if (setSelectedBanner && data) {
       const updatedData = data.map((banner: bannerType, index: number) => ({
@@ -91,7 +92,7 @@ export default function Page() {
     e.preventDefault();
     if (!selectedBanners || !setSelectedBanner || !editBanner) return;
     const changedBanner = selectedBanners.map((banner: bannerType) =>
-      banner.realDate === editBanner.realDate ? editBanner : banner,
+      banner.id === editBanner.id ? editBanner : banner,
     );
     setSelectedBanner(changedBanner);
     postBanner(changedBanner);
@@ -132,7 +133,7 @@ export default function Page() {
     } else if (file.name.includes('.')) {
       type = file.name.split('.').pop()?.toLowerCase() || 'unknown';
     }
-
+    const id=Date.now();
     const imgDetails = {
       imageName: file.name,
       src: base64,
@@ -140,6 +141,7 @@ export default function Page() {
       realDate: dateImg,
       isActive: false,
       type,
+      id
     };
 
     if (setSelectedBanner && imgDetails) {
@@ -275,80 +277,81 @@ export default function Page() {
                             </Dialog>
                           </span>
                           <span>
-                            {editBanner ? (
-                              <Dialog>
-                                <DialogTrigger asChild>
-                                  <Button
-                                    onClick={() => setEditBanner(banner)}
-                                    className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
-                                    variant="ghost"
-                                  >
-                                    Edit
-                                  </Button>
-                                </DialogTrigger>
-                                <DialogContent>
-                                  <DialogTitle></DialogTitle>
-                                  <form className="text-md lg:text-lg font-bold grid grid-cols-1 gap-6">
-                                    <div className="flex flex-row flex-nowrap w-full  justify-around">
-                                      <label
-                                        className="mx-4 cursor-pointer mt-2"
-                                        htmlFor="name"
-                                      >
-                                        Image Name
-                                      </label>
-                                      <input
-                                        required
-                                        value={editBanner.imageName}
-                                        onChange={(e) =>
-                                          setEditBanner({
-                                            ...editBanner,
-                                            imageName: e.target.value,
-                                          })
-                                        }
-                                        placeholder={banner.imageName}
-                                        className=" rounded-3xl p-3 border-1 border-gray w-1/2"
-                                        type="text"
-                                        id="name"
-                                      />
-                                    </div>
-                                    <div className="flex flex-row flex-nowrap w-full  justify-between">
-                                      <label
-                                        className="cursor-pointer mt-2"
-                                        htmlFor="source"
-                                      >
-                                        Upload New Image
-                                      </label>
-                                      <input
-                                        required
-                                        className=" w-1/2 rounded-3xl p-3 border-1 border-gray"
-                                        onChange={async (e) => {
-                                          const file = e.target.files?.[0];
-                                          if (!file) return;
-                                          const compressedSrc =
-                                            await compressAndConvertToBase64(
-                                              file,
-                                            );
-                                          setEditBanner({
-                                            ...editBanner,
-                                            src: compressedSrc,
-                                          });
-                                        }}
-                                        id="source"
-                                        type="file"
-                                      ></input>
-                                    </div>
+                           <Dialog
+  open={!!editBanner}
+  onOpenChange={(isOpen) => {
+    if (!isOpen) setEditBanner(null);
+  }}
+>
+  <DialogTrigger asChild>
+    <Button
+      onClick={() => setEditBanner(banner)}
+      className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
+      variant="ghost"
+    >
+      Edit
+    </Button>
+  </DialogTrigger>
 
-                                    <button
-                                      type="submit"
-                                      onClick={(e) => handleSave(e, editBanner)}
-                                      className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
-                                    >
-                                      Save Changes
-                                    </button>
-                                  </form>
-                                </DialogContent>
-                              </Dialog>
-                            ) : null}
+  {editBanner && (
+    <DialogContent>
+      <DialogTitle></DialogTitle>
+      <form
+        className="text-md lg:text-lg font-bold grid grid-cols-1 gap-6"
+        onSubmit={(e) => handleSave(e, editBanner)}
+      >
+        <div className="flex flex-row flex-nowrap w-full justify-around">
+          <label className="mx-4 cursor-pointer mt-2" htmlFor="name">
+            Image Name
+          </label>
+          <input
+            required
+            value={editBanner.imageName}
+            onChange={(e) =>
+              setEditBanner({
+                ...editBanner,
+                imageName: e.target.value,
+              })
+            }
+            placeholder={banner.imageName}
+            className="rounded-3xl p-3 border-1 border-gray w-1/2"
+            type="text"
+            id="name"
+          />
+        </div>
+
+        <div className="flex flex-row flex-nowrap w-full justify-between">
+          <label className="cursor-pointer mt-2" htmlFor="source">
+            Upload New Image
+          </label>
+          <input
+            required
+            className="w-1/2 rounded-3xl p-3 border-1 border-gray"
+            onChange={async (e) => {
+              const file = e.target.files?.[0];
+              if (!file) return;
+              const compressedSrc = await compressAndConvertToBase64(file);
+              setEditBanner({
+                ...editBanner,
+                src: compressedSrc,
+              });
+            }}
+            id="source"
+            type="file"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
+        >
+          Save Changes
+        </button>
+      </form>
+    </DialogContent>
+  )}
+</Dialog>
+
                           </span>
                           <span>
                             <Button

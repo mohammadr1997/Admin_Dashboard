@@ -6,7 +6,7 @@ import { cva } from 'class-variance-authority';
 import { cn } from '../lib/utils';
 import { usePost } from './hooks/usePost';
 import { Upload } from 'lucide-react';
-
+import useConvertBase64 from './hooks/useConvertBase64';
 
 export const buttonVariants = cva(
   'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
@@ -33,43 +33,44 @@ export const buttonVariants = cva(
   }
 );
 
-const compressAndConvertToBase64 = (file: File): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    const isSvg = file.type === 'image/svg+xml';
+// const compressAndConvertToBase64 = (file: File): Promise<string> => {
+//   return new Promise((resolve, reject) => {
+//     const reader = new FileReader();
+//     const isSvg = file.type === 'image/svg+xml';
 
-    reader.onload = () => {
-      if (isSvg) {
+//     reader.onload = () => {
+//       if (isSvg) {
        
-        resolve(reader.result as string);
-        return;
-      }
+//         resolve(reader.result as string);
+//         return;
+//       }
 
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const MAX_WIDTH = 800;
-        const scaleSize = MAX_WIDTH / img.width;
-        canvas.width = MAX_WIDTH;
-        canvas.height = img.height * scaleSize;
+//       const img = new Image();
+//       img.onload = () => {
+//         const canvas = document.createElement('canvas');
+//         const MAX_WIDTH = 800;
+//         const scaleSize = MAX_WIDTH / img.width;
+//         canvas.width = MAX_WIDTH;
+//         canvas.height = img.height * scaleSize;
 
-        const ctx = canvas.getContext('2d');
-        ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
+//         const ctx = canvas.getContext('2d');
+//         ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
-        resolve(compressedBase64);
-      };
-      img.onerror = reject;
-      img.src = reader.result as string;
-    };
+//         const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+//         resolve(compressedBase64);
+//       };
+//       img.onerror = reject;
+//       img.src = reader.result as string;
+//     };
 
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-};
+//     reader.onerror = reject;
+//     reader.readAsDataURL(file);
+//   });
+// };
 
 export default function UploadButton() {
   const context = useContext(Context);
+  const {compressAndConvertToBase64} =useConvertBase64()
   const setSelectedImgs = context?.setSelectedImages;
 
   const { postData } = usePost();
@@ -89,13 +90,14 @@ export default function UploadButton() {
 
       const realDate = `${day} ${month} ${year}`;
       const dateResult = `${day} ${month}`;
-
+      const id=Date.now()
       const objectImage = {
         imageName: name,
         src: base64String,
         date: dateResult,
         realDate,
         type: fileType,
+        id
       };
 
       setSelectedImgs?.((prev) => [...prev, objectImage]);

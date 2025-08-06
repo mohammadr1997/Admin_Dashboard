@@ -9,6 +9,7 @@ export type selectedImageType = {
   realDate: string;
   isActive: boolean;
   type?: string;
+  id:number
 };
 interface contextType {
   selectedImages: selectedImageType[];
