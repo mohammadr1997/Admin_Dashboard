@@ -1,8 +1,5 @@
-import React from 'react'
-import NotFound from './not-found'
+import React from 'react';
+import NotFound from './not-found';
 export default function page() {
-  return (
-    <NotFound/>
-  )
+  return <NotFound />;
 }
-

@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -43,12 +43,12 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 @font-face {
-  font-family: "Poppins";
-  src: url("/fonts/poppins/Poppins-Light.ttf") format(truetype);
+  font-family: 'Poppins';
+  src: url('/fonts/poppins/Poppins-Light.ttf') format(truetype);
   font-weight: bold;
 }
 body {
-  font-family: "Poppins";
+  font-family: 'Poppins';
 }
 
 :root {
