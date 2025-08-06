@@ -41,14 +41,13 @@ export default function Page() {
       setSelectedImgs(data.products);
     }
     console.log('dayValue',dayValueInput)
+  
   }, [data]);
   useEffect(()=>{
     refetch();
   },[selectedImgs])
 
-  useEffect(()=>{
-    console.log('dayvalue',dayValueInput)
-  },[dayValueInput])
+
   const handleDelete = (id: number) => {
     if (selectedImgs && selectedImgs.length > 0) {
       const newUpdatedImages = selectedImgs.filter((_, index) => id !== index);
@@ -86,7 +85,7 @@ export default function Page() {
       </div>
       <div className=" md:pl-[8px] lg:pl-[268px] md:pr-[18px] w-full  min-h-[33rem] bg-[#189DAC] grid grid-cols-1 md:flex md:flex-row md:flex-wrap md:gap-8 lg:flex lg:flex-row lg:gap-6  justify-center items-center gap-8">
     
-        {dayValueInput && Array.isArray(dayValueInput==='all' ? selectedImgs : imagesByDateFilter) ? (dayValueInput==='all' ? selectedImgs : imagesByDateFilter)?.map((img, key: number) => {
+        {dayValueInput==='' && Array.isArray(dayValueInput==='' ? selectedImgs : imagesByDateFilter) ? (dayValueInput==='' ? selectedImgs : imagesByDateFilter)?.map((img, key: number) => {
               return (
                 <Card
                   className="w-[300px]  overflow-hidden mx-auto rounded-3xl"
@@ -138,7 +137,58 @@ export default function Page() {
                 </Card>
               );
             })
-        :null  }
+        :imagesByDateFilter?.map((img, key: number) => {
+              return (
+                <Card
+                  className="w-[300px]  overflow-hidden mx-auto rounded-3xl"
+                  key={key}
+                >
+                  <CardContent className="w-[300px] overflow-hidden ">
+                    <Image
+                      className=" cursor-pointer transition-all duration-700 hover:scale-110 w-[300px] h-[300px] mx-auto p-0"
+                      src={img.src}
+                      alt={img.imageName}
+                      width={600}
+                      height={600}
+                    />
+                  </CardContent>
+                  <CardDescription className="text-left p-4">
+                    {img.imageName}
+                  </CardDescription>
+                  <CardFooter className="grid grid-cols-1">
+                    <div className="grid grid-cols-2 gap-8 mb-2">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button className="!text-black !font-bold !text-md !lg:text-lg !px-4 !py-2 !rounded-2xl !border-1 !border-gray">
+                            Preview
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogTitle></DialogTitle>
+                          <Image
+                            className="w-[450px] mx-auto h-[450px]"
+                            src={img.src}
+                            alt={img.imageName}
+                            width={600}
+                            height={600}
+                          />
+                        </DialogContent>
+                      </Dialog>
+
+                      <Button
+                        onClick={() => handleDelete(key)}
+                        className="!text-black !font-bold !text-md !lg:text-lg !px-4 !py-2 !rounded-2xl !border-1 !border-gray"
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                    <div>
+                      <span className="text-left p-2 mt-4 mb-">{img.date}</span>
+                    </div>
+                  </CardFooter>
+                </Card>
+              );
+            })  }
       </div>
     </section>
   );

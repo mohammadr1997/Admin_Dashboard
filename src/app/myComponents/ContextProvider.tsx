@@ -27,7 +27,7 @@ export default function Contextprovider({
   children: React.ReactNode;
 }) {
   const [selectedImages, setSelectedImages] = useState<selectedImageType[]>([]);
-  const [dayValue, setDayValue] = useState<string>('all');
+  const [dayValue, setDayValue] = useState<string>('');
   const [selectedBanner, setSelectedBanner] = useState<selectedImageType[]>([]);
   const [selectedImageGalleryByDate, setSelectedImageGalleryByDate] = useState<selectedImageType[]>([]);
 

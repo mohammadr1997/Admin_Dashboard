@@ -30,17 +30,17 @@ export function SelectDemo({ title }: titleType) {
   const dayVal=context?.dayValue
   const setDayVal=context?.setDayValue
   const setSelectedImgs = context?.setSelectedImages;
-  // const [dayValue, setDayValue] = useState<string>('');
+ 
   const [sortValue, setSortValue] = useState<string>('');
   const { data, refetch } = useFetch();
   useEffect(() => {
     
     refetch();
-    console.log('data', data?.products);
     
+    let updatedImgs;
     if (selectImagesByDateFilter && setSelectedImagesByDateFilter && data) {
-      
-      const updatedImgs = data?.products.filter((img: any) => {
+        if(dayVal==='') return
+         updatedImgs = data?.products.filter((img: any) => {
         const now = new Date();
         const secondsNow = now.getTime() / 1000;
         const imgDate = new Date(img.realDate);
@@ -73,16 +73,20 @@ export function SelectDemo({ title }: titleType) {
             return true;
         }
       });
+ 
+     
       
         setSelectedImagesByDateFilter(updatedImgs);
      
     }
+    
   }, [dayVal,selectedImgs]);
 
   useEffect(() => {
-    if (!selectedImgs || !setSelectedImgs) return;
-    const sortImages = (selectedImages: any, sort: string) => {
-      const sortImages = [...selectedImages];
+    
+    if (!selectedImgs || !setSelectedImgs || !setSelectedImagesByDateFilter || !selectImagesByDateFilter) return;
+  const sortImages = (selectedImagesForSort: any, sort: string,dayValue:string) => {
+      const sortImages = [...selectedImagesForSort];
       sortImages.sort((a: any, b: any) => {
         const aDate = new Date(a.realDate);
         const bDate = new Date(b.realDate);
@@ -90,9 +94,20 @@ export function SelectDemo({ title }: titleType) {
           ? aDate.getTime() - bDate.getTime()
           : bDate.getTime() - aDate.getTime();
       });
-      setSelectedImgs(sortImages);
-    };
-    sortImages(selectedImgs, sortValue);
+      if(dayVal===''){
+         setSelectedImgs(sortImages);
+      }else{
+        setSelectedImagesByDateFilter(sortImages)
+      }
+     
+    }
+    if(dayVal===''){
+       sortImages(selectedImgs, sortValue,dayVal);
+    }else{
+      sortImages(selectImagesByDateFilter,sortValue,'Defined')
+    }
+    
+   
   }, [sortValue]);
   return (
     <div>
