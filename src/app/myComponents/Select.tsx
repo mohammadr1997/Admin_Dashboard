@@ -1,3 +1,4 @@
+'use client'
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import useFetch from './hooks/useFetch';
@@ -24,19 +25,21 @@ const newest = ['newest', 'oldest'];
 export function SelectDemo({ title }: titleType) {
   const context = useContext(Context);
   const selectedImgs = context?.selectedImages;
-  const [allImgs, setAllImgs] = useState<[]>([]);
+  const selectImagesByDateFilter=context?.selectedImageGalleryByDate
+  const setSelectedImagesByDateFilter=context?.setSelectedImageGalleryByDate
+  const dayVal=context?.dayValue
+  const setDayVal=context?.setDayValue
   const setSelectedImgs = context?.setSelectedImages;
-  const [dayValue, setDayValue] = useState<string>('');
+  // const [dayValue, setDayValue] = useState<string>('');
   const [sortValue, setSortValue] = useState<string>('');
   const { data, refetch } = useFetch();
   useEffect(() => {
-    // const allProducts=localStorage.getItem("productsImages")
+    
     refetch();
     console.log('data', data?.products);
-
-    if (selectedImgs && setSelectedImgs) {
-      // const allProductsImgs=JSON.parse(allProducts)
-      // console.log('all',allProductsImgs)
+    
+    if (selectImagesByDateFilter && setSelectedImagesByDateFilter && data) {
+      
       const updatedImgs = data?.products.filter((img: any) => {
         const now = new Date();
         const secondsNow = now.getTime() / 1000;
@@ -45,7 +48,7 @@ export function SelectDemo({ title }: titleType) {
         const secondsImg = imgDate.getTime() / 1000;
         const secondsSevenDays = 7 * 24 * 60 * 60;
         const secondsThirtyDays = 30 * 24 * 60 * 60;
-        switch (dayValue) {
+        switch (dayVal) {
           case 'today':
             return (
               now.getFullYear() === imgDate.getFullYear() &&
@@ -70,11 +73,12 @@ export function SelectDemo({ title }: titleType) {
             return true;
         }
       });
-      if (setSelectedImgs) {
-        setSelectedImgs(updatedImgs);
-      }
+      
+        setSelectedImagesByDateFilter(updatedImgs);
+     
     }
-  }, [dayValue]);
+  }, [dayVal,selectedImgs]);
+
   useEffect(() => {
     if (!selectedImgs || !setSelectedImgs) return;
     const sortImages = (selectedImages: any, sort: string) => {
@@ -93,7 +97,7 @@ export function SelectDemo({ title }: titleType) {
   return (
     <div>
       {title === 'days' ? (
-        <Select value={dayValue} onValueChange={setDayValue}>
+        <Select value={dayVal} onValueChange={setDayVal}>
           <SelectTrigger className=" cursor-pointer flex text-md md:text-lg  !text-white bg-black/10  w-64 lg:w-72 backdrop-blur-lg border-1  font-bold  border-blue-100  rounded-3xl px-3 py-2 flex-row gap-2 flex-nowrap">
             <SelectValue className="" placeholder="filter by days" />
           </SelectTrigger>

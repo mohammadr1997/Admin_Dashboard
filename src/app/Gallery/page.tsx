@@ -1,12 +1,12 @@
 'use client';
 import React, { useContext } from 'react';
-import axios from 'axios';
+
 import Image from 'next/image';
 import { usePost } from '../myComponents/hooks/usePost';
 import { Context } from '../myComponents/Contextprovider';
 import { useState } from 'react';
 import { selectedImageType } from '../myComponents/Contextprovider';
-import { useQuery } from '@tanstack/react-query';
+
 import { useEffect } from 'react';
 import useFetch from '../myComponents/hooks/useFetch';
 import UploadButton from '../myComponents/uploadButton';
@@ -15,7 +15,7 @@ import { SelectDemo } from '../myComponents/Select';
 import { Card, CardFooter } from '../Components/ui/Card';
 import { CardDescription } from '../Components/ui/Card';
 import { CardContent } from '../Components/ui/Card';
-import { CardHeader } from '@/components/ui/card';
+
 import Button from '@mui/material/Button';
 import {
   Dialog,
@@ -28,31 +28,27 @@ export default function Page() {
   const context = useContext(Context);
   const selectedImgs = context?.selectedImages;
   const setSelectedImgs = context?.setSelectedImages;
-  const [allImages, setAllImages] = useState<selectedImageType[]>([]);
+  const dayValueInput=context?.dayValue
+  const setDayvalueInput=context?.setDayValue
+  const imagesByDateFilter=context?.selectedImageGalleryByDate
+  const setImagesByDateFilter=context?.setSelectedImageGalleryByDate
+  // const [allImages, setAllImages] = useState<selectedImageType[]>([]);
   const { data, refetch } = useFetch();
-  //  const getProducts=async()=>{
-  //   const response= await axios.get('api/data')
-  //   return response.data.data
-  // }
-  // const {data,refetch}=useQuery({
-  //   queryKey:['products'],
-  //   queryFn:getProducts
-  // })
+
   useEffect(() => {
     if (data && setSelectedImgs) {
-      // localStorage.setItem('productsImages',JSON.stringify(data.products))
+     
       setSelectedImgs(data.products);
     }
-    refetch();
+    console.log('dayValue',dayValueInput)
   }, [data]);
-  //  useEffect(()=>{
-  //   if(data && setSelectedImgs){
-  //     localStorage.setItem('productsImages',JSON.stringify(data.products))
+  useEffect(()=>{
+    refetch();
+  },[selectedImgs])
 
-  //   }
-  //   refetch()
-
-  // },[selectedImgs])
+  useEffect(()=>{
+    console.log('dayvalue',dayValueInput)
+  },[dayValueInput])
   const handleDelete = (id: number) => {
     if (selectedImgs && selectedImgs.length > 0) {
       const newUpdatedImages = selectedImgs.filter((_, index) => id !== index);
@@ -89,8 +85,8 @@ export default function Page() {
         </div>
       </div>
       <div className=" md:pl-[8px] lg:pl-[268px] md:pr-[18px] w-full  min-h-[33rem] bg-[#189DAC] grid grid-cols-1 md:flex md:flex-row md:flex-wrap md:gap-8 lg:flex lg:flex-row lg:gap-6  justify-center items-center gap-8">
-        {selectedImgs && selectedImgs?.length > 0
-          ? selectedImgs?.map((img, key: number) => {
+    
+        {dayValueInput && Array.isArray(dayValueInput==='all' ? selectedImgs : imagesByDateFilter) ? (dayValueInput==='all' ? selectedImgs : imagesByDateFilter)?.map((img, key: number) => {
               return (
                 <Card
                   className="w-[300px]  overflow-hidden mx-auto rounded-3xl"
@@ -142,7 +138,7 @@ export default function Page() {
                 </Card>
               );
             })
-          : null}
+        :null  }
       </div>
     </section>
   );
