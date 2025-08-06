@@ -8,7 +8,7 @@ const getBanners=async()=>{
   return response.data.data  
 }
 const {data,refetch}=useQuery({
-     keepPreviousData: true,
+    keepPreviousData: true,
     queryKey:['banners'],
     queryFn:getBanners,
     

@@ -48,7 +48,8 @@ useEffect(()=>{
   refetch()
 },[selectedBanners])
 
-const handleSave=(editBanner:bannerType)=>{
+const handleSave=(e,editBanner:bannerType)=>{
+  e.preventDefault();
   if(!selectedBanners || !setSelectedBanner || !editBanner ) return
   const changedBanner=selectedBanners.map((banner:bannerType)=>banner.realDate===editBanner.realDate ? editBanner : banner)
   setSelectedBanner(changedBanner)
@@ -123,7 +124,7 @@ if(!selectedBanners || !setSelectedBanner) return
   });
 };
   return (
-    <section className='relative  overflow-x-hidden  grid grid-cols-1  lg:flex-nowrap  w-full text-white '>
+    <section className='relative  overflow-x-hidden  grid grid-cols-1  lg:flex-nowrap  w-full text-white  '>
        <SideBar/>
 
        <div className=' text-white   font-bold  gap-4 lg:justify-between p-10  flex flex-col   bg-[#189DAC] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center  justify-around  '>
@@ -159,7 +160,7 @@ if(!selectedBanners || !setSelectedBanner) return
       </SelectContent>
     </Select>
        </div>
-        <div className='  text-black text-center grid grid-cols-1 md:flex md:flex-row md:flex-wrap justify-center gap-10 mt-14'>{selectedBanners ? selectedBanners.map((banner:bannerType,key:number)=>{
+        <div className='  text-black text-center grid grid-cols-1 md:flex md:flex-row md:flex-wrap justify-center gap-10 mt-14  bg-[#189DAC] min-h-[44rem]'>{selectedBanners ? selectedBanners.map((banner:bannerType,key:number)=>{
           return <div className='mt-2 mb-2' key={key}>
             <Card className='w-[350px] mx-auto overflow-hidden'>
             <CardTitle></CardTitle>
@@ -197,7 +198,7 @@ if(!selectedBanners || !setSelectedBanner) return
                           }} id='source' type='file'></input>
                         </div>
                              
-                        <button type='submit' onClick={()=>handleSave(editBanner)} className='!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer' >Save Changes</button>
+                        <button type='submit' onClick={(e)=>handleSave(e,editBanner)} className='!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer' >Save Changes</button>
                       
                         </form>
                       
