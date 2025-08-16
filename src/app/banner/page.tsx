@@ -240,7 +240,7 @@ export default function Page() {
                     <Card className="w-[350px] mx-auto overflow-hidden">
                       <CardTitle></CardTitle>
                       <CardDescription></CardDescription>
-                      <CardContent className="w-[350px] grid grid-cols-1">
+                      <CardContent className="w-[350px] h-[480px] grid-cols-1">
                         <Image
                           className="w-[350px]  rounded-3xl mt-5 h-[350px] mx-auto cursor-pointer hover:scale-110 transition-all duration-700"
                           src={banner.src}
@@ -250,7 +250,8 @@ export default function Page() {
                         />
                         <CardTitle className="mt-2 text-left p-4 text-md lg:text-xl font-bold">
                           {' '}
-                          {banner.imageName}
+                          
+                          {banner.imageName.substring(0,20)}
                         </CardTitle>
                         <div className="grid grid-cols-3 gap-6 mb-4 mt-1">
                           <span>
@@ -265,9 +266,9 @@ export default function Page() {
                                 </Button>
                               </DialogTrigger>
                               <DialogContent>
-                                <DialogTitle></DialogTitle>
+                              <DialogTitle ></DialogTitle>
                                 <Image
-                                  className="w-[450px]h-[450px]"
+                                  className="w-[450px] h-[450px]"
                                   alt={banner.imageName}
                                   src={banner.src}
                                   width={800}

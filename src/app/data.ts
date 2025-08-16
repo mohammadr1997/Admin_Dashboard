@@ -25,7 +25,7 @@ export const menuItem = [
       { name: 'Slide Banner', icon: SlidersHorizontal, url: 'banner' },
     ],
     restItem: [
-      { name: 'Sitemap', icon: Map, url: 'SiteMap' },
+      { name: 'Sitemap', icon: Map, url: 'siteMap' },
       { name: 'FAQ', icon: MailQuestionMark, url: 'faq' },
 
       { name: 'Message', icon: MessageCircle, url: 'message' },

@@ -16,7 +16,7 @@ export default function NotFound() {
         The page you are looking for does not exist or might be redirected to
         another url
       </p>
-      <Link href="/Dashboard" passHref>
+      <Link href="/dashboard" passHref>
         <Button
           className="bg-[#ef4444] cursor-pointer text-white font-bold text-md lg:text-lg"
           color="red"
