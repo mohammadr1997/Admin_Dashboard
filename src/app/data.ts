@@ -15,6 +15,12 @@ import {
   MessageSquareReply,
   Activity,
 } from 'lucide-react';
+export type FAQType = {
+  id: number;
+  question: string;
+  answer: string;
+  status: 'pending' | 'approved' | 'rejected';
+};
 export const menuItem = [
   {
     mainItem: [
@@ -76,6 +82,26 @@ export const stats = [
     value: '430',
     note: 'Less than expected',
     bg: 'bg-cyan-800 text-gray-300',
+  },
+];
+export const initialFAQData: FAQType[] = [
+  {
+    id: 1,
+    question: 'How can I reset my password?',
+    answer: '',
+    status: 'pending',
+  },
+  {
+    id: 2,
+    question: 'How do I contact support?',
+    answer: '',
+    status: 'pending',
+  },
+  {
+    id: 3,
+    question: 'Where can I find my purchase history?',
+    answer: '',
+    status: 'pending',
   },
 ];
 export const API_KEY = '108b184ea7a5977a6865035c94a4a258';
