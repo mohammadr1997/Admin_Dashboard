@@ -21,7 +21,7 @@ import {
     </CardContent>
     <CardFooter className="flex justify-center">
       <Link href={route.url}>
-        <Button className="px-6 cursor-pointer  py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold transition">
+        <Button className="px-6 cursor-pointer w-24 md:w-28  py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold transition">
           Visit
         </Button>
       </Link>
