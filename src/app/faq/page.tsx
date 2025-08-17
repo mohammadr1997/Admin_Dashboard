@@ -68,15 +68,18 @@ export default function FAQPage() {
         {faqData.map((faq) => (
           <Card className="w-[350px]  h-[250px] overflow-hidden mx-auto rounded-3xl" key={faq.id}>
             <CardContent className="w-[300px] overflow-hidden">
-              <h2 className="text-lg font-bold px-2 py-1">{faq.question}</h2>
-              <p className="mt-2 text-sm p-1">
-                Status: <span className={faq.status === 'approved' ? 'text-green-400' : faq.status === 'rejected' ? 'text-red-400' : 'text-yellow-300'}>
+              <h2 className="text-2xl font-extrabold px-2 py-1 ">{faq.question}</h2>
+              <p className="mt-2 text-md md:text-lg font-bold p-1">
+                 <span className={faq.status === 'approved' ? 'text-green-400' : faq.status === 'rejected' ? 'text-red-400' : 'text-yellow-300'}>
                   {faq.status?.toUpperCase()}
                 </span>
               </p>
             </CardContent>
             <CardFooter className="grid grid-cols-1 gap-2">
-              <Dialog open={!!selectedFAQ} onOpenChange={(isOpen) => { if (!isOpen) setSelectedFAQ(null); }}>
+              
+
+{faq.status=='pending'?   <div className="flex gap-2 justify-center mt-3 cursor-pointer pb-4">
+  <Dialog open={!!selectedFAQ} onOpenChange={(isOpen) => { if (!isOpen) setSelectedFAQ(null); }}>
                 <DialogTrigger asChild>
                   <Button
                     onClick={() => setSelectedFAQ(faq)}
@@ -93,12 +96,53 @@ export default function FAQPage() {
                   </DialogContent>
                 )}
               </Dialog>
-
-              <div className="flex gap-2 justify-center mt-3 cursor-pointer pb-4">
                 <Button className="bg-green-500 cursor-pointer hover:bg-green-600" onClick={() => handleApprove(faq)}>Approve</Button>
-                <Button className="bg-red-500 cursor-pointer hover:bg-red-600" onClick={() => handleReject(faq)}>Reject</Button>
-                <Button className="bg-gray-700 cursor-pointer hover:bg-gray-800" onClick={() => handleDelete(faq)}>Delete</Button>
-              </div>
+                <Button className="bg-red-600 cursor-pointer hover:bg-red-600" onClick={() => handleReject(faq)}>Reject</Button>
+                
+              </div>:faq.status=='approved'? <div className="flex gap-2 justify-center mt-3 cursor-pointer pb-4">
+  <Dialog open={!!selectedFAQ} onOpenChange={(isOpen) => { if (!isOpen) setSelectedFAQ(null); }}>
+                <DialogTrigger asChild>
+                  <Button
+                    onClick={() => setSelectedFAQ(faq)}
+                    className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
+                    variant="ghost"
+                  >
+                    View Answer
+                  </Button>
+                </DialogTrigger>
+                {selectedFAQ && (
+                  <DialogContent>
+                    <DialogTitle>{selectedFAQ.question}</DialogTitle>
+                    <p className="text-md lg:text-lg mt-4">{selectedFAQ.answer || 'No answer yet.'}</p>
+                  </DialogContent>
+                )}
+              </Dialog>
+                <Button className="bg-green-500 cursor-pointer hover:bg-green-600" onClick={() => handleReject(faq)}>Reject</Button>
+                <Button className="bg-red-600 cursor-pointer hover:bg-red-600" onClick={() => handleDelete(faq)}>Delete</Button>
+                
+              </div>: <div className="flex gap-2 justify-center mt-3 cursor-pointer pb-4">
+  <Dialog open={!!selectedFAQ} onOpenChange={(isOpen) => { if (!isOpen) setSelectedFAQ(null); }}>
+                <DialogTrigger asChild>
+                  <Button
+                    onClick={() => setSelectedFAQ(faq)}
+                    className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
+                    variant="ghost"
+                  >
+                    View Answer
+                  </Button>
+                </DialogTrigger>
+                {selectedFAQ && (
+                  <DialogContent>
+                    <DialogTitle>{selectedFAQ.question}</DialogTitle>
+                    <p className="text-md lg:text-lg mt-4">{selectedFAQ.answer || 'No answer yet.'}</p>
+                  </DialogContent>
+                )}
+              </Dialog>
+                <Button className="bg-green-500 cursor-pointer hover:bg-green-600" onClick={() => handleApprove(faq)}>Approve</Button>
+                <Button className="bg-red-600 cursor-pointer hover:bg-red-600" onClick={() => handleDelete(faq)}>Delete</Button>
+                
+              </div>}
+            
             </CardFooter>
           </Card>
         ))}
