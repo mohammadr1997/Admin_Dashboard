@@ -21,13 +21,22 @@ export default function FAQPage() {
 
   
   useEffect(() => {
-    const storedData = localStorage.getItem('faqData');
-    if (storedData) {
-      setFaqData(JSON.parse(storedData));
-    } else {
+  const storedData = localStorage.getItem('faqData');
+  if (storedData) {
+    const parsed = JSON.parse(storedData);
+
+    // if stored data has fewer items than initial data → reset
+    if (parsed.length !== initialFAQData.length) {
       setFaqData(initialFAQData);
+      localStorage.setItem('faqData', JSON.stringify(initialFAQData));
+    } else {
+      setFaqData(parsed);
     }
-  }, []);
+  } else {
+    setFaqData(initialFAQData);
+    localStorage.setItem('faqData', JSON.stringify(initialFAQData));
+  }
+}, [initialFAQData.length]);
 
  
   const updateFAQ = (updatedFAQ: FAQType) => {
@@ -69,8 +78,8 @@ export default function FAQPage() {
           <Card className="w-[350px]  h-[250px] overflow-hidden mx-auto rounded-3xl" key={faq.id}>
             <CardContent className="w-[300px] overflow-hidden">
               <h2 className="text-2xl font-extrabold px-2 py-1 ">{faq.question}</h2>
-              <p className="mt-2 text-md md:text-lg font-bold p-1">
-                 <span className={faq.status === 'approved' ? 'text-green-400' : faq.status === 'rejected' ? 'text-red-400' : 'text-yellow-300'}>
+              <p className="mt-2 text-sm md:text-md md:text-lg font-bold p-1">
+                 <span className={faq.status === 'approved' ? 'bg-[#b2f2bb] text-[#056608] p-1 rounded-md' : faq.status === 'rejected' ? 'bg-[#f5c2c7]  p-1 rounded-md text-[#a10000]' : '  p-1 rounded-md bg-[#f6e4a5] text-[#444]'}>
                   {faq.status?.toUpperCase()}
                 </span>
               </p>
@@ -83,28 +92,28 @@ export default function FAQPage() {
                 <DialogTrigger asChild>
                   <Button
                     onClick={() => setSelectedFAQ(faq)}
-                    className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
+                    className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer bg-[#e9ecef]"
                     variant="ghost"
                   >
                     View Answer
                   </Button>
                 </DialogTrigger>
                 {selectedFAQ && (
-                  <DialogContent>
+                  <DialogContent  className="backdrop-blur-sm bg-white/90">
                     <DialogTitle>{selectedFAQ.question}</DialogTitle>
                     <p className="text-md lg:text-lg mt-4">{selectedFAQ.answer || 'No answer yet.'}</p>
                   </DialogContent>
                 )}
               </Dialog>
-                <Button className="bg-green-500 cursor-pointer hover:bg-green-600" onClick={() => handleApprove(faq)}>Approve</Button>
-                <Button className="bg-red-600 cursor-pointer hover:bg-red-600" onClick={() => handleReject(faq)}>Reject</Button>
+                <Button className="bg-[#2ecc71] cursor-pointer hover:bg-green-600 text-white " onClick={() => handleApprove(faq)}>Approve</Button>
+                <Button className="bg-[#e74c3c] cursor-pointer hover:bg-red-600" onClick={() => handleReject(faq)}>Reject</Button>
                 
               </div>:faq.status=='approved'? <div className="flex gap-2 justify-center mt-3 cursor-pointer pb-4">
   <Dialog open={!!selectedFAQ} onOpenChange={(isOpen) => { if (!isOpen) setSelectedFAQ(null); }}>
                 <DialogTrigger asChild>
                   <Button
                     onClick={() => setSelectedFAQ(faq)}
-                    className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
+                    className="!text-black !font-bold bg-[#e9ecef] !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
                     variant="ghost"
                   >
                     View Answer
@@ -117,15 +126,15 @@ export default function FAQPage() {
                   </DialogContent>
                 )}
               </Dialog>
-                <Button className="bg-green-500 cursor-pointer hover:bg-green-600" onClick={() => handleReject(faq)}>Reject</Button>
-                <Button className="bg-red-600 cursor-pointer hover:bg-red-600" onClick={() => handleDelete(faq)}>Delete</Button>
+                <Button className="bg-[#e74c3c] cursor-pointer hover:bg-red-600" onClick={() => handleReject(faq)}>Reject</Button>
+                <Button className="bg-[#2d3436] text-white cursor-pointer hover:bg-[#4b575a]" onClick={() => handleDelete(faq)}>Delete</Button>
                 
               </div>: <div className="flex gap-2 justify-center mt-3 cursor-pointer pb-4">
   <Dialog open={!!selectedFAQ} onOpenChange={(isOpen) => { if (!isOpen) setSelectedFAQ(null); }}>
                 <DialogTrigger asChild>
                   <Button
                     onClick={() => setSelectedFAQ(faq)}
-                    className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
+                    className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer bg-[#e9ecef] "
                     variant="ghost"
                   >
                     View Answer
@@ -138,8 +147,8 @@ export default function FAQPage() {
                   </DialogContent>
                 )}
               </Dialog>
-                <Button className="bg-green-500 cursor-pointer hover:bg-green-600" onClick={() => handleApprove(faq)}>Approve</Button>
-                <Button className="bg-red-600 cursor-pointer hover:bg-red-600" onClick={() => handleDelete(faq)}>Delete</Button>
+                <Button className="bg-[#2ecc71] cursor-pointer hover:bg-green-600 text-white " onClick={() => handleApprove(faq)}>Approve</Button>
+                <Button className="bg-[#2d3436] text-white cursor-pointer hover:bg-[#4b575a]" onClick={() => handleDelete(faq)}>Delete</Button>
                 
               </div>}
             
