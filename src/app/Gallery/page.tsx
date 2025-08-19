@@ -23,6 +23,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../../components/ui/dialog';
+import UserCard from '../myComponents/UserCards';
 
 export default function Page() {
   const {compressAndConvertToBase64} =useConvertBase64()
@@ -78,7 +79,7 @@ export default function Page() {
   return (
     <section className="  overflow-x-hidden  grid grid-cols-1  lg:flex-nowrap  w-full text-white ">
       <SideBar />
-      <div className=" text-white   font-bold  gap-4 lg:justify-between p-10  flex flex-col   bg-[#189DAC] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center  justify-around ">
+      <div className=" text-white   font-bold  gap-4 lg:justify-between p-10  flex flex-col dark:bg-[#0f4b5c]   bg-[#189DAC] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center  justify-around ">
         <div className=" flex flex-col md:flex-col lg:flex-row lg:justify-between relative justify-center w-full">
           {' '}
           <div>
@@ -87,21 +88,24 @@ export default function Page() {
               Hi Mohammad manage and Publish your content visuial
             </p>
           </div>
-          <div className="mx-auto mt-6 lg:mt-0">
-            <UploadButton />
+          <div className=" hidden lg:inline-block mx-auto mt-6 lg:mt-0">
+            <UserCard/>
           </div>
         </div>
 
-        <div className="flex flex-col justify-center gap-6 md:flex-row md:flex-nowrap md:justify-center lg:justify-end">
-          <div className="mx-auto lg:mx-0">
+        <div className="flex flex-col justify-center gap-6 md:flex-row md:flex-nowrap md:justify-center lg:justify-end  overflow-x-hidden lg:pl-[288px] md:pr-[8px] w-full  ">
+           <div className="mx-auto mt-2 lg:mx-0 w-full">
+            <UploadButton />
+          </div>
+          <div className="mx-auto mt-2 lg:mx-0 w-full">
             <SelectDemo title="days" />
           </div>
-          <div className="mx-auto lg:mx-0">
+          <div className="mx-auto mt-2 lg:mx-0 w-full">
             <SelectDemo title="sort" />
           </div>
         </div>
       </div>
-      <div className=" md:pl-[8px] lg:pl-[268px] md:pr-[18px] w-full  min-h-[33rem] bg-[#189DAC] grid grid-cols-1 md:flex md:flex-row md:flex-wrap md:gap-8 lg:flex lg:flex-row lg:gap-6  justify-center items-center gap-8">
+      <div className=" md:pl-[8px] lg:pl-[268px] md:pr-[18px] w-full  min-h-[33rem] dark:bg-[#0f4b5c] bg-[#189DAC] grid grid-cols-1 md:flex md:flex-row md:flex-wrap md:gap-8 lg:flex lg:flex-row lg:gap-6  justify-center items-center gap-8">
     
         {dayValueInput==='' && Array.isArray(dayValueInput==='' ? selectedImgs : imagesByDateFilter) ? (dayValueInput==='' ? selectedImgs : imagesByDateFilter)?.map((img, key: number) => {
               return (
@@ -126,7 +130,7 @@ export default function Page() {
                       <Dialog>
                         <DialogTrigger asChild>
                          
-                            <Button  className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer" variant='ghost'>
+                            <Button  className="text-black dark:text-white !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer" variant='ghost'>
                             Preview
                           </Button>
                         
@@ -149,7 +153,7 @@ export default function Page() {
   <DialogTrigger asChild>
     <Button
       onClick={() => setEditImage(img)}
-      className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
+      className="text-black dark:text-white !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
       variant="ghost"
     >
       Edit
@@ -217,7 +221,7 @@ export default function Page() {
                       
                                <Button
                         onClick={() => handleDelete(key)}
-                        className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer" variant='ghost'
+                        className="text-black dark:text-white !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer" variant='ghost'
                       >
                         Delete
                       </Button>

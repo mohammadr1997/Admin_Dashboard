@@ -28,17 +28,17 @@ export default function Page() {
       <SideBar />
 
  
-      <div className="flex flex-col gap-6 p-10 bg-[#189DAC] text-white md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full">
+      <div className="flex flex-col gap-6 p-10 dark:bg-[#0f4b5c] bg-[#189DAC] text-white md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full">
         
       
-        <div>
-          <h1 className="text-2xl lg:text-4xl font-bold">Sitemap</h1>
-          <p className="text-md lg:text-xl text-gray-100">
+        <div className="mx-auto">
+          <h1 className="text-2xl lg:text-4xl font-bold text-center mb-1">Sitemap</h1>
+          <p className="text-md lg:text-xl text-gray-100 text-center mb-1 mt-1">
             Hi Mohammad, quickly access and navigate your content structure
           </p>
         </div>
 
-     <div className="flex gap-4">
+     <div className="flex gap-4  justify-center">
   <button
     onClick={() => window.location.reload()}
     className="bg-black/10 w-48 lg:w-72 backdrop-blur-lg border border-blue-100 rounded-3xl cursor-pointer  text-white font-bold flex flex-row items-center justify-center gap-2 text-lg md:text-xl"

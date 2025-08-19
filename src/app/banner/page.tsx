@@ -180,7 +180,7 @@ export default function Page() {
     <section className="relative  overflow-x-hidden  grid grid-cols-1  lg:flex-nowrap  w-full text-white  ">
       <SideBar />
 
-      <div className=" text-white   font-bold  gap-4 lg:justify-between p-10  flex flex-col   bg-[#189DAC] dark:bg-[#0f4b5c] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center  justify-around  ">
+      <div className=" text-white   font-bold  gap-4 lg:justify-between p-10  flex flex-col dark:bg-[#0f4b5c]   bg-[#189DAC] dark:bg-[#0f4b5c] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center  justify-around  ">
         <div className="grid grid-cols-1 gap-8 mx-auto text-md lg:text-2xl ">
           <h2 className="text-xl lg:text-3xl">Slide Banner</h2>
           <p>Hi Mohammad manage and publish you Banner visuialy</p>

@@ -106,7 +106,7 @@ export default function UploadButton() {
   };
 
   return (
-    <div className="flex bg-black/10 w-64 lg:w-72 backdrop-blur-lg border-1 font-bold border-blue-100 rounded-3xl px-3 py-2 flex-row gap-2 flex-nowrap">
+    <div className="flex -mt-1 bg-black/10 w-full backdrop-blur-lg border-1  font-bold border-blue-100 rounded-3xl px-2 -py-1 flex-row gap-2 flex-nowrap">
       <input
         onChange={handleChange}
         id="trigger-upload"
@@ -117,7 +117,7 @@ export default function UploadButton() {
         <Upload className="mt-2" />
         <span
           className={cn(
-            'text-white font-bold text-center text-sm lg:text-lg hover:!bg-transparent hover:!text-inherit',
+            'text-white font-bold text-center text-sm lg:text-md hover:!bg-transparent hover:!text-inherit',
             buttonVariants({ variant: 'ghost', size: 'lg' })
           )}
         >

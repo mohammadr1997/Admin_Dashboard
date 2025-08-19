@@ -113,7 +113,7 @@ export function SelectDemo({ title }: titleType) {
     <div>
       {title === 'days' ? (
         <Select value={dayVal} onValueChange={setDayVal}>
-          <SelectTrigger className=" cursor-pointer flex text-md md:text-lg  !text-white bg-black/10  w-64 lg:w-72 backdrop-blur-lg border-1  font-bold  border-blue-100  rounded-3xl px-3 py-2 flex-row gap-2 flex-nowrap">
+          <SelectTrigger className=" cursor-pointer flex text-md md:text-lg  !text-white bg-black/10  w-full backdrop-blur-lg border-1  font-bold  border-blue-100  rounded-3xl px-3 py-2 flex-row gap-2 flex-nowrap">
             <SelectValue className="" placeholder="filter by days" />
           </SelectTrigger>
           <SelectContent>
@@ -130,7 +130,7 @@ export function SelectDemo({ title }: titleType) {
         </Select>
       ) : (
         <Select value={sortValue} onValueChange={setSortValue}>
-          <SelectTrigger className=" cursor-pointer flex !text-white text-md md:text-lg bg-black/10  w-64 lg:w-72 backdrop-blur-lg border-1  font-bold  border-blue-100  rounded-3xl px-3 py-2 flex-row gap-2 flex-nowrap">
+          <SelectTrigger className=" cursor-pointer flex !text-white text-md md:text-lg bg-black/10  w-full  backdrop-blur-lg border-1  font-bold  border-blue-100  rounded-3xl px-3 py-2 flex-row gap-2 flex-nowrap">
             <SelectValue placeholder="sort : Newest" />
           </SelectTrigger>
           <SelectContent>
