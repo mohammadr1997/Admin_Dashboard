@@ -180,7 +180,7 @@ export default function Page() {
     <section className="relative  overflow-x-hidden  grid grid-cols-1  lg:flex-nowrap  w-full text-white  ">
       <SideBar />
 
-      <div className=" text-white   font-bold  gap-4 lg:justify-between p-10  flex flex-col   bg-[#189DAC] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center  justify-around  ">
+      <div className=" text-white   font-bold  gap-4 lg:justify-between p-10  flex flex-col   bg-[#189DAC] dark:bg-[#0f4b5c] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center  justify-around  ">
         <div className="grid grid-cols-1 gap-8 mx-auto text-md lg:text-2xl ">
           <h2 className="text-xl lg:text-3xl">Slide Banner</h2>
           <p>Hi Mohammad manage and publish you Banner visuialy</p>
@@ -228,7 +228,7 @@ export default function Page() {
             </SelectContent>
           </Select>
         </div>
-        <div className="  text-black text-center grid grid-cols-1 md:flex md:flex-row md:flex-wrap justify-center gap-10 mt-14  bg-[#189DAC] min-h-[44rem]">
+        <div className="  text-black text-center grid grid-cols-1 md:flex md:flex-row md:flex-wrap justify-center gap-10 mt-14  bg-[#189DAC] dark:bg-[#0f4b5c] min-h-[44rem]">
           {(filteredByType?.length
   ? filteredByType
   : selectedBanners?.length && typeValue===''
@@ -259,7 +259,7 @@ export default function Page() {
                             <Dialog>
                               <DialogTrigger asChild>
                                 <Button
-                                  className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
+                                  className="text-black dark:text-white !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
                                   variant="ghost"
                                 >
                                   Preview
@@ -287,7 +287,7 @@ export default function Page() {
   <DialogTrigger asChild>
     <Button
       onClick={() => setEditBanner(banner)}
-      className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
+      className="text-black dark:text-white !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
       variant="ghost"
     >
       Edit
@@ -344,7 +344,7 @@ export default function Page() {
 
         <button
           type="submit"
-          className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
+          className="text-black dark:text-white !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
         >
           Save Changes
         </button>
@@ -357,7 +357,7 @@ export default function Page() {
                           <span>
                             <Button
                               onClick={() => handleDelete(banner.imageName)}
-                              className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
+                              className="text-black dark:text-white !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
                               variant="ghost"
                             >
                               Delete

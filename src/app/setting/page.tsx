@@ -2,13 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../../components/ui/button';
 import SideBar from '../myComponents/SideBar';
+import { useContext } from 'react';
+import { DarkModeContext } from '../myComponents/darkModeProvider';
 import { Card, CardContent, CardFooter } from '../Components/ui/Card';
 import { initialSettingsData, SettingsType } from '../data';
 
 export default function SettingsPage() {
   const [settingsData, setSettingsData] = useState<SettingsType[]>([]);
 
-
+    const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
   useEffect(() => {
     const storedData = localStorage.getItem('settingsData');
     if (storedData) {
@@ -74,7 +76,12 @@ export default function SettingsPage() {
             <CardFooter className="flex justify-center mt-3 gap-2 pb-6">
               <Button
                 className={setting.enabled ? 'bg-[#e74c3c] cursor-pointer hover:bg-red-600 text-white' : 'bg-[#2ecc71] hover:bg-green-600 text-white cursor-pointer'}
-                onClick={() => toggleSetting(setting)}
+                onClick={() =>{ 
+                  toggleSetting(setting)
+                  if(setting.name=='Dark Mode'){
+                    toggleDarkMode()
+                  }
+                }}
               >
                 {setting.enabled ? 'Disable' : 'Enable'}
               </Button>

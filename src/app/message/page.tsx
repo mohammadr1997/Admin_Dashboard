@@ -14,62 +14,40 @@ import { initialMessagesData, MessageType } from '../data';
 export default function MessagesPage() {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [selectedMessage, setSelectedMessage] = useState<MessageType | null>(null);
-    const [changedMessages,setChangedMessages]=useState<MessageType[]>([])
-useEffect(() => {
-  const storedData = localStorage.getItem('messagesData');
-  let finalData: MessageType[] = initialMessagesData;
-  let changedMessages: MessageType[] = [];
 
-  if (storedData) {
-    try {
-      const parsed: MessageType[] = JSON.parse(storedData);
-
-      if (Array.isArray(parsed)) {
-        // مقایسه با initialMessagesData
-        changedMessages = initialMessagesData.filter(initMsg => {
-          const storedMsg = parsed.find(p => p.id === initMsg.id);
-          // اگر پیام جدید است یا متن آن تغییر کرده
-          return !storedMsg || storedMsg.text !== initMsg.text || storedMsg.status !== initMsg.status;
-        });
-
-        // داده نهایی: ترکیب داده‌های ذخیره‌شده با پیام‌های جدید
-        finalData = [...parsed];
-        changedMessages.forEach(msg => {
-          if (!parsed.find(p => p.id === msg.id)) {
-            finalData.push(msg);
-          } else {
-            // پیام موجود ولی تغییر کرده → جایگزین می‌کنیم
-            finalData = finalData.map(p => p.id === msg.id ? msg : p);
-          }
-        });
-      } else {
-        finalData = initialMessagesData;
-        changedMessages = initialMessagesData;
+  // بارگذاری اولیه از localStorage یا initialMessagesData
+  useEffect(() => {
+    const storedData = localStorage.getItem('messagesData');
+    if (storedData) {
+      try {
+        const parsed: MessageType[] = JSON.parse(storedData);
+        if (Array.isArray(parsed)) {
+          setMessages(parsed);
+          return;
+        }
+      } catch (error) {
+        console.error("Failed to parse messagesData:", error);
       }
-    } catch (error) {
-      console.error("Failed to parse messagesData:", error);
-      finalData = initialMessagesData;
-      changedMessages = initialMessagesData;
     }
-  } else {
-    changedMessages = initialMessagesData;
-  }
+    setMessages(initialMessagesData);
+    localStorage.setItem('messagesData', JSON.stringify(initialMessagesData));
+  }, [initialMessagesData]);
 
-  setMessages(finalData);
-  setChangedMessages(changedMessages); // state جدید برای نمایش پیام‌های تغییر یافته
-  localStorage.setItem('messagesData', JSON.stringify(finalData));
-}, [initialMessagesData]);
+  // هر بار messages تغییر کرد → ذخیره تو localStorage
+  useEffect(() => {
+    if (messages.length > 0) {
+      localStorage.setItem('messagesData', JSON.stringify(messages));
+    }
+  }, [messages]);
 
   const markAsRead = (msg: MessageType) => {
-    const updated = messages.map(m => m.id === msg.id ? { ...m, status: 'read' } : m);
-    setMessages(updated);
-    localStorage.setItem('messagesData', JSON.stringify(updated));
+    setMessages(prev =>
+      prev.map(m => m.id === msg.id ? { ...m, status: 'read' } : m)
+    );
   };
 
   const deleteMessage = (msg: MessageType) => {
-    const updated = messages.filter(m => m.id !== msg.id);
-    setMessages(updated);
-    localStorage.setItem('messagesData', JSON.stringify(updated));
+    setMessages(prev => prev.filter(m => m.id !== msg.id));
   };
 
   return (
@@ -96,7 +74,9 @@ useEffect(() => {
                   {msg.status?.toUpperCase()}
                 </span>
               </p>
-              <p className="mt-2 text-md lg:text-lg px-2  h-24">{msg.text.substring(0, 45)}...</p>
+              <p className="mt-2 text-md lg:text-lg px-2 h-24">
+                {msg.text.length > 45 ? msg.text.substring(0, 45) + '...' : msg.text}
+              </p>
             </CardContent>
             <CardFooter className="grid grid-cols-1 gap-2 pb-3">
               <div className="flex gap-2 justify-center mt-3 cursor-pointer pb-4">
