@@ -6,7 +6,7 @@ import axios from 'axios';
 import CircularIndeterminate from './loading';
 import { useQuery } from '@tanstack/react-query';
 import BasicAlerts from './AlertError';
-import { Span } from 'next/dist/trace';
+
 import UserCard from './UserCards';
 interface newsNumber {
   number: number;
@@ -42,12 +42,12 @@ export default function LatestNews({ number, title }: newsNumber) {
   return (
     <div className=" p-4    ">
       <div className='flex mt-1 flex-row w-full flex-nowrap justify-between gap-2'>
-
-      <div className=' flex flex-col w-full lg:w-3/4'>
+      {number!==10 ?<> 
+       <div className=' flex flex-col w-full lg:w-3/4'>
         <h3 className="text-lg lg:text-2xl font-bold">{title}</h3>
       <p className="text-white text-md lg:text-2xl mb-2 mt-1">Hi Mohammad, stay updated with the latest news and insights tailored just for you</p></div>
 
-       <div className='hidden lg:inline-block  '><UserCard/></div>  
+       <div className='hidden lg:inline-block  '><UserCard/></div> </>:null}   
       </div>
      
      

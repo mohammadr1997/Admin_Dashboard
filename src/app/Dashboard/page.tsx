@@ -13,16 +13,20 @@ export default function Page() {
       <SideBar />
 
       <div className="mt-0   bg-[#189DAC] dark:bg-[#0f4b5c] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center flex flex-col    ">
-        <div className="flex w-full flex-col lg:flex-row gap-4  lg:justify-around text-black justify-center  relative  mt-4 h-24 font-bold mx-auto  ">
-          <h2 className=" lg:absolute left-18 top-2 text-center lg:text-left flex flex-col gap-3">
-            <span className=" text-lg  lg:text-2xl text-white text-center ">
+        
+        <div className="flex w-full flex-col lg:flex-row gap-4  lg:justify-evenly text-black justify-center  relative  mt-4 h-28 font-bold mx-auto ">
+          <div className='lg:w-3/4   mx-auto flex justify-center'>
+            <h2 className=" text-center lg:text-left flex flex-col gap-3">
+            <span className=" text-lg  lg:text-xl text-white text-center ">
               Dashboard
             </span>
-            <p className="text-white text-md lg:text-2xl">
+            <p className="text-white text-md lg:text-2xl ">
               Hi Mohammad we help you prioritize your activity and tasks
             </p>
           </h2>
-          <div className=" hidden lg:flex mt-2 text-white flex-row gap-1 justify-center lg:absolute lg:right-14 top-2">
+          </div>
+          
+          <div className="lg:w-1/4 hidden lg:flex  text-white flex-row gap-1 justify-end px-2 ">
             <UserCard/>
           </div>
         </div>

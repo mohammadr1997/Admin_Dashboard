@@ -80,21 +80,21 @@ export default function Page() {
     <section className="  overflow-x-hidden  grid grid-cols-1  lg:flex-nowrap  w-full text-white ">
       <SideBar />
       <div className=" text-white   font-bold  gap-4 lg:justify-between p-10  flex flex-col dark:bg-[#0f4b5c]   bg-[#189DAC] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center  justify-around ">
-        <div className=" flex flex-col md:flex-col lg:flex-row lg:justify-between relative justify-center w-full">
+        <div className=" flex flex-col md:flex-col lg:flex-row lg:justify-between  relative justify-center  w-full">
           {' '}
-          <div>
+          <div className=' text-center'>
             <h1 className=" text-xl lg:text-4xl">Galley</h1>
             <p className="text-md lg:text-xl">
               Hi Mohammad manage and Publish your content visuial
             </p>
           </div>
-          <div className=" hidden lg:inline-block mx-auto mt-6 lg:mt-0">
+          <div className=" hidden lg:inline-block justify-end   mt-6 lg:mt-0">
             <UserCard/>
           </div>
         </div>
 
-        <div className="flex flex-col justify-center gap-6 md:flex-row md:flex-nowrap md:justify-center lg:justify-end  overflow-x-hidden lg:pl-[288px] md:pr-[8px] w-full  ">
-           <div className="mx-auto mt-2 lg:mx-0 w-full">
+        <div className="flex flex-col  lg:h-24 justify-center gap-6 md:flex-row md:flex-nowrap md:justify-center lg:justify-end  overflow-x-hidden lg:pl-[288px] md:pr-[8px] w-full  ">
+           <div className="mx-auto mt-2  lg:mx-0 w-full">
             <UploadButton />
           </div>
           <div className="mx-auto mt-2 lg:mx-0 w-full">
