@@ -4,11 +4,19 @@ import SideBar from '../myComponents/SideBar';
 import Slider from '../myComponents/Slider';
 import Statistics from '../myComponents/Statistics';
 import LatestNews from '../myComponents/LatestNews';
-
+import { useState,useEffect } from 'react';
 import UserCard from '../myComponents/UserCards';
 import { Bell } from 'lucide-react';
+import NotificationBell from '../myComponents/NotificationBell';
 
 export default function Page() {
+   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+     useEffect(() => {
+    const stored = localStorage.getItem('notificationsEnabled');
+    if (stored !== null) {
+      setNotificationsEnabled(JSON.parse(stored));
+    }
+  }, []);
   return (
     <section className="  overflow-x-hidden  grid grid-cols-1 lg:flex lg:flex-row lg:flex-nowrap  w-full text-white ">
       <SideBar />
@@ -29,7 +37,7 @@ export default function Page() {
           
           <div className="lg:w-1/4 hidden lg:flex  text-white flex-row flex-nowrap gap-3 justify-center px-2 ">
             <UserCard/>
-             <Bell className=" hidden lg:inline-block cursor-pointer lg:mt-10 mx-1 " color="white" />
+            <NotificationBell enabled={notificationsEnabled}/>
           </div>
         </div>
         <div>

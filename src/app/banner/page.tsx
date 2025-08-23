@@ -35,6 +35,7 @@ import {
 import { Button } from '../../components/ui/button';
 import { DialogTitle } from '@radix-ui/react-dialog';
 import UserCard from '../myComponents/UserCards';
+import NotificationBell from '../myComponents/NotificationBell';
 
 const types = ['JPEG', 'PNG', 'WebP', 'SVG', 'All'];
 interface bannerType {
@@ -47,6 +48,7 @@ interface bannerType {
   id:number
 }
 export default function Page() {
+    const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [filteredByType, setFilteredByType] = useState<bannerType[] | null>(
     null,
   );
@@ -177,6 +179,12 @@ export default function Page() {
       reader.readAsDataURL(file);
     });
   };
+  useEffect(() => {
+    const stored = localStorage.getItem('notificationsEnabled');
+    if (stored !== null) {
+      setNotificationsEnabled(JSON.parse(stored));
+    }
+  }, []);
   return (
     <section className="relative  overflow-x-hidden  grid grid-cols-1  lg:flex-nowrap  w-full text-white  ">
       <SideBar />
@@ -191,7 +199,7 @@ export default function Page() {
           <div className='hidden lg:flex flex-row flex-nowrap gap-3 -mt-6'>
 
             <UserCard/>
-             <Bell className='cursor-pointer mt-8' color='white'/>
+          <NotificationBell enabled={notificationsEnabled}/>
           </div>
          
         </div>

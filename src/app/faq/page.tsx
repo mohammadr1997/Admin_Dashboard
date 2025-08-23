@@ -12,8 +12,10 @@ import { Card, CardContent, CardFooter } from '../Components/ui/Card';
 import { initialFAQData, FAQType } from '../data';
 import UserCard from '../myComponents/UserCards';
 import { Bell } from 'lucide-react';
+import NotificationBell from '../myComponents/NotificationBell';
 
 export default function FAQPage() {
+   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [faqData, setFaqData] = useState<FAQType[]>([]);
   const [selectedFAQ, setSelectedFAQ] = useState<FAQType | null>(null);
 
@@ -59,7 +61,12 @@ export default function FAQPage() {
     setFaqData(newData);
     localStorage.setItem('faqData', JSON.stringify(newData));
   };
-
+ useEffect(() => {
+      const stored = localStorage.getItem('notificationsEnabled');
+      if (stored !== null) {
+        setNotificationsEnabled(JSON.parse(stored));
+      }
+    }, []);
   return (
     <section className="overflow-x-hidden grid grid-cols-1 lg:flex-nowrap w-full text-white">
       <SideBar />
@@ -73,7 +80,7 @@ export default function FAQPage() {
           </div>
           <div className=' hidden lg:flex  flex-row gap-3 flex-nowrap'>
             <UserCard/>
-            <Bell className=" hidden lg:inline-block cursor-pointer lg:mt-5 mx-1 " color="white" />
+            <NotificationBell enabled={notificationsEnabled}/>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { DatabaseRecordType } from '../data';
 import { initialDatabaseData } from '../data';
 import UserCard from '../myComponents/UserCards';
 import { Bell } from 'lucide-react';
+import NotificationBell from '../myComponents/NotificationBell';
 
 
 
@@ -60,7 +61,13 @@ export default function DatabasePage() {
     setData(newData);
     localStorage.setItem('databaseData', JSON.stringify(newData));
   };
-
+   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+    useEffect(() => {
+    const stored = localStorage.getItem('notificationsEnabled');
+    if (stored !== null) {
+      setNotificationsEnabled(JSON.parse(stored));
+    }
+  }, []);
   return (
     <section className="overflow-x-hidden grid grid-cols-1 lg:flex-nowrap w-full text-white">
       <SideBar />
@@ -72,7 +79,7 @@ export default function DatabasePage() {
              Hi Mohammad View and manage your database tables
             </p></div>
             <div className='hidden lg:flex flex-row gap-3 justify-end text-center'>
-                <UserCard/> <Bell className='cursor-pointer mt-5' color='white'/>
+                <UserCard/> <NotificationBell enabled={notificationsEnabled}/>
             </div>
            
           </div>

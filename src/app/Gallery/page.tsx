@@ -25,8 +25,10 @@ import {
 } from '../../components/ui/dialog';
 import UserCard from '../myComponents/UserCards';
 import { Bell } from 'lucide-react';
+import NotificationBell from '../myComponents/NotificationBell';
 
 export default function Page() {
+   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const {compressAndConvertToBase64} =useConvertBase64()
   const { postData } = usePost();
   const [editImage,setEditImage]=useState<selectedImageType | null>(null)
@@ -37,7 +39,7 @@ export default function Page() {
   const setDayvalueInput=context?.setDayValue
   const imagesByDateFilter=context?.selectedImageGalleryByDate
   const setImagesByDateFilter=context?.setSelectedImageGalleryByDate
-  // const [allImages, setAllImages] = useState<selectedImageType[]>([]);
+
   const { data, refetch } = useFetch();
 
   useEffect(() => {
@@ -77,6 +79,12 @@ export default function Page() {
     }
     setEditImage(null)
   }
+    useEffect(() => {
+      const stored = localStorage.getItem('notificationsEnabled');
+      if (stored !== null) {
+        setNotificationsEnabled(JSON.parse(stored));
+      }
+    }, []);
   return (
     <section className="  overflow-x-hidden  grid grid-cols-1  lg:flex-nowrap  w-full text-white ">
       <SideBar />
@@ -91,7 +99,7 @@ export default function Page() {
           </div>
           <div className=" hidden lg:flex flex-row flex-nowrap gap-3 justify-end   mt-6 lg:mt-0">
             <UserCard/>
-              <Bell className='cursor-pointer mt-5' color='white'/>
+              <NotificationBell enabled={notificationsEnabled}/>
           </div>
         </div>
 

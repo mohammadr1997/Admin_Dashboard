@@ -6,14 +6,17 @@ import axios from 'axios';
 import CircularIndeterminate from './loading';
 import { useQuery } from '@tanstack/react-query';
 import BasicAlerts from './AlertError';
-
+import { useState,useEffect } from 'react';
 import UserCard from './UserCards';
 import { Bell } from 'lucide-react';
+import NotificationBell from './NotificationBell';
 interface newsNumber {
   number: number;
   title: string;
 }
 export default function LatestNews({ number, title }: newsNumber) {
+
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const truncateText = (description, numbersofWords) => {
     const desc = description.split(' ');
     if (desc.length > numbersofWords) {
@@ -39,7 +42,13 @@ export default function LatestNews({ number, title }: newsNumber) {
     queryKey: ['LatestNews'],
     queryFn: fetchNews,
   });
-  console.log('data', data);
+  
+  useEffect(() => {
+    const stored = localStorage.getItem('notificationsEnabled');
+    if (stored !== null) {
+      setNotificationsEnabled(JSON.parse(stored));
+    }
+  }, []);
   return (
     <div className=" p-4    ">
       <div className='flex mt-1 flex-row w-full flex-nowrap justify-between gap-2'>
@@ -48,7 +57,7 @@ export default function LatestNews({ number, title }: newsNumber) {
         <h3 className="text-lg lg:text-3xl font-bold">{title}</h3>
       <p className="text-white text-md lg:text-2xl mb-2 mt-1">Hi Mohammad stay updated with the latest news and insights tailored just for you</p></div>
 
-       <div className='hidden lg:flex flex-row justify-end flex-nowrap gap-3  '><UserCard/>     <Bell className='cursor-pointer mt-10' color='white'/></div> </>:null}   
+       <div className='hidden lg:flex flex-row justify-end flex-nowrap gap-3  '><UserCard/>     <NotificationBell enabled={notificationsEnabled}/></div> </>:null}   
       </div>
      
      

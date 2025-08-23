@@ -11,14 +11,16 @@ import SideBar from '../myComponents/SideBar';
 import { Card, CardContent, CardFooter } from '../Components/ui/Card';
 import { initialMessagesData, MessageType } from '../data';
 import UserCard from '../myComponents/UserCards';
-import { Belanosima } from 'next/font/google';
-import { Bell } from 'lucide-react';
+
+import NotificationBell from '../myComponents/NotificationBell';
+
 
 export default function MessagesPage() {
+   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [selectedMessage, setSelectedMessage] = useState<MessageType | null>(null);
 
-  // بارگذاری اولیه از localStorage یا initialMessagesData
+ 
   useEffect(() => {
     const storedData = localStorage.getItem('messagesData');
     if (storedData) {
@@ -52,7 +54,12 @@ export default function MessagesPage() {
   const deleteMessage = (msg: MessageType) => {
     setMessages(prev => prev.filter(m => m.id !== msg.id));
   };
-
+  useEffect(() => {
+    const stored = localStorage.getItem('notificationsEnabled');
+    if (stored !== null) {
+      setNotificationsEnabled(JSON.parse(stored));
+    }
+  }, []);
   return (
     <section className="overflow-x-hidden grid grid-cols-1 lg:flex-nowrap w-full text-white">
       <SideBar />
@@ -66,7 +73,7 @@ export default function MessagesPage() {
             </p>
             </div>
             <div className="hidden lg:flex flex-row text-center flex-nowrap gap-3 justify-end">
-              <UserCard/> <Bell className='cursor-pointer mt-5' color='white'/>
+              <UserCard/>  <NotificationBell enabled={notificationsEnabled} />
             </div>
            
           </div>
