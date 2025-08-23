@@ -9,11 +9,12 @@ import {
 } from "@/components/ui/select"
 import React from 'react';
 import {Bell, ChevronDown, RefreshCcw } from 'lucide-react'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import SideBar  from '../myComponents/SideBar';
 import { menuItem } from '../data';
 import SiteCard from '../myComponents/SiteCard';
 import UserCard from "../myComponents/UserCards";
+import NotificationBell from "../myComponents/NotificationBell";
 
 
 
@@ -22,7 +23,15 @@ import UserCard from "../myComponents/UserCards";
  
 
 export default function Page() {
+    const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+
   const [viewMode,setViewMode]=useState<string>('grid')
+    useEffect(() => {
+    const stored = localStorage.getItem('notificationsEnabled');
+    if (stored !== null) {
+      setNotificationsEnabled(JSON.parse(stored));
+    }
+  }, []);
   return (
     <section className="relative overflow-x-hidden grid grid-cols-1 lg:flex-nowrap w-full">
   
@@ -37,7 +46,7 @@ export default function Page() {
           <p className="text-md lg:text-xl text-gray-100 text-center mb-1 mt-1">
             Hi Mohammad, quickly access and navigate your content structure
           </p></div>
-          <div className=" hidden lg:flex flex-row gap-3 flex-nowrap justify-end text-center"><UserCard/> <Bell className="cursor-pointer mt-6" color="white"/></div>
+          <div className=" hidden lg:flex flex-row gap-3 flex-nowrap justify-end text-center"><UserCard/> <NotificationBell enabled={notificationsEnabled}/></div>
         
         </div>
 
