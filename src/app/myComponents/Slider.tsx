@@ -75,7 +75,7 @@ export default function Slider() {
         </Swiper>
       ) : null}
 
-      {/* Custom Navigation Buttons */}
+     
       <button
         ref={prevRef}
         className="absolute top-1/2 left-2 z-10 -translate-y-1/2 bg-white p-2 rounded-full shadow"

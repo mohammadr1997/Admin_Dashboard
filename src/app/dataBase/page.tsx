@@ -6,6 +6,8 @@ import { Button } from '../../components/ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '../../components/ui/dialog';
 import { DatabaseRecordType } from '../data';
 import { initialDatabaseData } from '../data';
+import UserCard from '../myComponents/UserCards';
+import { Bell } from 'lucide-react';
 
 
 
@@ -20,7 +22,7 @@ export default function DatabasePage() {
     try {
       const parsed: DatabaseRecordType[] = JSON.parse(storedData);
       if (Array.isArray(parsed)) {
-        // اضافه کردن رکوردهای جدیدی که هنوز در localStorage نیستند
+      
         const mergedData = [...parsed];
         initialDatabaseData.forEach(initialRecord => {
           if (!parsed.some(r => r.id === initialRecord.id)) {
@@ -62,18 +64,22 @@ export default function DatabasePage() {
   return (
     <section className="overflow-x-hidden grid grid-cols-1 lg:flex-nowrap w-full text-white">
       <SideBar />
-      <div className="text-white font-bold gap-4 lg:justify-between p-10 flex flex-col bg-[#189DAC] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center justify-around">
+      <div className="text-white font-bold gap-4 lg:justify-between p-10 flex flex-col bg-[#189DAC] dark:bg-[#0f4b5c] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center justify-around">
         <div className="flex flex-col md:flex-col lg:flex-row lg:justify-between relative justify-center w-full">
-          <div className='mx-auto'>
-            <h1 className="text-xl lg:text-4xl">Database Management</h1>
+          <div className='w-full flex flex-row justify-between gap-3 '>
+            <div className='mx-auto lg:mx-0'>  <h1 className="text-xl lg:text-4xl">Database Management</h1>
             <p className="text-md lg:text-xl">
-              View and manage your database tables
-            </p>
+             Hi Mohammad View and manage your database tables
+            </p></div>
+            <div className='hidden lg:flex flex-row gap-3 justify-end text-center'>
+                <UserCard/> <Bell className='cursor-pointer mt-5' color='white'/>
+            </div>
+           
           </div>
         </div>
       </div>
 
-      <div className="md:pl-[8px] pb-11 lg:pl-[268px] md:pr-[18px] w-full min-h-[40rem] bg-[#189DAC] grid grid-cols-1 md:flex md:flex-row md:flex-wrap md:gap-8 lg:flex lg:flex-row lg:gap-6 justify-center items-center gap-8">
+      <div className="md:pl-[8px] pb-11 lg:pl-[268px] md:pr-[18px] w-full min-h-[40rem] bg-[#189DAC] dark:bg-[#0f4b5c] grid grid-cols-1 md:flex md:flex-row md:flex-wrap md:gap-8 lg:flex lg:flex-row lg:gap-6 justify-center items-center gap-8">
         {data.map(record => (
           <Card className="w-[350px] h-[220px] overflow-hidden mx-auto rounded-3xl" key={record.id}>
             <CardContent className="w-[300px] overflow-hidden">

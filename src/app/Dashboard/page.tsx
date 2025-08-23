@@ -4,8 +4,9 @@ import SideBar from '../myComponents/SideBar';
 import Slider from '../myComponents/Slider';
 import Statistics from '../myComponents/Statistics';
 import LatestNews from '../myComponents/LatestNews';
-import { Avatar, AvatarFallback, AvatarImage } from '../Components/ui/Avatar';
+
 import UserCard from '../myComponents/UserCards';
+import { Bell } from 'lucide-react';
 
 export default function Page() {
   return (
@@ -26,8 +27,9 @@ export default function Page() {
           </h2>
           </div>
           
-          <div className="lg:w-1/4 hidden lg:flex  text-white flex-row gap-1 justify-end px-2 ">
+          <div className="lg:w-1/4 hidden lg:flex  text-white flex-row flex-nowrap gap-3 justify-center px-2 ">
             <UserCard/>
+             <Bell className=" hidden lg:inline-block cursor-pointer lg:mt-10 mx-1 " color="white" />
           </div>
         </div>
         <div>

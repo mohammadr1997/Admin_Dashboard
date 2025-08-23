@@ -59,7 +59,7 @@ export default function SideBar() {
               </Avatar>
             </div>
 
-            <div className="w-full">
+            <div className="w-full  mt-2">
               <p className="text-sm font-medium ">Mohammad Rezaei</p>
               <p className="text-sm text-muted-foreground">Manager</p>
             </div>

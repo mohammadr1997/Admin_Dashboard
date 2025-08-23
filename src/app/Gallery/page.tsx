@@ -24,6 +24,7 @@ import {
   DialogTrigger,
 } from '../../components/ui/dialog';
 import UserCard from '../myComponents/UserCards';
+import { Bell } from 'lucide-react';
 
 export default function Page() {
   const {compressAndConvertToBase64} =useConvertBase64()
@@ -88,8 +89,9 @@ export default function Page() {
               Hi Mohammad manage and Publish your content visuial
             </p>
           </div>
-          <div className=" hidden lg:inline-block justify-end   mt-6 lg:mt-0">
+          <div className=" hidden lg:flex flex-row flex-nowrap gap-3 justify-end   mt-6 lg:mt-0">
             <UserCard/>
+              <Bell className='cursor-pointer mt-5' color='white'/>
           </div>
         </div>
 

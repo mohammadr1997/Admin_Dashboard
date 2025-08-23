@@ -8,11 +8,12 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import React from 'react';
-import {ChevronDown, RefreshCcw } from 'lucide-react'
+import {Bell, ChevronDown, RefreshCcw } from 'lucide-react'
 import { useState } from 'react';
 import SideBar  from '../myComponents/SideBar';
 import { menuItem } from '../data';
 import SiteCard from '../myComponents/SiteCard';
+import UserCard from "../myComponents/UserCards";
 
 
 
@@ -31,11 +32,13 @@ export default function Page() {
       <div className="flex flex-col gap-6 p-10 dark:bg-[#0f4b5c] bg-[#189DAC] text-white md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full">
         
       
-        <div className="mx-auto">
-          <h1 className="text-2xl lg:text-4xl font-bold text-center mb-1">Sitemap</h1>
+        <div className="flex flex-row flex-nowrap justify-between gap-3">
+          <div>  <h1 className="text-2xl lg:text-4xl font-bold text-center mb-1">Sitemap</h1>
           <p className="text-md lg:text-xl text-gray-100 text-center mb-1 mt-1">
             Hi Mohammad, quickly access and navigate your content structure
-          </p>
+          </p></div>
+          <div className=" hidden lg:flex flex-row gap-3 flex-nowrap justify-end text-center"><UserCard/> <Bell className="cursor-pointer mt-6" color="white"/></div>
+        
         </div>
 
      <div className="flex gap-4  justify-center">

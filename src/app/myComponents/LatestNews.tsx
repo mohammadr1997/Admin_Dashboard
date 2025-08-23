@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import BasicAlerts from './AlertError';
 
 import UserCard from './UserCards';
+import { Bell } from 'lucide-react';
 interface newsNumber {
   number: number;
   title: string;
@@ -44,10 +45,10 @@ export default function LatestNews({ number, title }: newsNumber) {
       <div className='flex mt-1 flex-row w-full flex-nowrap justify-between gap-2'>
       {number!==10 ?<> 
        <div className=' flex flex-col w-full lg:w-3/4'>
-        <h3 className="text-lg lg:text-2xl font-bold">{title}</h3>
-      <p className="text-white text-md lg:text-2xl mb-2 mt-1">Hi Mohammad, stay updated with the latest news and insights tailored just for you</p></div>
+        <h3 className="text-lg lg:text-3xl font-bold">{title}</h3>
+      <p className="text-white text-md lg:text-2xl mb-2 mt-1">Hi Mohammad stay updated with the latest news and insights tailored just for you</p></div>
 
-       <div className='hidden lg:inline-block  '><UserCard/></div> </>:null}   
+       <div className='hidden lg:flex flex-row justify-end flex-nowrap gap-3  '><UserCard/>     <Bell className='cursor-pointer mt-10' color='white'/></div> </>:null}   
       </div>
      
      

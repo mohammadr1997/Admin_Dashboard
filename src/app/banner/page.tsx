@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Bold } from 'lucide-react';
+import { Bell, Bold } from 'lucide-react';
 import { Toggle } from '@/components/ui/toggle';
 import usePostBanners from '../myComponents/hooks/usePostBanners';
 import SideBar from '../myComponents/SideBar';
@@ -34,6 +34,7 @@ import {
 } from '../Components/ui/Card';
 import { Button } from '../../components/ui/button';
 import { DialogTitle } from '@radix-ui/react-dialog';
+import UserCard from '../myComponents/UserCards';
 
 const types = ['JPEG', 'PNG', 'WebP', 'SVG', 'All'];
 interface bannerType {
@@ -181,9 +182,18 @@ export default function Page() {
       <SideBar />
 
       <div className=" text-white   font-bold  gap-4 lg:justify-between p-10  flex flex-col   bg-[#189DAC] dark:bg-[#0f4b5c] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center  justify-around  ">
-        <div className="grid grid-cols-1 gap-8 mx-auto text-md lg:text-2xl ">
-          <h2 className="text-xl lg:text-3xl">Slide Banner</h2>
+        <div className=" flex flex-row flex-nowrap justify-between  text-md lg:text-2xl  ">
+          <div className='grid grid-cols-1 gap-3'>
+             <h2 className="text-xl lg:text-3xl">Slide Banner</h2>
           <p>Hi Mohammad manage and publish you Banner visuialy</p>
+
+          </div>
+          <div className='hidden lg:flex flex-row flex-nowrap gap-3 -mt-6'>
+
+            <UserCard/>
+             <Bell className='cursor-pointer mt-8' color='white'/>
+          </div>
+         
         </div>
         <div className="flex  bg-black/10  w-64 lg:w-76 backdrop-blur-lg border-1  font-bold  border-blue-100  rounded-3xl px-3 py-2 flex-row gap-2 flex-nowrap mx-auto">
           <input

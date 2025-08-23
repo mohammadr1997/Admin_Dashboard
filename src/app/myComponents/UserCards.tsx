@@ -9,7 +9,7 @@ const UserCard = () => {
         <AvatarImage src="./images/manager.jpg" alt='admin pic' />
         <AvatarFallback>MR</AvatarFallback>
       </Avatar>
-      <div className="w-full text-sm md:text-lg">
+      <div className="w-full text-sm md:text-lg ">
         <p className="text-sm md:text-md ">Manager</p>
         <p className="text-sm md:text-md text-white">Mohammad Rezaee</p>
       </div>
