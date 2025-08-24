@@ -1,116 +1,106 @@
-'use client';
-import { usePathname } from 'next/navigation';
-import React from 'react';
-import Link from 'next/link';
-import { useState } from 'react';
-import { Menu, X, Bell, LucideIcon } from 'lucide-react';
-import { menuItem } from '../data';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '../../components/ui/avatar';
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-} from '../../components/ui/command';
+"use client";
+import { usePathname } from "next/navigation";
+import React, { useContext } from "react";
+import Link from "next/link";
+import { Context } from "./Contextprovider";
+import { Menu, X, Bell, LucideIcon } from "lucide-react";
+import { menuItem } from "../data";
+import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
+import { Command, CommandGroup, CommandItem, CommandList, CommandSeparator } from "../../components/ui/command";
+import { DarkModeContext } from "../myComponents/darkModeProvider";
+
 export default function SideBar() {
-  type items = {
-    name: string;
-    icon: LucideIcon;
-    url: string;
-  };
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  type items = { name: string; icon: LucideIcon; url: string };
+
   const pathName = usePathname();
-  const path = pathName.split('').slice(1).join('');
+  const path = pathName.split("").slice(1).join("");
+
+  const { darkMode } = useContext(DarkModeContext);
+  const context=useContext(Context)
+
+ const menuOpen = context?.menuOpen ;
+  const setOpenMenu = context?.setMenuOpen;
+
+  const bgColor = darkMode ? "bg-[#0f4b5c]" : "bg-white";
+  const textColor = darkMode ? "text-black" : "text-black";
+  const hoverBg = darkMode ? "hover:bg-[#056608]" : "hover:bg-white";
+  const hoverText = darkMode ? "hover:text-white" : "hover:text-white hover:bg-blue-900";
+  const iconColor = darkMode ? "white" : "white";
+
   return (
     <>
+   
       <div
-        className={`lg:hidden fixed lg:col-span-1 text-center p-6  transition-all   ${menuOpen ? 'h-full' : ''} lg:h-screen mx-auto relative w-full bg-gray-50 `}
+        className={`lg:hidden  fixed text-center p-6 transition-all ${menuOpen ? "h-[70vh]" : ""} lg:h-screen mx-auto  relative w-full ${bgColor}`}
       >
-        {menuOpen ? (
+        { menuOpen ? (
           <X
             className="cursor-pointer"
-            color="black"
-            onClick={() => setMenuOpen((prev) => !prev)}
+            color={iconColor}
+            onClick={() =>{ 
+              if(!setOpenMenu) return
+              setOpenMenu((prev) => !prev)}}
           />
         ) : (
           <Menu
-            color="black"
-            onClick={() => setMenuOpen((prev) => !prev)}
-            className={` ${menuOpen ? 'hidden' : 'flex'}lg:hidden cursor-pointer '`}
+            className="lg:hidden cursor-pointer"
+            color={iconColor}
+            onClick={() =>{ 
+              if(!setOpenMenu) return
+              setOpenMenu((prev) => !prev)}}
           />
         )}
-        <div className="absolute flex flex-row flex-gap-4 justify-end gap-1 right-10 top-4  ">
-          <div className="flex flex-row gap-1 rounded-4xl p-2  text-stone-950 w-64 px-4  shadow-4xl mx-1 -mt-4 ">
-            <div>
-              <Avatar className="w-14 h-14">
-                <AvatarImage
-                  className=""
-                  src="./images/manager.jpg"
-                  alt="pic"
-                ></AvatarImage>
-                <AvatarFallback>MR</AvatarFallback>
-              </Avatar>
-            </div>
 
-            <div className="w-full  mt-2">
-              <p className="text-sm font-medium ">Mohammad Rezaei</p>
+        <div className="absolute  flex flex-row gap-1 justify-end right-4 top-4   ">
+          <div className={`flex flex-row gap-1 rounded-4xl p-2 w-64 shadow-4xl   mx-1 -mt-4 ${bgColor} ${textColor}`}>
+            <Avatar className="w-14 h-14">
+              <AvatarImage src="./images/manager.jpg" alt="pic" />
+              <AvatarFallback>MR</AvatarFallback>
+            </Avatar>
+            <div className="w-full mt-2">
+              <p className={`text-sm font-medium ${darkMode? 'text-white':'text-black'}`}>Mohammad Rezaei</p>
               <p className="text-sm text-muted-foreground">Manager</p>
             </div>
           </div>
-
-          <Bell className="cursor-pointer" color="black" />
+          <Bell className="cursor-pointer" color={iconColor} />
         </div>
 
         <Command
-          className={`overflow-y-hidden scroll-y-0 transition-all duration-1000 ${menuOpen ? 'relative h-full opacity-100 ' : 'hidden opacity-0 '}`}
+          className={`overflow-y-hidden scroll-y-0 transition-all duration-1000 ${
+            menuOpen ? "relative  h-full z-10 opacity-100 mt-8 " : "hidden opacity-0 "
+          }`}
         >
-          <CommandList className="">
-            <CommandGroup className="w-44" heading="">
-              {menuItem[0].mainItem.map((item: items, key: Key) => {
+          <CommandList>
+            <CommandGroup className="w-44">
+              {menuItem[0].mainItem.map((item: items, key: number) => {
                 const Icon = item.icon;
+             const active = `/${item.url}` === pathName;
                 return (
                   <CommandItem
-                    className={`${item.name === path ? 'bg-white text-black ' : 'text-black'} hover:text-black hover:!bg-white mt-1 text-white`}
+                    className={`mt-1 cursor-pointer ${active ? "bg-white " + textColor : textColor} ${hoverBg} `}
                     key={key}
                   >
-                    <Link
-                      className={`flex flex-row gap-2 ${item.name === path ? 'text-black ' : ''}  cursor-pointer text-black`}
-                      href={`/${item.url}`}
-                    >
-                      <Icon />
-                      &nbsp;{item.name}
+                    <Link className="flex flex-row gap-2 cursor-pointer text-white" href={`/${item.url}`}>
+                      <Icon className={`${active ? "text-black" : textColor} w-6 h-6 `} />
+                      {item.name}
                     </Link>
                   </CommandItem>
                 );
               })}
             </CommandGroup>
             <CommandSeparator />
-            <CommandSeparator />
-
-            <hr className=" border-t border-gray-800 w-[10rem] lg:w-4/5 lg:mx-auto" />
-            <CommandSeparator />
-            <CommandSeparator />
-            <CommandGroup className="w-44" heading="">
-              {menuItem[0].restItem.map((item: items, key: Key) => {
+            <CommandGroup className="w-44">
+              {menuItem[0].restItem.map((item: items, key: number) => {
                 const Icon = item.icon;
+             const active = `/${item.url}` === pathName;
                 return (
                   <CommandItem
-                    className={` cursor-pointer ${item.name === path ? 'bg-white text-black ' : 'text-black'} hover:text-black hover:!bg-white group mt-1 `}
+                    className={`mt-1 cursor-pointer ${active ? "bg-white " + textColor : textColor} ${hoverBg} ${hoverText}`}
                     key={key}
                   >
-                    <Link
-                      className={`flex flex-row gap-2  cursor-pointer ${item.name === path ? 'text-black' : ''}text-black`}
-                      href={`/${item.url}`}
-                    >
-                      <Icon />
-                      &nbsp;{item.name}
+                    <Link className="flex flex-row gap-2 cursor-pointer" href={`/${item.url}`}>
+                      <Icon className={`${active ? "text-black" : textColor} w-6 h-6`} />
+                      {item.name}
                     </Link>
                   </CommandItem>
                 );
@@ -119,55 +109,43 @@ export default function SideBar() {
           </CommandList>
         </Command>
       </div>
-      <div className="hidden lg:w-[250px]   lg:flex lg:fixed  text-center bg-blue-950    lg:h-screen  ">
-        {/* {menuOpen ? <X color='black' onClick={()=>setMenuOpen((prev)=>!prev)} /> : <Menu color='black' onClick={()=>setMenuOpen((prev)=>!prev)} className={` ${menuOpen?'hidden':'flex'}lg:hidden cursor-pointer '`}/>} */}
 
+    
+      <div className={`hidden lg:w-[250px] lg:flex lg:fixed text-center ${bgColor} lg:h-screen`}>
         <Command>
-          <CommandList className=" lg:h-full  w-full ">
-            <CommandGroup className="" heading="">
-              {menuItem[0].mainItem.map((item: items, key: Key) => {
+          <CommandList className="lg:h-full w-full">
+            <CommandGroup>
+              {menuItem[0].mainItem.map((item: items, key: number) => {
                 const Icon = item.icon;
-                return (
+               const active = `/${item.url}` === pathName;
+                 return (
                   <CommandItem
-                    className={` cursor-pointer ${item.name === path ? 'bg-white ' : ''} group hover:!text-black hover:!bg-white mt-1 text-white`}
+                    className={`mt-1 cursor-pointer ${active ? "bg-blue-900 text-white "  : textColor} ${hoverBg} ${hoverText} ${!darkMode ? 'hover:text-white' :''}`}
                     key={key}
                   >
-                    <Link
-                      className={`flex flex-row gap-2  cursor-pointer ${item.name === path ? 'text-black' : ''} text-lg`}
-                      href={`/${item.url}`}
-                    >
-                      <Icon
-                        className={`w-7 h-7  group-hover:!text-black ${item.name === path ? 'text-black' : 'text-white'}`}
-                      />
-                      &nbsp;{item.name}
+                    <Link className="group flex flex-row gap-2 cursor-pointer text-lg" href={`/${item.url}`}>
+                      <Icon className={`w-8 h-8   ${active ? "text-white bg-blue-900" : darkMode ? "text-white" : " "}
+    ${!darkMode ? "group-hover::text-white " : ""} `}  />
+                      {item.name}
                     </Link>
                   </CommandItem>
                 );
               })}
             </CommandGroup>
             <CommandSeparator />
-            <CommandSeparator />
-
-            <hr className=" border-t border-gray-800 w-[10rem] lg:w-4/5 lg:mx-auto" />
-            <CommandSeparator />
-            <CommandSeparator />
-            <CommandGroup heading="">
-              {menuItem[0].restItem.map((item: items, key: Key) => {
+            <CommandGroup>
+              {menuItem[0].restItem.map((item: items, key: number) => {
                 const Icon = item.icon;
+                const active = `/${item.url}` === pathName;
                 return (
                   <CommandItem
-                    className={` cursor-pointer ${item.name === path ? 'bg-white ' : ''} group hover:text-black hover:bg-white mt-1 text-white`}
+                    className={`mt-1 cursor-pointer ${active ? "bg-blue-900 text-white "  : textColor} ${hoverBg} ${hoverText} ${!darkMode ? 'hover:text-white' :''}`}
                     key={key}
                   >
-                    <Link
-                      className={`flex flex-row gap-2  cursor-pointer text-lg `}
-                      href={`/${item.url}`}
-                    >
-                      {' '}
-                      <Icon
-                        className={`w-7 h-7  group-hover:text-black  ${item.name === path ? 'text-black' : 'text-white'}`}
-                      />
-                      &nbsp;{item.name}{' '}
+                    <Link className="group flex flex-row gap-2 cursor-pointer text-lg" href={`/${item.url}`}>
+                      <Icon className={`w-8 h-8   ${active ? "text-white bg-blue-900" : darkMode ? "text-white" : " "}
+    ${!darkMode ? "group-hover::text-white " : ""} `}  />
+                      {item.name}
                     </Link>
                   </CommandItem>
                 );

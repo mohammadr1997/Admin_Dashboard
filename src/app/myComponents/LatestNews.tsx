@@ -8,14 +8,16 @@ import { useQuery } from '@tanstack/react-query';
 import BasicAlerts from './AlertError';
 import { useState,useEffect } from 'react';
 import UserCard from './UserCards';
-import { Bell } from 'lucide-react';
+import { Context } from './Contextprovider';
+import { useContext } from 'react';
 import NotificationBell from './NotificationBell';
 interface newsNumber {
   number: number;
   title: string;
 }
 export default function LatestNews({ number, title }: newsNumber) {
-
+const context=useContext(Context)
+  const menuOpen=context?.menuOpen
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const truncateText = (description, numbersofWords) => {
     const desc = description.split(' ');
@@ -50,14 +52,14 @@ export default function LatestNews({ number, title }: newsNumber) {
     }
   }, []);
   return (
-    <div className=" p-4    ">
-      <div className='flex mt-1 flex-row w-full flex-nowrap justify-between gap-2'>
+    <div className={`p-4 ${menuOpen ? '':''}`} >
+      <div className='flex   mt-1 flex-row w-full flex-nowrap justify-between gap-2'>
       {number!==10 ?<> 
        <div className=' flex flex-col w-full lg:w-3/4'>
         <h3 className="text-lg lg:text-3xl font-bold">{title}</h3>
-      <p className="text-white text-md lg:text-2xl mb-2 mt-1">Hi Mohammad stay updated with the latest news and insights tailored just for you</p></div>
+      <p className="text-white text-md lg:text-2xl mb-2 mt-2">Hi Mohammad stay updated with the latest news and insights tailored just for you</p></div>
 
-       <div className='hidden lg:flex flex-row justify-end flex-nowrap gap-3  '><UserCard/>     <NotificationBell enabled={notificationsEnabled}/></div> </>:null}   
+       <div className='hidden lg:flex flex-row justify-end flex-nowrap gap-3  '><UserCard/>  <div className='mt-6'><NotificationBell enabled={notificationsEnabled}/></div>   </div> </>:null}   
       </div>
      
      
@@ -100,10 +102,13 @@ export default function LatestNews({ number, title }: newsNumber) {
                   
                 </div>
                 <div className="grid grid-cols-1 gap-2 px-3">
-                  <p className="text-md lg:text-xl ">
-                    {truncateText(news.description, 18)}
+                  <p className="text-md hidden lg:block lg:text-xl ">
+                    {truncateText(news.description, 14)}
                   </p>
-                  <p className="text-sm lg:text-lg text-stone-900 font-bold">
+                   <p className="text-md mt-4 lg:hidden block lg:text-xl ">
+                    {truncateText(news.description, 6)}
+                  </p>
+                  <p className="text-sm lg:text-lg  dark:text-white text-stone-900 font-bold">
                     {' '}
                     {formattedDate(news.publishedAt)}
                   </p>

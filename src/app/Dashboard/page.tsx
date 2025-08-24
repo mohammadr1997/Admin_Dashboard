@@ -6,7 +6,7 @@ import Statistics from '../myComponents/Statistics';
 import LatestNews from '../myComponents/LatestNews';
 import { useState,useEffect } from 'react';
 import UserCard from '../myComponents/UserCards';
-import { Bell } from 'lucide-react';
+
 import NotificationBell from '../myComponents/NotificationBell';
 
 export default function Page() {
@@ -26,7 +26,7 @@ export default function Page() {
         <div className="flex w-full flex-col lg:flex-row gap-4  lg:justify-evenly text-black justify-center  relative  mt-4 h-28 font-bold mx-auto ">
           <div className='lg:w-3/4   mx-auto flex justify-center'>
             <h2 className=" text-center lg:text-left flex flex-col gap-3">
-            <span className=" text-lg  lg:text-xl text-white text-center ">
+            <span className=" text-lg  lg:text-3xl text-white text-center ">
               Dashboard
             </span>
             <p className="text-white text-md lg:text-2xl ">
@@ -37,7 +37,8 @@ export default function Page() {
           
           <div className="lg:w-1/4 hidden lg:flex  text-white flex-row flex-nowrap gap-3 justify-center px-2 ">
             <UserCard/>
-            <NotificationBell enabled={notificationsEnabled}/>
+            <div className='mt-6'> <NotificationBell enabled={notificationsEnabled}/></div>
+           
           </div>
         </div>
         <div>

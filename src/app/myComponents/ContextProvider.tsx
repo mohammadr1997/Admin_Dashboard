@@ -17,6 +17,8 @@ interface contextType {
   setDayValue:React.Dispatch<React.SetStateAction<string>>
   selectedImageGalleryByDate: selectedImageType[];
   selectedBanner: selectedImageType[];
+  menuOpen:boolean;
+  setMenuOpen:React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedImages: React.Dispatch<React.SetStateAction<selectedImageType[]>>;
   setSelectedImageGalleryByDate: React.Dispatch<React.SetStateAction<selectedImageType[]>>;
   setSelectedBanner: React.Dispatch<React.SetStateAction<selectedImageType[]>>;
@@ -29,6 +31,7 @@ export default function Contextprovider({
 }) {
   const [selectedImages, setSelectedImages] = useState<selectedImageType[]>([]);
   const [dayValue, setDayValue] = useState<string>('');
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [selectedBanner, setSelectedBanner] = useState<selectedImageType[]>([]);
   const [selectedImageGalleryByDate, setSelectedImageGalleryByDate] = useState<selectedImageType[]>([]);
 
@@ -42,7 +45,9 @@ export default function Contextprovider({
         setSelectedImageGalleryByDate,
         selectedImageGalleryByDate,
         dayValue,
-        setDayValue
+        setDayValue,
+        menuOpen,
+        setMenuOpen
       }}
     >
       {children}

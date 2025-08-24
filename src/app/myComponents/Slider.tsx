@@ -39,7 +39,7 @@ export default function Slider() {
             swiper.navigation.init();
             swiper.navigation.update();
           }}
-          className="bg-[#189DAC] rounded-xl w-full  "
+          className=" bg-[#189DAC] dark:bg-[#0f4b5c] rounded-xl w-full  "
         >
           {stats.map((datum, index) => {
             const Icon = datum.icon;
