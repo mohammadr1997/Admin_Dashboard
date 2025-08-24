@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import React, { useContext } from "react";
+import React, { act, useContext } from "react";
 import Link from "next/link";
 import { Context } from "./Contextprovider";
 import { Menu, X, Bell, LucideIcon } from "lucide-react";
@@ -8,6 +8,7 @@ import { menuItem } from "../data";
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 import { Command, CommandGroup, CommandItem, CommandList, CommandSeparator } from "../../components/ui/command";
 import { DarkModeContext } from "../myComponents/darkModeProvider";
+import { group } from "console";
 
 export default function SideBar() {
   type items = { name: string; icon: LucideIcon; url: string };
@@ -23,9 +24,9 @@ export default function SideBar() {
 
   const bgColor = darkMode ? "bg-[#0f4b5c]" : "bg-white";
   const textColor = darkMode ? "text-black" : "text-black";
-  const hoverBg = darkMode ? "hover:bg-[#056608]" : "hover:bg-white";
+  const hoverBg = darkMode ? "hover:bg-blue-900" : "hover:bg-white";
   const hoverText = darkMode ? "hover:text-white" : "hover:text-white hover:bg-blue-900";
-  const iconColor = darkMode ? "white" : "white";
+  const iconColor = darkMode ? "white" : "black";
 
   return (
     <>
@@ -77,11 +78,12 @@ export default function SideBar() {
              const active = `/${item.url}` === pathName;
                 return (
                   <CommandItem
-                    className={`mt-1 cursor-pointer ${active ? "bg-white " + textColor : textColor} ${hoverBg} `}
+                     className={`mt-1 group cursor-pointer !text-white ${active ? "bg-blue-900 text-white "  : textColor} ${hoverBg} ${hoverText} ${!darkMode ? 'hover:text-white' :'!text-black'}`}
                     key={key}
                   >
-                    <Link className="flex flex-row gap-2 cursor-pointer text-white" href={`/${item.url}`}>
-                      <Icon className={`${active ? "text-black" : textColor} w-6 h-6 `} />
+                    <Link className={`flex flex-row gap-2 cursor-pointer  ${darkMode ? 'text-white':'text-black group-hover:text-white'}`} href={`/${item.url}`}>
+                      <Icon className={`w-8 h-8   ${active ? "text-white bg-blue-900" : darkMode ? "text-white" : ""}
+    ${!darkMode ? "group-hover:text-white " : ""} `} />
                       {item.name}
                     </Link>
                   </CommandItem>
@@ -95,11 +97,12 @@ export default function SideBar() {
              const active = `/${item.url}` === pathName;
                 return (
                   <CommandItem
-                    className={`mt-1 cursor-pointer ${active ? "bg-white " + textColor : textColor} ${hoverBg} ${hoverText}`}
+                    className={`mt-1 group cursor-pointer  ${active ? "bg-blue-900 text-white "  : textColor} ${hoverBg} ${hoverText} ${!darkMode ? 'hover:text-white' :''}`}
                     key={key}
                   >
-                    <Link className="flex flex-row gap-2 cursor-pointer" href={`/${item.url}`}>
-                      <Icon className={`${active ? "text-black" : textColor} w-6 h-6`} />
+                    <Link className={`group-hover:text-white flex flex-row gap-2 ${active && 'text-white'} cursor-pointer ${darkMode ? 'text-white':'text-black'} `} href={`/${item.url}`}>
+                      <Icon  className={`w-8 h-8   ${active ? "text-white bg-blue-900" : darkMode ? "text-white" : " text-black"}
+    ${!darkMode ? "group-hover:text-white " : ""} `} />
                       {item.name}
                     </Link>
                   </CommandItem>
@@ -120,11 +123,11 @@ export default function SideBar() {
                const active = `/${item.url}` === pathName;
                  return (
                   <CommandItem
-                    className={`mt-1 cursor-pointer ${active ? "bg-blue-900 text-white "  : textColor} ${hoverBg} ${hoverText} ${!darkMode ? 'hover:text-white' :''}`}
+                    className={`mt-1 cursor-pointer ${active ? "bg-blue-900 text-white "  : textColor} ${hoverBg} ${hoverText} ${!darkMode ? 'hover:text-white' :'text-white'}`}
                     key={key}
                   >
                     <Link className="group flex flex-row gap-2 cursor-pointer text-lg" href={`/${item.url}`}>
-                      <Icon className={`w-8 h-8   ${active ? "text-white bg-blue-900" : darkMode ? "text-white" : " "}
+                      <Icon className={`!w-[24px] !h-[24px]    ${active ? "text-white bg-blue-900" : darkMode ? "text-white" : " "}
     ${!darkMode ? "group-hover::text-white " : ""} `}  />
                       {item.name}
                     </Link>
@@ -139,12 +142,12 @@ export default function SideBar() {
                 const active = `/${item.url}` === pathName;
                 return (
                   <CommandItem
-                    className={`mt-1 cursor-pointer ${active ? "bg-blue-900 text-white "  : textColor} ${hoverBg} ${hoverText} ${!darkMode ? 'hover:text-white' :''}`}
+                    className={`mt-1 cursor-pointer ${active ? "bg-blue-900 text-white "  : textColor} ${hoverBg} ${hoverText} ${!darkMode ? 'hover:text-white' :'text-white'}`}
                     key={key}
                   >
                     <Link className="group flex flex-row gap-2 cursor-pointer text-lg" href={`/${item.url}`}>
-                      <Icon className={`w-8 h-8   ${active ? "text-white bg-blue-900" : darkMode ? "text-white" : " "}
-    ${!darkMode ? "group-hover::text-white " : ""} `}  />
+                      <Icon className={`!w-[24px] !h-[24px]   ${active ? "text-white bg-blue-900" : darkMode ? "text-white" : " "}
+    ${!darkMode ? "group-hover::text-white  " : "!bg-blue-900"} `}  />
                       {item.name}
                     </Link>
                   </CommandItem>
