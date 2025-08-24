@@ -24,15 +24,18 @@ import {
   DialogTrigger,
 } from '../../components/ui/dialog';
 import UserCard from '../myComponents/UserCards';
-import { Bell } from 'lucide-react';
+
 import NotificationBell from '../myComponents/NotificationBell';
 
 export default function Page() {
-   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  
+   
   const {compressAndConvertToBase64} =useConvertBase64()
   const { postData } = usePost();
   const [editImage,setEditImage]=useState<selectedImageType | null>(null)
   const context = useContext(Context);
+   const notificationsEnabled=context?.notificationsEnabled
+    const setNotificationsEnabled=context?.setNotificationsEnabled
   const selectedImgs = context?.selectedImages;
   const setSelectedImgs = context?.setSelectedImages;
   const dayValueInput=context?.dayValue
@@ -80,11 +83,12 @@ export default function Page() {
     setEditImage(null)
   }
     useEffect(() => {
+      if(!notificationsEnabled || !setNotificationsEnabled) return
       const stored = localStorage.getItem('notificationsEnabled');
       if (stored !== null) {
         setNotificationsEnabled(JSON.parse(stored));
       }
-    }, []);
+    }, [notificationsEnabled]);
   return (
     <section className="  overflow-x-hidden  grid grid-cols-1  lg:flex-nowrap  w-full text-white ">
       <SideBar />

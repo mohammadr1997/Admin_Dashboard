@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { API_KEY } from '../data';
+
 import Image from 'next/image';
 import axios from 'axios';
 import CircularIndeterminate from './loading';
@@ -11,14 +11,17 @@ import UserCard from './UserCards';
 import { Context } from './Contextprovider';
 import { useContext } from 'react';
 import NotificationBell from './NotificationBell';
+import Link from 'next/link';
 interface newsNumber {
   number: number;
   title: string;
 }
 export default function LatestNews({ number, title }: newsNumber) {
+  const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const context=useContext(Context)
   const menuOpen=context?.menuOpen
-  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+   const notificationsEnabled=context?.notificationsEnabled
+  const setNotificationsEnabled=context?.setNotificationsEnabled
   const truncateText = (description, numbersofWords) => {
     const desc = description.split(' ');
     if (desc.length > numbersofWords) {
@@ -46,11 +49,12 @@ const context=useContext(Context)
   });
   
   useEffect(() => {
+    if(!notificationsEnabled || !setNotificationsEnabled) return
     const stored = localStorage.getItem('notificationsEnabled');
     if (stored !== null) {
       setNotificationsEnabled(JSON.parse(stored));
     }
-  }, []);
+  }, [notificationsEnabled]);
   return (
     <div className={`p-4 ${menuOpen ? '':''}`} >
       <div className='flex   mt-1 flex-row w-full flex-nowrap justify-between gap-2'>
@@ -102,12 +106,17 @@ const context=useContext(Context)
                   
                 </div>
                 <div className="grid grid-cols-1 gap-2 px-3">
-                  <p className="text-md hidden lg:block lg:text-xl ">
+                  {number==25 ? <a className="text-md hidden lg:block lg:text-xl ">
+                   <Link href={'/news/n'}>{truncateText(news.description, 14)}</Link> 
+                  </a> : <p className="text-md hidden lg:block lg:text-xl ">
                     {truncateText(news.description, 14)}
-                  </p>
-                   <p className="text-md mt-4 lg:hidden block lg:text-xl ">
+                  </p> }
+                 {number==25 ?  <a className="text-md mt-4 lg:hidden block lg:text-xl ">
+                   <Link href={'/news/n'}>{truncateText(news.description, 6)}</Link> 
+                  </a> : <p className="text-md mt-4 lg:hidden block lg:text-xl ">
                     {truncateText(news.description, 6)}
-                  </p>
+                  </p>}
+                  
                   <p className="text-sm lg:text-lg  dark:text-white text-stone-900 font-bold">
                     {' '}
                     {formattedDate(news.publishedAt)}

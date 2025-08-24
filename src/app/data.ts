@@ -287,4 +287,3 @@ export const initialSettingsData: SettingsType[] = [
     enabled: true,
   },
 ];
-export const API_KEY = '108b184ea7a5977a6865035c94a4a258';

@@ -7,7 +7,8 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '../../compone
 import { DatabaseRecordType } from '../data';
 import { initialDatabaseData } from '../data';
 import UserCard from '../myComponents/UserCards';
-import { Bell } from 'lucide-react';
+import { Context } from '../myComponents/Contextprovider';
+import { useContext } from 'react';
 import NotificationBell from '../myComponents/NotificationBell';
 
 
@@ -16,7 +17,7 @@ import NotificationBell from '../myComponents/NotificationBell';
 export default function DatabasePage() {
   const [data, setData] = useState<DatabaseRecordType[]>([]);
   const [selectedRecord, setSelectedRecord] = useState<DatabaseRecordType | null>(null);
-
+const context=useContext(Context)
  useEffect(() => {
   const storedData = localStorage.getItem('databaseData');
   if (storedData) {
@@ -61,13 +62,15 @@ export default function DatabasePage() {
     setData(newData);
     localStorage.setItem('databaseData', JSON.stringify(newData));
   };
-   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+   const notificationsEnabled=context?.notificationsEnabled
+    const setNotificationsEnabled=context?.setNotificationsEnabled
     useEffect(() => {
+      if(!notificationsEnabled || !setNotificationsEnabled) return
     const stored = localStorage.getItem('notificationsEnabled');
     if (stored !== null) {
       setNotificationsEnabled(JSON.parse(stored));
     }
-  }, []);
+  }, [notificationsEnabled]);
   return (
     <section className="overflow-x-hidden grid grid-cols-1 lg:flex-nowrap w-full text-white">
       <SideBar />

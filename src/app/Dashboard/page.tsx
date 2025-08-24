@@ -6,17 +6,22 @@ import Statistics from '../myComponents/Statistics';
 import LatestNews from '../myComponents/LatestNews';
 import { useState,useEffect } from 'react';
 import UserCard from '../myComponents/UserCards';
-
+import { Context } from '../myComponents/Contextprovider';
+import { useContext } from 'react';
 import NotificationBell from '../myComponents/NotificationBell';
 
 export default function Page() {
-   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
-     useEffect(() => {
-    const stored = localStorage.getItem('notificationsEnabled');
-    if (stored !== null) {
-      setNotificationsEnabled(JSON.parse(stored));
-    }
-  }, []);
+  const context=useContext(Context)
+  const notificationsEnabled=context?.notificationsEnabled
+    const setNotificationsEnabled=context?.setNotificationsEnabled
+ 
+   useEffect(() => {
+       if(!notificationsEnabled || !setNotificationsEnabled) return
+     const stored = localStorage.getItem('notificationsEnabled');
+     if (stored !== null) {
+       setNotificationsEnabled(JSON.parse(stored));
+     }
+   }, [notificationsEnabled]);
   return (
     <section className="  overflow-x-hidden  grid grid-cols-1 lg:flex lg:flex-row lg:flex-nowrap  w-full text-white ">
       <SideBar />

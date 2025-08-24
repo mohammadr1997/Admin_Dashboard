@@ -11,12 +11,13 @@ import SideBar from '../myComponents/SideBar';
 import { Card, CardContent, CardFooter } from '../Components/ui/Card';
 import { initialMessagesData, MessageType } from '../data';
 import UserCard from '../myComponents/UserCards';
-
+import { Context } from '../myComponents/Contextprovider';
+import { useContext } from 'react';
 import NotificationBell from '../myComponents/NotificationBell';
 
 
 export default function MessagesPage() {
-   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [selectedMessage, setSelectedMessage] = useState<MessageType | null>(null);
 
@@ -54,12 +55,16 @@ export default function MessagesPage() {
   const deleteMessage = (msg: MessageType) => {
     setMessages(prev => prev.filter(m => m.id !== msg.id));
   };
+  const context=useContext(Context)
+  const notificationsEnabled=context?.notificationsEnabled
+  const setNotificationsEnabled=context?.setNotificationsEnabled
   useEffect(() => {
+    if(!notificationsEnabled || !setNotificationsEnabled) return
     const stored = localStorage.getItem('notificationsEnabled');
     if (stored !== null) {
       setNotificationsEnabled(JSON.parse(stored));
     }
-  }, []);
+  }, [notificationsEnabled]);
   return (
     <section className="overflow-x-hidden grid grid-cols-1 lg:flex-nowrap w-full text-white">
       <SideBar />

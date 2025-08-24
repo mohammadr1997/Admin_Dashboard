@@ -1,14 +1,16 @@
 "use client";
 import { usePathname } from "next/navigation";
-import React, { act, useContext } from "react";
+import React, { useContext } from "react";
+import { useState,useEffect } from "react";
 import Link from "next/link";
+
 import { Context } from "./Contextprovider";
-import { Menu, X, Bell, LucideIcon } from "lucide-react";
+import { Menu, X, LucideIcon } from "lucide-react";
 import { menuItem } from "../data";
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 import { Command, CommandGroup, CommandItem, CommandList, CommandSeparator } from "../../components/ui/command";
 import { DarkModeContext } from "../myComponents/darkModeProvider";
-import { group } from "console";
+import NotificationBell from "./NotificationBell";
 
 export default function SideBar() {
   type items = { name: string; icon: LucideIcon; url: string };
@@ -27,7 +29,18 @@ export default function SideBar() {
   const hoverBg = darkMode ? "hover:bg-blue-900" : "hover:bg-white";
   const hoverText = darkMode ? "hover:text-white" : "hover:text-white hover:bg-blue-900";
   const iconColor = darkMode ? "white" : "black";
+  
+  const notificationsEnabled=context?.notificationsEnabled
+  const setNotificationsEnabled=context?.setNotificationsEnabled
+ 
 
+     useEffect(() => {
+      if(!notificationsEnabled || !setNotificationsEnabled) return
+    const stored = localStorage.getItem('notificationsEnabled');
+    if (stored !== null) {
+      setNotificationsEnabled(JSON.parse(stored));
+    }
+  }, [notificationsEnabled]);
   return (
     <>
    
@@ -63,7 +76,7 @@ export default function SideBar() {
               <p className="text-sm text-muted-foreground">Manager</p>
             </div>
           </div>
-          <Bell className="cursor-pointer" color={iconColor} />
+          <NotificationBell enabled={notificationsEnabled}/>
         </div>
 
         <Command
@@ -78,10 +91,10 @@ export default function SideBar() {
              const active = `/${item.url}` === pathName;
                 return (
                   <CommandItem
-                     className={`mt-1 group cursor-pointer !text-white ${active ? "bg-blue-900 text-white "  : textColor} ${hoverBg} ${hoverText} ${!darkMode ? 'hover:text-white' :'!text-black'}`}
+                     className={`mt-1 group cursor-pointer !text-white ${active ? "bg-blue-900 text-white "  : ''} ${hoverBg} ${hoverText} ${!darkMode ? 'hover:text-white' :'!text-black'}`}
                     key={key}
                   >
-                    <Link className={`flex flex-row gap-2 cursor-pointer  ${darkMode ? 'text-white':'text-black group-hover:text-white'}`} href={`/${item.url}`}>
+                    <Link className={`flex flex-row gap-2 cursor-pointer  ${active && 'text-white'}   ${darkMode ? 'text-white':'text-black group-hover:text-white'}`} href={`/${item.url}`}>
                       <Icon className={`w-8 h-8   ${active ? "text-white bg-blue-900" : darkMode ? "text-white" : ""}
     ${!darkMode ? "group-hover:text-white " : ""} `} />
                       {item.name}

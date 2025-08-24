@@ -12,6 +12,8 @@ export type selectedImageType = {
   id:number
 };
 interface contextType {
+  notificationsEnabled:boolean
+  setNotificationsEnabled:React.Dispatch<React.SetStateAction<boolean>>;
   selectedImages: selectedImageType[];
   dayValue:string,
   setDayValue:React.Dispatch<React.SetStateAction<string>>
@@ -34,7 +36,7 @@ export default function Contextprovider({
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [selectedBanner, setSelectedBanner] = useState<selectedImageType[]>([]);
   const [selectedImageGalleryByDate, setSelectedImageGalleryByDate] = useState<selectedImageType[]>([]);
-
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   return (
     <Context.Provider
       value={{
@@ -47,7 +49,9 @@ export default function Contextprovider({
         dayValue,
         setDayValue,
         menuOpen,
-        setMenuOpen
+        setMenuOpen,
+        notificationsEnabled,
+        setNotificationsEnabled
       }}
     >
       {children}

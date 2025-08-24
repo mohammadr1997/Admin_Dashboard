@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
 import { Button } from "../../components/ui/button";
+
+import { Context } from "../myComponents/Contextprovider";
 import SideBar from "../myComponents/SideBar";
 import { DarkModeContext } from "../myComponents/darkModeProvider";
 import { Card, CardContent, CardFooter } from "../Components/ui/Card";
@@ -10,8 +12,10 @@ import NotificationBell from "../myComponents/NotificationBell";
 import { useToast } from "../myComponents/useToast";
 
 export default function SettingsPage() {
+  const context=useContext(Context)
   const [settingsData, setSettingsData] = useState<SettingsType[]>([]);
-  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+   const notificationsEnabled=context?.notificationsEnabled
+  const setNotificationsEnabled=context?.setNotificationsEnabled
   const [locationAccess, setLocationAccess] = useState(false);
   const [emailAlert, setEmailAlert] = useState(false);
   const [betaFeature, setBetaFeature] = useState(false);
@@ -51,15 +55,15 @@ export default function SettingsPage() {
     };
 
     loadSettings();
-
-    // بارگذاری وضعیت هر گزینه
+      if(!notificationsEnabled || !setNotificationsEnabled) return
+   
     setNotificationsEnabled(JSON.parse(localStorage.getItem("notificationsEnabled") || "false"));
     setLocationAccess(JSON.parse(localStorage.getItem("locationAccess") || "false"));
     setEmailAlert(JSON.parse(localStorage.getItem("emailAlert") || "false"));
     setBetaFeature(JSON.parse(localStorage.getItem("betaFeature") || "false"));
     setDataSync(JSON.parse(localStorage.getItem("dataSync") || "false"));
 
-    // گوش دادن به تغییرات localStorage
+    
     const handleStorageChange = (event: StorageEvent) => {
       if (!event.key) return;
       const value = JSON.parse(event.newValue || "false");
@@ -89,6 +93,13 @@ export default function SettingsPage() {
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
+    useEffect(() => {
+        if(!notificationsEnabled || !setNotificationsEnabled) return
+      const stored = localStorage.getItem('notificationsEnabled');
+      if (stored !== null) {
+        setNotificationsEnabled(JSON.parse(stored));
+      }
+    }, [notificationsEnabled]);
 
   const toggleSetting = (setting: SettingsType) => {
     const updated = settingsData.map((s) =>

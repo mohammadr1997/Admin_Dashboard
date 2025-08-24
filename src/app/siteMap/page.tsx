@@ -8,7 +8,9 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import React from 'react';
-import {Bell, ChevronDown, RefreshCcw } from 'lucide-react'
+import { RefreshCcw } from 'lucide-react'
+import { Context } from "../myComponents/Contextprovider";
+import { useContext } from "react";
 import { useState,useEffect } from 'react';
 import SideBar  from '../myComponents/SideBar';
 import { menuItem } from '../data';
@@ -23,15 +25,18 @@ import NotificationBell from "../myComponents/NotificationBell";
  
 
 export default function Page() {
-    const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const context=useContext(Context)
+ const notificationsEnabled=context?.notificationsEnabled
+  const setNotificationsEnabled=context?.setNotificationsEnabled
 
   const [viewMode,setViewMode]=useState<string>('grid')
     useEffect(() => {
+      if(!notificationsEnabled || !setNotificationsEnabled) return
     const stored = localStorage.getItem('notificationsEnabled');
     if (stored !== null) {
       setNotificationsEnabled(JSON.parse(stored));
     }
-  }, []);
+  }, [notificationsEnabled]);
   return (
     <section className="relative overflow-x-hidden grid grid-cols-1 lg:flex-nowrap w-full">
   
