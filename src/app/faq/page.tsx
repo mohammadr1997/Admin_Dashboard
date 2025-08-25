@@ -84,7 +84,8 @@ export default function FAQPage() {
           </div>
           <div className=' hidden lg:flex  flex-row gap-3 flex-nowrap'>
             <UserCard/>
-            <NotificationBell enabled={notificationsEnabled}/>
+            <div className='mt-1'>  <NotificationBell enabled={notificationsEnabled}/></div>
+           
           </div>
         </div>
       </div>
@@ -124,7 +125,7 @@ export default function FAQPage() {
                   >
                     <DialogTrigger asChild>
                       <Button
-                        className="bg-[#e9ecef] cursor-pointer hover:bg-[#b9babb]"
+                        className="bg-[#b1b4b6] cursor-pointer hover:bg-[#c5c6c7]"
                         onClick={() => setSelectedFAQ(faq)}
                       >
                         View Answer
@@ -162,7 +163,7 @@ export default function FAQPage() {
                   >
                     <DialogTrigger className="" asChild>
                       <Button
-                        className="bg-[#e9ecef] cursor-pointer hover:bg-[#b9babb]"
+                        className="bg-[#b1b4b6] cursor-pointer hover:bg-[#c5c6c7]"
                         onClick={() => setSelectedFAQ(faq)}
                       >
                         View Answer
@@ -200,7 +201,7 @@ export default function FAQPage() {
                   >
                     <DialogTrigger asChild>
                       <Button
-                        className="bg-[#e9ecef] cursor-pointer hover:bg-[#b9babb]"
+                        className="bg-[#b1b4b6] cursor-pointer hover:bg-[#c5c6c7]"
                         onClick={() => setSelectedFAQ(faq)}
                       >
                         View Answer

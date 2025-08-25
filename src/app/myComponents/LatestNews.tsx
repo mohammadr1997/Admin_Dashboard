@@ -43,7 +43,7 @@ const context=useContext(Context)
     );
     return response.data.articles;
   };
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['LatestNews'],
     queryFn: fetchNews,
   });
@@ -55,6 +55,7 @@ const context=useContext(Context)
       setNotificationsEnabled(JSON.parse(stored));
     }
   }, [notificationsEnabled]);
+  console.log('news',data)
   return (
     <div className={`p-4 ${menuOpen ? '':''}`} >
       <div className='flex   mt-1 flex-row w-full flex-nowrap justify-between gap-2'>
@@ -106,14 +107,32 @@ const context=useContext(Context)
                   
                 </div>
                 <div className="grid grid-cols-1 gap-2 px-3">
-                  {number==25 ? <a className="text-md hidden lg:block lg:text-xl ">
-                   <Link href={'/news/n'}>{truncateText(news.description, 14)}</Link> 
-                  </a> : <p className="text-md hidden lg:block lg:text-xl ">
+                  {number==25 ? <div className="underline text-md hidden lg:block lg:text-xl ">
+                   <Link href={{
+                    pathname:`/news/${news.id}`,
+                    query:{
+                    title: news.title,
+                    content:news.content,
+                    publishedAt:news.publishedAt,
+                    image:news.image
+                    }
+                    
+                   }}>{truncateText(news.description, 14)}</Link> 
+                  </div> : <p className="text-md hidden lg:block lg:text-xl ">
                     {truncateText(news.description, 14)}
                   </p> }
-                 {number==25 ?  <a className="text-md mt-4 lg:hidden block lg:text-xl ">
-                   <Link href={'/news/n'}>{truncateText(news.description, 6)}</Link> 
-                  </a> : <p className="text-md mt-4 lg:hidden block lg:text-xl ">
+                 {number==25 ?  <div className="underline text-md mt-4 lg:hidden block lg:text-xl ">
+                   <Link href={{
+                     pathname:`/news/${news.id}`,
+                     query:{
+                     title: news.title,
+                     content:news.content,
+                     publishedAt:news.publishedAt,
+                     image:news.image
+                     }
+
+                   }}>{truncateText(news.description, 6)}</Link> 
+                  </div> : <p className="text-md mt-4 lg:hidden block lg:text-xl ">
                     {truncateText(news.description, 6)}
                   </p>}
                   

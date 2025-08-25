@@ -105,14 +105,14 @@ const context=useContext(Context)
                   <DialogTrigger asChild>
                     <Button
                       onClick={() => setSelectedRecord(record)}
-                      className="!text-black  !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer bg-[#e9ecef]"
+                      className="!text-black  !font-bold !text-md !lg:text-xl !bg-[#b1b4b6] cursor-pointer hover:!bg-[#c5c6c7] !px-4  !py-2 !rounded-2xl !border-1 !border-gray "
                       variant="ghost"
                     >
                       View Details
                     </Button>
                   </DialogTrigger>
                   {selectedRecord && (
-                    <DialogContent className="backdrop-blur-sm bg-white/90">
+                    <DialogContent className="backdrop-blur-sm bg-white/90 dark:bg-[#1e293b] dark:text-white">
                       <DialogTitle>{selectedRecord.name}</DialogTitle>
                       <p className="text-md lg:text-lg mt-4">{selectedRecord.description || 'No description.'}</p>
                       <p className="mt-2 font-bold">Status: {selectedRecord.status.toUpperCase()}</p>

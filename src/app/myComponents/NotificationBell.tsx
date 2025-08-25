@@ -9,7 +9,7 @@ type Notification = {
 };
 
 interface NotificationBellProps {
-  enabled: boolean;
+  enabled: boolean | undefined;
 }
 
 
