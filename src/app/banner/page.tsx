@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Bell, Bold } from 'lucide-react';
+
 import { Toggle } from '@/components/ui/toggle';
 import usePostBanners from '../myComponents/hooks/usePostBanners';
 import SideBar from '../myComponents/SideBar';
@@ -22,7 +22,7 @@ import {
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
+ 
   DialogTrigger,
 } from '../../components/ui/dialog';
 import {
@@ -39,12 +39,12 @@ import NotificationBell from '../myComponents/NotificationBell';
 
 const types = ['JPEG', 'PNG', 'WebP', 'SVG', 'All'];
 interface bannerType {
-  imageName: string;
+   imageName: string;
   src: string;
-  realDate: string;
   date: string;
+  realDate: string;
   isActive: boolean;
-  type: string;
+  type?: string;
   id:number
 }
 export default function Page() {
@@ -54,7 +54,7 @@ export default function Page() {
   );
   const { postBanner } = usePostBanners();
   const { data, refetch } = useFetchBanner();
-  const [banners, setBanners] = useState<bannerType[]>([]);
+  // const [banners, setBanners] = useState<bannerType[]>([]);
   const [typeValue, setTypeValue] = useState('');
   const context = useContext(Context);
   const selectedBanners = context?.selectedBanner;
@@ -91,7 +91,7 @@ export default function Page() {
   
   }, [typeValue]);
 
-  const handleSave = (e, editBanner: bannerType) => {
+  const handleSave = (e:any, editBanner: bannerType) => {
     e.preventDefault();
     if (!selectedBanners || !setSelectedBanner || !editBanner) return;
     const changedBanner = selectedBanners.map((banner: bannerType) =>

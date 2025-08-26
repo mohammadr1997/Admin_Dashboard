@@ -16,10 +16,10 @@ export default function SettingsPage() {
   const [settingsData, setSettingsData] = useState<SettingsType[]>([]);
    const notificationsEnabled=context?.notificationsEnabled
   const setNotificationsEnabled=context?.setNotificationsEnabled
-  const [locationAccess, setLocationAccess] = useState(false);
-  const [emailAlert, setEmailAlert] = useState(false);
-  const [betaFeature, setBetaFeature] = useState(false);
-  const [dataSync, setDataSync] = useState(false);
+  // const [locationAccess, setLocationAccess] = useState(false);
+  // const [emailAlert, setEmailAlert] = useState(false);
+  // const [betaFeature, setBetaFeature] = useState(false);
+  // const [dataSync, setDataSync] = useState(false);
 
   const { toggleDarkMode } = useContext(DarkModeContext);
   const { toast } = useToast();

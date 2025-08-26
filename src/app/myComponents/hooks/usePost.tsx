@@ -10,9 +10,14 @@ export function usePost() {
     try {
       const response = await axios.post('/api/data', data);
       return response.data.data;
-    } catch (error: any) {
-      console.error('Post error:', error);
-      throw new Error(error.response?.data?.message || 'Post failed');
+    } catch (error:unknown) {
+      if (axios.isAxiosError(error)) {
+        console.error('Post error:', error);
+        throw new Error(error.response?.data?.message || 'Post failed');
+      } else {
+        console.error('Unexpected error:', error);
+        throw new Error('Unexpected error occurred');
+      }
     }
   };
 

@@ -6,7 +6,7 @@ import axios from 'axios';
 import CircularIndeterminate from './loading';
 import { useQuery } from '@tanstack/react-query';
 import BasicAlerts from './AlertError';
-import { useState,useEffect } from 'react';
+import {useEffect } from 'react';
 import UserCard from './UserCards';
 import { Context } from './Contextprovider';
 import { useContext } from 'react';
@@ -43,7 +43,7 @@ const context=useContext(Context)
     );
     return response.data.articles;
   };
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['LatestNews'],
     queryFn: fetchNews,
   });

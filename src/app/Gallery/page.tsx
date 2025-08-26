@@ -39,7 +39,7 @@ export default function Page() {
   const selectedImgs = context?.selectedImages;
   const setSelectedImgs = context?.setSelectedImages;
   const dayValueInput=context?.dayValue
-  const setDayvalueInput=context?.setDayValue
+  // const setDayvalueInput=context?.setDayValue
   const imagesByDateFilter=context?.selectedImageGalleryByDate
   const setImagesByDateFilter=context?.setSelectedImageGalleryByDate
 

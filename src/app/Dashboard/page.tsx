@@ -4,7 +4,7 @@ import SideBar from '../myComponents/SideBar';
 import Slider from '../myComponents/Slider';
 import Statistics from '../myComponents/Statistics';
 import LatestNews from '../myComponents/LatestNews';
-import { useState,useEffect } from 'react';
+import {useEffect } from 'react';
 import UserCard from '../myComponents/UserCards';
 import { Context } from '../myComponents/Contextprovider';
 import { useContext } from 'react';

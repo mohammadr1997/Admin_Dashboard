@@ -2,16 +2,16 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import useFetch from './hooks/useFetch';
-import { selectedImageType } from './Contextprovider';
+
 import { Context } from './Contextprovider';
 import { useContext } from 'react';
-import { useQuery } from '@tanstack/react-query';
+
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
+ 
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
@@ -21,7 +21,13 @@ interface titleType {
 }
 const days = ['today', 'last 7 days', 'last 30', 'year', 'all'];
 const newest = ['newest', 'oldest'];
-
+interface imgType {
+    imageName:string
+    src:string
+      realDate: string,
+      type: string,
+      id: string
+}
 export function SelectDemo({ title }: titleType) {
   const context = useContext(Context);
   const selectedImgs = context?.selectedImages;
@@ -40,7 +46,7 @@ export function SelectDemo({ title }: titleType) {
     let updatedImgs;
     if (selectImagesByDateFilter && setSelectedImagesByDateFilter && data) {
         if(dayVal==='') return
-         updatedImgs = data?.products.filter((img: any) => {
+         updatedImgs = data?.products.filter((img:imgType) => {
         const now = new Date();
         const secondsNow = now.getTime() / 1000;
         const imgDate = new Date(img.realDate);
