@@ -48,7 +48,7 @@ interface bannerType {
   id:number
 }
 export default function Page() {
-   
+    const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [filteredByType, setFilteredByType] = useState<bannerType[] | null>(
     null,
   );
@@ -57,9 +57,6 @@ export default function Page() {
   const [banners, setBanners] = useState<bannerType[]>([]);
   const [typeValue, setTypeValue] = useState('');
   const context = useContext(Context);
-    
-    const notificationsEnabled=context?.notificationsEnabled
-      const setNotificationsEnabled=context?.setNotificationsEnabled
   const selectedBanners = context?.selectedBanner;
   const setSelectedBanner = context?.setSelectedBanner;
   const [editBanner, setEditBanner] = useState<bannerType | null>(null);
@@ -93,13 +90,6 @@ export default function Page() {
     console.log(types)
   
   }, [typeValue]);
-      useEffect(() => {
-        if(!notificationsEnabled || !setNotificationsEnabled) return
-        const stored = localStorage.getItem('notificationsEnabled');
-        if (stored !== null) {
-          setNotificationsEnabled(JSON.parse(stored));
-        }
-      }, [notificationsEnabled]);
 
   const handleSave = (e, editBanner: bannerType) => {
     e.preventDefault();
@@ -192,8 +182,7 @@ export default function Page() {
   useEffect(() => {
     const stored = localStorage.getItem('notificationsEnabled');
     if (stored !== null) {
-      if(setNotificationsEnabled){
-      setNotificationsEnabled(JSON.parse(stored))};
+      setNotificationsEnabled(JSON.parse(stored));
     }
   }, []);
   return (
@@ -210,8 +199,7 @@ export default function Page() {
           <div className='hidden lg:flex flex-row flex-nowrap gap-3 -mt-6'>
 
             <UserCard/>
-            <div className='mt-6'><NotificationBell enabled={notificationsEnabled}/></div>
-          
+          <NotificationBell enabled={notificationsEnabled}/>
           </div>
          
         </div>
