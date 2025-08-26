@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import {useEffect } from "react";
 import Link from "next/link";
 
-import { Context } from "./Contextprovider";
+import { Context } from "./ContextProvider";
 import { Menu, X, LucideIcon } from "lucide-react";
 import { menuItem } from "../data";
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
@@ -17,8 +17,12 @@ export default function SideBar() {
 
   const pathName = usePathname();
   // const path = pathName.split("").slice(1).join("");
-
-  const { darkMode } = useContext(DarkModeContext);
+   const contextDark = useContext(DarkModeContext);
+    if (!contextDark) {
+    throw new Error('DarkModeContext must be used within a DarkModeProvider');
+  }
+  const { darkMode } = contextDark;  
+  // const { darkMode } = useContext(DarkModeContext);
   const context=useContext(Context)
 
  const menuOpen = context?.menuOpen ;

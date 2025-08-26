@@ -6,7 +6,7 @@ import Statistics from '../myComponents/Statistics';
 import LatestNews from '../myComponents/LatestNews';
 import {useEffect } from 'react';
 import UserCard from '../myComponents/UserCards';
-import { Context } from '../myComponents/Contextprovider';
+import { Context } from '../myComponents/ContextProvider';
 import { useContext } from 'react';
 import NotificationBell from '../myComponents/NotificationBell';
 

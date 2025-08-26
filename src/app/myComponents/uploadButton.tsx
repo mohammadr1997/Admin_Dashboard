@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useContext } from 'react';
-import { Context } from './Contextprovider';
+import { Context } from './ContextProvider';
 import { cva } from 'class-variance-authority';
 import { cn } from '../lib/utils';
 import { usePost } from './hooks/usePost';

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import useFetch from './hooks/useFetch';
 
-import { Context } from './Contextprovider';
+import { Context } from './ContextProvider';
 import { useContext } from 'react';
 
 import {
@@ -11,7 +11,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
- 
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
@@ -21,32 +20,36 @@ interface titleType {
 }
 const days = ['today', 'last 7 days', 'last 30', 'year', 'all'];
 const newest = ['newest', 'oldest'];
+
 interface imgType {
-    imageName:string
-    src:string
-      realDate: string,
-      type: string,
-      id: string
+  imageName: string;
+  src: string;
+  date: string;
+  realDate: string;
+  isActive: boolean;
+  type?: string;
+  id:number
 }
+
 export function SelectDemo({ title }: titleType) {
   const context = useContext(Context);
   const selectedImgs = context?.selectedImages;
-  const selectImagesByDateFilter=context?.selectedImageGalleryByDate
-  const setSelectedImagesByDateFilter=context?.setSelectedImageGalleryByDate
-  const dayVal=context?.dayValue
-  const setDayVal=context?.setDayValue
+  const selectImagesByDateFilter = context?.selectedImageGalleryByDate;
+  const setSelectedImagesByDateFilter = context?.setSelectedImageGalleryByDate;
+  const dayVal = context?.dayValue;
+  const setDayVal = context?.setDayValue;
   const setSelectedImgs = context?.setSelectedImages;
- 
+
   const [sortValue, setSortValue] = useState<string>('');
   const { data, refetch } = useFetch();
+
   useEffect(() => {
-    
     refetch();
-    
+
     let updatedImgs;
     if (selectImagesByDateFilter && setSelectedImagesByDateFilter && data) {
-        if(dayVal==='') return
-         updatedImgs = data?.products.filter((img:imgType) => {
+      if (dayVal === '') return;
+      updatedImgs = data?.products.filter((img: imgType) => {
         const now = new Date();
         const secondsNow = now.getTime() / 1000;
         const imgDate = new Date(img.realDate);
@@ -79,42 +82,43 @@ export function SelectDemo({ title }: titleType) {
             return true;
         }
       });
- 
-     
-      
-        setSelectedImagesByDateFilter(updatedImgs);
-     
+
+      setSelectedImagesByDateFilter(updatedImgs);
     }
-    
-  }, [dayVal,selectedImgs]);
+  }, [dayVal, selectedImgs]);
 
   useEffect(() => {
-    
-    if (!selectedImgs || !setSelectedImgs || !setSelectedImagesByDateFilter || !selectImagesByDateFilter) return;
-  const sortImages = (selectedImagesForSort: any, sort: string) => {
+    if (
+      !selectedImgs ||
+      !setSelectedImgs ||
+      !setSelectedImagesByDateFilter ||
+      !selectImagesByDateFilter
+    )
+      return;
+
+    const sortImages = (selectedImagesForSort: imgType[], sort: string) => {
       const sortImages = [...selectedImagesForSort];
-      sortImages.sort((a: any, b: any) => {
+      sortImages.sort((a: imgType, b: imgType) => {
         const aDate = new Date(a.realDate);
         const bDate = new Date(b.realDate);
         return sort === 'oldest'
           ? aDate.getTime() - bDate.getTime()
           : bDate.getTime() - aDate.getTime();
       });
-      if(dayVal===''){
-         setSelectedImgs(sortImages);
-      }else{
-        setSelectedImagesByDateFilter(sortImages)
+      if (dayVal === '') {
+        setSelectedImgs(sortImages);
+      } else {
+        setSelectedImagesByDateFilter(sortImages);
       }
-     
+    };
+
+    if (dayVal === '') {
+      sortImages(selectedImgs, sortValue);
+    } else {
+      sortImages(selectImagesByDateFilter, sortValue);
     }
-    if(dayVal===''){
-       sortImages(selectedImgs, sortValue,dayVal);
-    }else{
-      sortImages(selectImagesByDateFilter,sortValue,'Defined')
-    }
-    
-   
   }, [sortValue]);
+
   return (
     <div>
       {title === 'days' ? (

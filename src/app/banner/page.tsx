@@ -8,7 +8,7 @@ import usePostBanners from '../myComponents/hooks/usePostBanners';
 import SideBar from '../myComponents/SideBar';
 import useFetchBanner from '../myComponents/hooks/useFetchBanner';
 import { Upload } from 'lucide-react';
-import { Context } from '../myComponents/Contextprovider';
+import { Context } from '../myComponents/ContextProvider';
 import { useContext } from 'react';
 import { buttonVariants } from '../myComponents/uploadButton';
 import {
@@ -91,7 +91,7 @@ export default function Page() {
   
   }, [typeValue]);
 
-  const handleSave = (e:any, editBanner: bannerType) => {
+  const handleSave = (e: React.FormEvent<HTMLFormElement>, editBanner: bannerType) => {
     e.preventDefault();
     if (!selectedBanners || !setSelectedBanner || !editBanner) return;
     const changedBanner = selectedBanners.map((banner: bannerType) =>

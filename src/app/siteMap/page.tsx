@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/select"
 import React from 'react';
 import { RefreshCcw } from 'lucide-react'
-import { Context } from "../myComponents/Contextprovider";
+import { Context } from "../myComponents/ContextProvider";
 import { useContext } from "react";
 import { useState,useEffect } from 'react';
 import SideBar  from '../myComponents/SideBar';

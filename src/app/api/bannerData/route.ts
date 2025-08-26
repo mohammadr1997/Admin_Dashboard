@@ -43,9 +43,16 @@ export async function GET() {
         data: fileData.banners,
       });
     }
-  } catch (err: Error) {
-    return NextResponse.json({
-      message: err.message,
-    });
+  } catch (err: unknown) {
+    let errorMessage = 'Unknown error';
+    if (err instanceof Error) {
+      errorMessage = err.message;
+    }
+    return NextResponse.json(
+      {
+        message: errorMessage,
+      },
+      { status: 500 },
+    );
   }
 }

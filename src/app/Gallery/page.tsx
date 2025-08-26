@@ -3,9 +3,9 @@ import React, { useContext } from 'react';
 import useConvertBase64 from '../myComponents/hooks/useConvertBase64';
 import Image from 'next/image';
 import { usePost } from '../myComponents/hooks/usePost';
-import { Context } from '../myComponents/Contextprovider';
+import { Context } from '../myComponents/ContextProvider';
 import { useState } from 'react';
-import { selectedImageType } from '../myComponents/Contextprovider';
+import { selectedImageType } from '../myComponents/ContextProvider';
 
 import { useEffect } from 'react';
 import useFetch from '../myComponents/hooks/useFetch';
@@ -67,7 +67,7 @@ export default function Page() {
       }
     }
   };
-  const handleSave=(e,image:selectedImageType)=>{
+  const handleSave=(e:React.FormEvent<HTMLFormElement>,image:selectedImageType)=>{
     e.preventDefault();
     if(!selectedImgs || !setSelectedImgs || !imagesByDateFilter || !setImagesByDateFilter) return
 

@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button } from "../../components/ui/button";
 
-import { Context } from "../myComponents/Contextprovider";
+import { Context } from "../myComponents/ContextProvider";
 import SideBar from "../myComponents/SideBar";
 import { DarkModeContext } from "../myComponents/darkModeProvider";
 import { Card, CardContent, CardFooter } from "../Components/ui/Card";
@@ -21,7 +21,11 @@ export default function SettingsPage() {
   // const [betaFeature, setBetaFeature] = useState(false);
   // const [dataSync, setDataSync] = useState(false);
 
-  const { toggleDarkMode } = useContext(DarkModeContext);
+  const contextDark = useContext(DarkModeContext);
+  if (!contextDark) {
+  throw new Error('DarkModeContext must be used within a DarkModeProvider');
+}
+const { toggleDarkMode } = contextDark;
   const { toast } = useToast();
 
   useEffect(() => {

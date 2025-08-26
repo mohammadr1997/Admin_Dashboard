@@ -11,7 +11,7 @@ import SideBar from '../myComponents/SideBar';
 import { Card, CardContent, CardFooter } from '../Components/ui/Card';
 import { initialMessagesData, MessageType } from '../data';
 import UserCard from '../myComponents/UserCards';
-import { Context } from '../myComponents/Contextprovider';
+import { Context } from '../myComponents/ContextProvider';
 import { useContext } from 'react';
 import NotificationBell from '../myComponents/NotificationBell';
 

@@ -26,7 +26,7 @@ interface contextType {
   setSelectedBanner: React.Dispatch<React.SetStateAction<selectedImageType[]>>;
 }
 export const Context = createContext<contextType | undefined>(undefined);
-export default function Contextprovider({
+export default function ContextProvider({
   children,
 }: {
   children: React.ReactNode;

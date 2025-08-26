@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import BasicAlerts from './AlertError';
 import {useEffect } from 'react';
 import UserCard from './UserCards';
-import { Context } from './Contextprovider';
+import { Context } from './ContextProvider';
 import { useContext } from 'react';
 import NotificationBell from './NotificationBell';
 import Link from 'next/link';
@@ -16,13 +16,19 @@ interface newsNumber {
   number: number;
   title: string;
 }
+interface NewsItem {
+  title: string;
+  description: string;
+  image: string;
+  publishedAt: string;
+}
 export default function LatestNews({ number, title }: newsNumber) {
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const context=useContext(Context)
   const menuOpen=context?.menuOpen
    const notificationsEnabled=context?.notificationsEnabled
   const setNotificationsEnabled=context?.setNotificationsEnabled
-  const truncateText = (description, numbersofWords) => {
+  const truncateText = (description:string, numbersofWords: number) => {
     const desc = description.split(' ');
     if (desc.length > numbersofWords) {
       return desc.slice(0, numbersofWords).join(' ') + ' ' + '...';
@@ -43,7 +49,7 @@ const context=useContext(Context)
     );
     return response.data.articles;
   };
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery<NewsItem[]>({
     queryKey: ['LatestNews'],
     queryFn: fetchNews,
   });
@@ -90,7 +96,7 @@ const context=useContext(Context)
         <div
           className={`${number > 10 ? '' : 'h-[30rem]'}  overflow-y-auto overflow-x-hidden !mt-7 pb-2`}
         >
-          {data.map((news, index) => {
+          {data.map((news:NewsItem, index) => {
             return (
               <div key={index} className="grid grid-cols-2 gap-8  mt-4 mb-4   ">
                 <div className="">

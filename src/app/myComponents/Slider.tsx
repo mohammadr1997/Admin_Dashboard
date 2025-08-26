@@ -32,9 +32,9 @@ export default function Slider() {
             nextEl: nextRef.current,
           }}
           onInit={(swiper) => {
-            // @ts-expect-error
+           // @ts-expect-error Swiper types do not expose prevEl
             swiper.params.navigation.prevEl = prevRef.current;
-            // @ts-expect-error
+             // @ts-expect-error Swiper types do not expose prevEl
             swiper.params.navigation.nextEl = nextRef.current;
             swiper.navigation.init();
             swiper.navigation.update();

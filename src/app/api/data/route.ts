@@ -12,10 +12,14 @@ export async function GET() {
       message: 'file is successfully fetched',
       data: statistics,
     });
-  } catch (error) {
+  } catch (error: unknown) {
+    let errorMessage = 'Unknown error';
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
     return NextResponse.json({
       message: 'file can not be fetched',
-      error: error.message,
+      error: errorMessage,
       status: 500,
     });
   }
@@ -44,10 +48,14 @@ export async function POST(req: Request) {
       message: 'Data successfully written to db.json',
       data: currentData.products,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    let errorMessage = 'Unknown error';
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
     return NextResponse.json({
       message: 'Failed to write to file',
-      error: error.message,
+      error: errorMessage,
       status: 500,
     });
   }

@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '../../compone
 import { DatabaseRecordType } from '../data';
 import { initialDatabaseData } from '../data';
 import UserCard from '../myComponents/UserCards';
-import { Context } from '../myComponents/Contextprovider';
+import { Context } from '../myComponents/ContextProvider';
 import { useContext } from 'react';
 import NotificationBell from '../myComponents/NotificationBell';
 
@@ -52,7 +52,7 @@ const context=useContext(Context)
   const toggleStatus = (record: DatabaseRecordType) => {
     const newData = data.map(r =>
       r.id === record.id ? { ...r, status: r.status === 'active' ? 'inactive' : 'active' } : r
-    );
+    ) as DatabaseRecordType[];
     setData(newData);
     localStorage.setItem('databaseData', JSON.stringify(newData));
   };
