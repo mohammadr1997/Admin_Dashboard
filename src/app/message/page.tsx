@@ -105,7 +105,7 @@ export default function MessagesPage() {
                   <DialogTrigger asChild>
                     <Button
                       onClick={() => setSelectedMessage(msg)}
-                      className="!text-black !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer bg-[#e9ecef]"
+                      className="bg-[#a5a6a6] cursor-pointer dark:text-white hover:!bg-[#b9babb] text-black   !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray "
                       variant="ghost"
                     >
                       View Message

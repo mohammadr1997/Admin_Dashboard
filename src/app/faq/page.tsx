@@ -124,7 +124,7 @@ export default function FAQPage() {
                   >
                     <DialogTrigger asChild>
                       <Button
-                        className="bg-[#e9ecef] cursor-pointer hover:bg-[#b9babb]"
+                        className="bg-[#a5a6a6] cursor-pointer dark:text-white hover:bg-[#b9babb]"
                         onClick={() => setSelectedFAQ(faq)}
                       >
                         View Answer
@@ -162,7 +162,7 @@ export default function FAQPage() {
                   >
                     <DialogTrigger className="" asChild>
                       <Button
-                        className="bg-[#e9ecef] cursor-pointer hover:bg-[#b9babb]"
+                        className="bg-[#a5a6a6] cursor-pointer  dark:hover:bg-[#b9babb] hover:bg-[#9b9c9d]"
                         onClick={() => setSelectedFAQ(faq)}
                       >
                         View Answer
@@ -200,7 +200,7 @@ export default function FAQPage() {
                   >
                     <DialogTrigger asChild>
                       <Button
-                        className="bg-[#e9ecef] cursor-pointer hover:bg-[#b9babb]"
+                        className="bg-[#a5a6a6] cursor-pointer hover:bg-[#b9babb]"
                         onClick={() => setSelectedFAQ(faq)}
                       >
                         View Answer
