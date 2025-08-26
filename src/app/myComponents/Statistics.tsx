@@ -4,6 +4,14 @@ import axios from "axios";
 import React, { useContext } from "react";
 import Progress from "./Progress";
 import { DarkModeContext } from "../myComponents/darkModeProvider";
+interface StatusType {
+  totalVisitors: number | string;
+  todaysVisitors: number | string;
+  todaysHits: number | string;
+  totalHits: number | string;
+}
+  
+
 
 export default function Statistics() {
   const { darkMode } = useContext(DarkModeContext);
@@ -18,7 +26,7 @@ export default function Statistics() {
     queryFn: getStats,
   });
 
-  // کلاس‌های رنگی برای دارک مود
+  
   const containerBg = darkMode ? "bg-[#0f4b5c]" : "bg-white";
   const cardBg = darkMode ? "bg-[#189DAC]" : "bg-white";
   const textColor = darkMode ? "text-white" : "text-black";
@@ -31,7 +39,7 @@ export default function Statistics() {
         </h3>
         <div className="flex flex-col md:flex-row md:flex-wrap gap-8 justify-center">
           {data &&
-            data.map((status: any, key: number) => {
+            data.map((status: StatusType, key: number) => {
               const valueStatus = Object.values(status);
               const keystatus = Object.keys(status);
               return (

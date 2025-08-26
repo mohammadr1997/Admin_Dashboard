@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import React, { useContext } from "react";
-import { useState,useEffect } from "react";
+import {useEffect } from "react";
 import Link from "next/link";
 
 import { Context } from "./Contextprovider";
@@ -16,7 +16,7 @@ export default function SideBar() {
   type items = { name: string; icon: LucideIcon; url: string };
 
   const pathName = usePathname();
-  const path = pathName.split("").slice(1).join("");
+  // const path = pathName.split("").slice(1).join("");
 
   const { darkMode } = useContext(DarkModeContext);
   const context=useContext(Context)

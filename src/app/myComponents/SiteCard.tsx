@@ -1,4 +1,5 @@
 'use client'
+
 import Link from 'next/link';
 import { Button } from '../Components/ui/Button';
 import {
@@ -8,7 +9,14 @@ import {
    CardTitle,
    CardDescription,
  } from '../Components/ui/Card';
- export default function SiteCard({ route, iconBg }:any){
+import { LucideIcon } from 'lucide-react';
+ interface NavItem {
+  name: string;
+  icon: LucideIcon;
+  url: string;
+  description:string
+}
+ export default function SiteCard({ route, iconBg }:{route:NavItem , iconBg:string}){
     return (<Card className="w-[300px] mx-auto rounded-2xl shadow-md overflow-hidden bg-white text-gray-800">
     <CardContent className="p-6 flex flex-col justify-center items-center gap-4">
       <span className={`p-4 ${iconBg} rounded-full text-black bg-transparent shadow-md`}>

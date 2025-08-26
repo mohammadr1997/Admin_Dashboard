@@ -91,7 +91,7 @@ export function SelectDemo({ title }: titleType) {
   useEffect(() => {
     
     if (!selectedImgs || !setSelectedImgs || !setSelectedImagesByDateFilter || !selectImagesByDateFilter) return;
-  const sortImages = (selectedImagesForSort: any, sort: string,dayValue:string) => {
+  const sortImages = (selectedImagesForSort: any, sort: string) => {
       const sortImages = [...selectedImagesForSort];
       sortImages.sort((a: any, b: any) => {
         const aDate = new Date(a.realDate);
