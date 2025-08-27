@@ -36,6 +36,7 @@ import { Button } from '../../components/ui/button';
 import { DialogTitle } from '@radix-ui/react-dialog';
 import UserCard from '../myComponents/UserCards';
 import NotificationBell from '../myComponents/NotificationBell';
+import EmptyState from '../myComponents/EmptyState';
 
 const types = ['JPEG', 'PNG', 'WebP', 'SVG', 'All'];
 interface bannerType {
@@ -406,6 +407,9 @@ export default function Page() {
                 );
               })
             }
+            {selectedBanners?.length === 0 && (
+              <EmptyState component='banner' />
+            )}
         </div>
       </div>
     </section>

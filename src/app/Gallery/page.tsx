@@ -26,6 +26,7 @@ import {
 import UserCard from '../myComponents/UserCards';
 
 import NotificationBell from '../myComponents/NotificationBell';
+import EmptyState from '../myComponents/EmptyState';
 
 export default function Page() {
   
@@ -372,6 +373,9 @@ export default function Page() {
                 </Card>
               );
             })  }
+            {selectedImgs?.length===0 && (
+              <EmptyState component='image' />
+            )}
       </div>
     </section>
   );
