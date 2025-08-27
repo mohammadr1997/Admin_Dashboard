@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Bell, BellOff } from "lucide-react";
-
+import { DarkModeContext } from "./darkModeProvider";
+import { useContext } from "react";
 type Notification = {
   id: number;
   message: string;
@@ -10,13 +11,15 @@ type Notification = {
 
 interface NotificationBellProps {
   enabled: boolean | undefined;
+  sideBar?:boolean
 }
 
 
-export default function NotificationBell({ enabled }: NotificationBellProps) {
+export default function NotificationBell({ enabled,sideBar=false }: NotificationBellProps) {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [open, setOpen] = useState(false);
-
+  const darkModeContext=useContext(DarkModeContext)
+  const dark=darkModeContext?.darkMode
  
   useEffect(() => {
     const stored = localStorage.getItem("notifications");
@@ -43,8 +46,8 @@ export default function NotificationBell({ enabled }: NotificationBellProps) {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   if (!enabled) {
-    return <BellOff   className="cursor-not-allowed  mt-5 opacity-85"
-        color="gray"/>
+    return <BellOff   className="cursor-not-allowed  mt-5 opacity-100"
+        color={sideBar && !dark ? "black":"white"}/>
    
   }else{
   return (
@@ -52,7 +55,7 @@ export default function NotificationBell({ enabled }: NotificationBellProps) {
      
       <Bell
         className="cursor-pointer  mt-5"
-        color="gray"
+        color={sideBar && !dark ? "black":"white"}
         onClick={() => setOpen(!open)}
       />
 

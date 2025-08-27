@@ -34,7 +34,7 @@ export default function Statistics() {
   const textColor = darkMode ? "text-white" : "text-black";
 
   return (
-    <div className={`flex justify-center w-full p-4 rounded-3xl ${containerBg}`}>
+    <div className={`flex justify-center w-full p-4 lg:mb-8 lg:mt-2 rounded-3xl ${containerBg}`}>
       <div
         className={`m-5 ${cardBg} w-full flex-col md:h-[18rem] lg:h-full p-4 rounded-3xl`}
       >
@@ -49,7 +49,7 @@ export default function Statistics() {
               Object.entries(status).map(([keyStatus, valueStatus], idx) => (
                 <div
                   key={`${key}-${idx}`}
-                  className="mt-6 h-32 w-28 md:w-32 md:h-32 lg:w-44 lg:h-48 mx-auto"
+                  className="mt-6 h-32 w-28 md:w-32 md:h-32 lg:w-44 lg:h-44  mx-auto"
                 >
                   <Progress
                     keyStatus={keyStatus}

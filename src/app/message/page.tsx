@@ -112,7 +112,7 @@ export default function MessagesPage() {
                     </Button>
                   </DialogTrigger>
                   {selectedMessage && (
-                    <DialogContent className="backdrop-blur-sm bg-white/90">
+                    <DialogContent className="backdrop-blur-sm bg-white/90 dark:bg-[#1e293b] dark:text-white">
                       <DialogTitle>{selectedMessage.sender}</DialogTitle>
                       <p className="text-md lg:text-lg mt-4">{selectedMessage.text}</p>
                     </DialogContent>

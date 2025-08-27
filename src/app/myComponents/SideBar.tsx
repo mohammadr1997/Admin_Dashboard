@@ -80,7 +80,7 @@ export default function SideBar() {
               <p className="text-sm text-muted-foreground">Manager</p>
             </div>
           </div>
-          <NotificationBell enabled={notificationsEnabled}/>
+          <NotificationBell sideBar={true} enabled={notificationsEnabled}/>
         </div>
 
         <Command
