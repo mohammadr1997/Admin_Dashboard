@@ -134,9 +134,9 @@ Tailwind CSS
 
 
 ## 🖼️ تصاویر پروژه
-![Screen_Shots(github/dashboard-1.png)
+![Screen_Shots](github/dashboard-1.png)
 
-![Screen_Shots(github/dashboard-2.png)
+![Screen_Shots](github/dashboard-2.png)
 
 ![Screen_Shots](github/dashboard-3.png)
 
