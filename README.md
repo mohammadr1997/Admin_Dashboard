@@ -1,36 +1,143 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Admin Dashboard with ShadCN UI, React & TypeScript
+## یک داشبورد ادمین کامل ساخته شده با **React**, **Next.js 13**, **TypeScript** و **ShadCN UI** برای مدیریت کاربران، تصاویر، محصولات و آمار وبسایت
 
-## Getting Started
+## 🎯 ویژگی‌های پروژه
 
-First, run the development server:
+- **داشبورد ریسپانسیو** با طراحی مدرن و قابل استفاده در موبایل و دسکتاپ
+- **حالت تاریک / روشن** با Context API
+- **مدیریت تصاویر** با آپلود، فیلتر بر اساس تاریخ و مرتب‌سازی
+- **مدیریت محصولات و بنرها** با ذخیره‌سازی در `db.json`
+- **آمار سایت** با نمایش پیشرفت‌ها (Progress Bar)
+- **کامپوننت‌های از پیش طراحی شده** با ShadCN UI
+- **استفاده از React Query** برای fetch و cache داده‌ها
+- **ساختار TypeScript** برای ایمنی بیشتر کد
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🧩 کامپوننت‌های کلیدی
+
+### 1️⃣ Sidebar
+- ناوبری اصلی داشبورد
+- پشتیبانی از حالت تاریک / روشن
+- آیکون‌ها و لینک‌های صفحات
+- نوتیفیکیشن با `NotificationBell`
+
+### 2️⃣ UserCard
+- نمایش کاربر مدیریت‌کننده
+- Avatar با fallback
+- اطلاعات کاربری
+
+### 3️⃣ SettingsPage
+- مدیریت تنظیمات:  
+  - Dark Mode  
+  - Notifications  
+  - Location Access  
+  - Email Alerts  
+  - Beta Features  
+  - Data Sync  
+- ذخیره‌سازی خودکار در `localStorage`  
+- نوتیفیکیشن برای تغییر وضعیت تنظیمات
+
+### 4️⃣ Sitemap Page
+- نمایش ساختار صفحات با **Grid View / List View**  
+- دکمه Refresh برای بارگذاری دوباره
+- هر بخش با **SiteCard** قابل دسترسی است
+
+### 5️⃣ SiteCard
+- نمایش هر صفحه یا بخش با آیکون و نام
+- دکمه Visit برای دسترسی سریع
+
+### 6️⃣ EmptyState
+- نمایش حالت خالی برای تصاویر یا بنرها
+- آیکون `UploadCloud` و پیام مناسب
+
+### 7️⃣ UploadButton
+- آپلود فایل تصویر
+- تبدیل به Base64 و فشرده‌سازی
+- افزودن خودکار به context و ارسال به API
+
+### 8️⃣ Progress
+- نمایش آمار به صورت دایره‌ای
+- دریافت مقدار هدف و نمایش پیشرفت
+
+### 9️⃣ Slider
+- نمایش آمار یا کارت‌ها به صورت اسلایدر
+- استفاده از Swiper.js
+- کاملاً ریسپانسیو
+
+### 🔟 Statistics
+- دریافت آمار از `/api/data` با **React Query**
+- نمایش `totalVisitors`, `todaysVisitors`, `todaysHits`, `totalHits` با Progress
+
+### 1️⃣1️⃣ Hooks
+- **useToast**: نمایش نوتیفیکیشن ساده با alert  
+- **usePost**: ارسال داده‌ها به API
+- **useConvertBase64**: فشرده‌سازی و تبدیل تصویر به Base64
+- **useFetch**: fetch داده‌ها از API  
+
+---
+
+## 🗂️ ساختار پروژه
+
+```text
+src/
+├─ app/
+│  ├─ dashboard/
+│  │  ├─ page.tsx
+│  │  ├─ settings.tsx
+│  │  └─ sitemap.tsx
+├─ myComponents/
+│  ├─ ContextProvider.tsx
+│  ├─ DarkModeProvider.tsx
+│  ├─ SideBar.tsx
+│  ├─ UploadButton.tsx
+│  ├─ UserCards.tsx
+│  ├─ NotificationBell.tsx
+│  ├─ SelectDemo.tsx
+│  └─ Progress.tsx
+├─ Components/
+│  ├─ ui/
+│  │  ├─ Button.tsx
+│  │  ├─ Card.tsx
+│  │  └─ Select.tsx
+├─ hooks/
+│  ├─ useToast.ts
+│  ├─ useFetch.ts
+│  ├─ usePost.ts
+│  └─ useConvertBase64.ts
+├─ data.ts
+├─ db.json
+└─ styles/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## ⚡ تکنولوژی‌ها و ابزارها
 
-To learn more about Next.js, take a look at the following resources:
+Next.js 13
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+React 18
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+TypeScript
 
-## Deploy on Vercel
+ShadCN UI
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Lucide Icons
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Swiper.js
+
+React Query
+
+Tailwind CSS
+
+
+## 💡 نکات مهم
+
+تمام داده‌ها در فایل db.json ذخیره می‌شوند و با APIهای داخلی مدیریت می‌شوند.
+
+تمام حالت‌ها و تنظیمات کاربر با localStorage ذخیره می‌شوند.
+
+قابلیت Dark Mode با Context API مدیریت شده است.
+
+تصاویر آپلود شده به Base64 تبدیل و فشرده می‌شوند.
