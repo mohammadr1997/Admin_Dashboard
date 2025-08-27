@@ -132,7 +132,22 @@ React Query
 Tailwind CSS
 
 
+
 ## 🖼️ تصاویر پروژه
+![Screen_Shots(./github/dashboard-1)
+
+![Screen_Shots(./github/dashboard-2)
+
+![Screen_Shots(./github/dashboard-3)
+
+![Screen_Shots(./github/dashboard-4)
+
+![Screen_Shots(./github/dashboard-5)
+
+![Screen_Shots(./github/dashboard-6)
+
+![Screen_Shots(./github/dashboard-7)
+
 
 
 ## 💡 نکات مهم
