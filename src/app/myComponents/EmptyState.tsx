@@ -1,5 +1,5 @@
 import { UploadCloud } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
 interface propType{
   component:string
 }
