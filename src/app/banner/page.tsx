@@ -43,7 +43,7 @@ interface bannerType {
   src: string;
   date: string;
   realDate: string;
-  isActive: boolean;
+  isActive?: boolean;
   type?: string;
   id:number
 }

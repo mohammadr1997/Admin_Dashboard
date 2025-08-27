@@ -22,11 +22,18 @@ const days = ['today', 'last 7 days', 'last 30', 'year', 'all'];
 const newest = ['newest', 'oldest'];
 
 interface imgType {
+  // imageName: string;
+  // src: string;
+  // date: string;
+  // realDate: string;
+  // isActive: boolean;
+  // type?: string;
+  // id:number
   imageName: string;
   src: string;
   date: string;
   realDate: string;
-  isActive: boolean;
+  isActive?: boolean;
   type?: string;
   id:number
 }

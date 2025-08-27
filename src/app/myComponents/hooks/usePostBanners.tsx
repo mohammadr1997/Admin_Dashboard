@@ -6,7 +6,7 @@ interface dataType {
   src: string;
   realDate: string;
   date: string;
-  isActive: boolean;
+  isActive?: boolean;
 }
 export default function usePostBanners() {
   const postBanner = async (data: dataType | dataType[]) => {

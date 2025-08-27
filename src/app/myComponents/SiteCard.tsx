@@ -14,7 +14,7 @@ import { LucideIcon } from 'lucide-react';
   name: string;
   icon: LucideIcon;
   url: string;
-  description:string
+ 
 }
  export default function SiteCard({ route, iconBg }:{route:NavItem , iconBg:string}){
     return (<Card className="w-[300px] mx-auto rounded-2xl shadow-md overflow-hidden bg-white text-gray-800">
@@ -24,7 +24,7 @@ import { LucideIcon } from 'lucide-react';
       </span>
       <CardTitle className="text-lg font-semibold">{route.name}</CardTitle>
       <CardDescription className="text-sm text-gray-500 text-center">
-        {route.description}
+        {/* {route.description} */}
       </CardDescription>
     </CardContent>
     <CardFooter className="flex justify-center">

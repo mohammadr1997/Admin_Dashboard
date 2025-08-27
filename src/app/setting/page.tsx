@@ -16,11 +16,11 @@ export default function SettingsPage() {
   const [settingsData, setSettingsData] = useState<SettingsType[]>([]);
    const notificationsEnabled=context?.notificationsEnabled
   const setNotificationsEnabled=context?.setNotificationsEnabled
-  // const [locationAccess, setLocationAccess] = useState(false);
-  // const [emailAlert, setEmailAlert] = useState(false);
-  // const [betaFeature, setBetaFeature] = useState(false);
-  // const [dataSync, setDataSync] = useState(false);
-
+  const [locationAccess, setLocationAccess] = useState(false);
+  const [emailAlert, setEmailAlert] = useState(false);
+  const [betaFeature, setBetaFeature] = useState(false);
+  const [dataSync, setDataSync] = useState(false);
+  console.log(locationAccess,emailAlert,betaFeature,dataSync)
   const contextDark = useContext(DarkModeContext);
   if (!contextDark) {
   throw new Error('DarkModeContext must be used within a DarkModeProvider');
@@ -119,7 +119,8 @@ const { toggleDarkMode } = contextDark;
         toggleDarkMode();
         break;
       case "Enable Notifications":
-        setNotificationsEnabled(newStatus);
+        if(setNotificationsEnabled){
+        setNotificationsEnabled(newStatus);}
         localStorage.setItem("notificationsEnabled", JSON.stringify(newStatus));
         toast({
           title: newStatus ? "Notifications Enabled" : "Notifications Disabled",

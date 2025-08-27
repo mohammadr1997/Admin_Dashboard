@@ -8,6 +8,9 @@ interface progressProp {
 }
 interface progressProp {
   keyStatus: string;
+  target:number
+  darkMode:boolean
+
 }
 export default function Progress({ target, keyStatus }: progressProp) {
   const [progressValue, setProgressValue] = useState<number>(0);
