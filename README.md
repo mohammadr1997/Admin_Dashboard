@@ -134,19 +134,21 @@ Tailwind CSS
 
 
 ## 🖼️ تصاویر پروژه
-![Screen_Shots](github/dashboard-1.png)
 
-![Screen_Shots](github/dashboard-2.png)
 
-![Screen_Shots](github/dashboard-3.png)
+![Screen_Shots](gitHub/dashboard-2.png)
 
-![Screen_Shots](github/dashboard-4.png)
+![Screen_Shots](gitHub/dashboard-3.png)
 
-![Screen_Shots](github/dashboard-5.png)
+![Screen_Shots](gitHub/dashboard-4.png)
 
-![Screen_Shots](github/dashboard-6.png)
+![Screen_Shots](gitHub/dashboard-1.png)
 
-![Screen_Shots](github/dashboard-7.png)
+![Screen_Shots](gitHub/dashboard-5.png)
+
+![Screen_Shots](gitHub/dashboard-6.png)
+
+![Screen_Shots](gitHub/dashboard-7.png)
 
 
 
