@@ -43,10 +43,10 @@ export type FAQType = {
 export const menuItem = [
   {
     mainItem: [
-      { name: 'Dashboard', icon: LayoutDashboard, url: 'dashboard' },
-      { name: 'News', icon: Newspaper, url: 'news' },
+      { name: 'Dashboard', icon: LayoutDashboard, url: 'Dashboard' },
+      { name: 'News', icon: Newspaper, url: 'News' },
 
-      { name: 'Gallery', icon: GalleryHorizontal, url: 'gallery' },
+      { name: 'Gallery', icon: GalleryHorizontal, url: 'Gallery' },
       { name: 'Slide Banner', icon: SlidersHorizontal, url: 'banner' },
     ],
     restItem: [
