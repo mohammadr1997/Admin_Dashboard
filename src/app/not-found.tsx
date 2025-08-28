@@ -5,7 +5,7 @@ import { Button } from './Components/ui/Button';
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center h-full gap-4 p-10 lg:p-5">
+    <div className="flex flex-col !dark:bg-white items-center justify-center h-full gap-4 p-10 lg:p-5">
       <Image
         width={600}
         height={600}
