@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 interface alertProps{
-number:number
+number?:number
 }
 export default function BasicAlerts({number}:alertProps) {
   return (
