@@ -1,11 +1,13 @@
 'use client';
 import * as React from 'react';
 
-
-export default function BasicAlerts() {
+interface alertProps{
+number:number
+}
+export default function BasicAlerts({number}:alertProps) {
   return (
 
-    <p className='text-center -mt-22 lg:-mt-32 mx-auto text-red-400 text-md lg:text-xl font-semibold'> check your newtwork connection !</p>
+    <p className={` ${number===25? '-mt-4 lg:-mt-[6rem] ':'-mt-18 lg:-mt-22'} text-center   mx-auto text-red-400 text-md lg:text-2xl font-semibold`}> check your newtwork connection !</p>
     // <Stack
     //   sx={{
     //     width: '100%',
