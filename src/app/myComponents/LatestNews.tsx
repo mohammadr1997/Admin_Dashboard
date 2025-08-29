@@ -79,8 +79,8 @@ const context=useContext(Context)
         </div>
       )}
       {isError && (
-        <div className="-mt-14 lg:-mt-18 flex flex-col gap-14 justify-center">
-          <div className="mx-auto !mb-4 ">
+         <div className={`-mt-14 lg:${number==25 ? '':'-mt-14'} flex flex-col gap-8 justify-center`}>
+          <div className={` lg:${number==25?'-mt-18 -mb-14':''} mx-auto  `}>
             <Image
               alt="alert-pic"
               width={800}
@@ -89,7 +89,7 @@ const context=useContext(Context)
             />
           </div>
 
-          <BasicAlerts />
+          <BasicAlerts number={number} />
         </div>
       )}
        
