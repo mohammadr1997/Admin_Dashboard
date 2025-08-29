@@ -92,18 +92,7 @@ const context=useContext(Context)
           <BasicAlerts />
         </div>
       )}
-        <div className={`-mt-14 lg:${number==25 ? '':'-mt-14'} flex flex-col gap-8 justify-center`}>
-          <div className={` lg:${number==25?'-mt-18 -mb-14':''} mx-auto  `}>
-            <Image
-              alt="alert-pic"
-              width={800}
-              height={800}
-              src="/images/alert.png"
-            />
-          </div>
-
-          <BasicAlerts number={number} />
-        </div>
+       
       {data && (
         <div
           className={`${number > 10 ? '' : 'h-[30rem]'}  overflow-y-auto overflow-x-hidden !mt-7 pb-2`}
