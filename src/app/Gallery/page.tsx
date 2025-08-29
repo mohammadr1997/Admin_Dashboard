@@ -225,7 +225,7 @@ export default function Page() {
 
         <button
           type="submit"
-          className="!text-black  dark:text-white !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
+          className="text-black  !dark:text-white !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1 !border-gray cursor-pointer"
         >
           Save Changes
         </button>
