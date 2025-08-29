@@ -36,7 +36,7 @@ export default function ContextProvider({
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [selectedBanner, setSelectedBanner] = useState<selectedImageType[]>([]);
   const [selectedImageGalleryByDate, setSelectedImageGalleryByDate] = useState<selectedImageType[]>([]);
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   return (
     <Context.Provider
       value={{
