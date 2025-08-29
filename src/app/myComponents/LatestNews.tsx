@@ -73,12 +73,12 @@ const context=useContext(Context)
       </div>
      
      
-      {/* {isLoading && (
+      {isLoading && (
         <div className=" mx-auto mt-14 lg:mt-22">
           <CircularIndeterminate />
         </div>
-      )} */}
-      {/* {isError && (
+      )}
+      {isError && (
         <div className="-mt-14 lg:-mt-18 flex flex-col gap-14 justify-center">
           <div className="mx-auto !mb-4 ">
             <Image
@@ -91,7 +91,7 @@ const context=useContext(Context)
 
           <BasicAlerts />
         </div>
-      )} */}
+      )}
         <div className={`-mt-14 lg:${number==25 ? '':'-mt-14'} flex flex-col gap-8 justify-center`}>
           <div className={` lg:${number==25?'-mt-18 -mb-14':''} mx-auto  `}>
             <Image
@@ -104,7 +104,7 @@ const context=useContext(Context)
 
           <BasicAlerts number={number} />
         </div>
-      {/* {data && (
+      {data && (
         <div
           className={`${number > 10 ? '' : 'h-[30rem]'}  overflow-y-auto overflow-x-hidden !mt-7 pb-2`}
         >
@@ -144,7 +144,7 @@ const context=useContext(Context)
             );
           })}
         </div>
-      )} */}
+      )}
     </div>
   );
 }
