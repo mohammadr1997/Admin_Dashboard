@@ -1,7 +1,7 @@
 # 🚀 Admin Dashboard with ShadCN UI, React & TypeScript
 ## یک داشبورد ادمین کامل ساخته شده با **React**, **Next.js 13**, **TypeScript** و **ShadCN UI** برای مدیریت کاربران، تصاویر، محصولات و آمار وبسایت
 
-#### 🔗[Click here to see the live demo](https://admin-dashboard-teal-psi-55.vercel.app/Dashboard)
+#### 🔗[Click here to see the live demo](https://admin-dashboard-two-phi-39.vercel.app/setting)
 
 
 ## 🎯 ویژگی‌های پروژه
