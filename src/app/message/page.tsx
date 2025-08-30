@@ -68,7 +68,7 @@ export default function MessagesPage() {
   return (
     <section className="overflow-x-hidden grid grid-cols-1 lg:flex-nowrap w-full text-white">
       <SideBar />
-      <div className="text-white font-bold gap-4 lg:justify-between p-10 flex flex-col bg-[#189DAC] dark:bg-[#0f4b5c] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center justify-around">
+      <div className="text-white mt-10 lg:mt-0 font-bold gap-4 lg:justify-between p-10 flex flex-col bg-[#189DAC] dark:bg-[#0f4b5c] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center justify-around">
         <div className="flex flex-col md:flex-col lg:flex-row lg:justify-between relative justify-center w-full">
           <div className='flex flex-row justify-between gap-3  w-full '>
             <div className='mx-auto lg:mx-0'>

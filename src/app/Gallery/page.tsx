@@ -93,7 +93,7 @@ export default function Page() {
   return (
     <section className="  overflow-x-hidden  grid grid-cols-1  lg:flex-nowrap  w-full text-white ">
       <SideBar />
-      <div className=" text-white   font-bold  gap-4 lg:justify-between p-10  flex flex-col dark:bg-[#0f4b5c]   bg-[#189DAC] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center  justify-around ">
+      <div className=" text-white mt-10  lg:mt-0   font-bold  gap-4 lg:justify-between p-10  flex flex-col dark:bg-[#0f4b5c]   bg-[#189DAC] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center  justify-around ">
         <div className=" flex flex-col md:flex-col lg:flex-row lg:justify-between  relative justify-center  w-full">
           {' '}
           <div className=' text-center'>
@@ -124,6 +124,7 @@ export default function Page() {
     
         {dayValueInput==='' && Array.isArray(dayValueInput==='' ? selectedImgs : imagesByDateFilter) ? (dayValueInput==='' ? selectedImgs : imagesByDateFilter)?.map((img, key: number) => {
               return (
+            
                 <Card
                   className="w-[300px]  overflow-hidden mx-auto rounded-3xl"
                   key={key}

@@ -43,7 +43,7 @@ export default function Page() {
       <SideBar />
 
  
-      <div className="flex flex-col gap-6 p-10 dark:bg-[#0f4b5c] bg-[#189DAC] text-white md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full">
+      <div className="flex flex-col mt-10 lg:mt-0 gap-6 p-10 dark:bg-[#0f4b5c] bg-[#189DAC] text-white md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full">
         
       
         <div className="flex flex-row flex-nowrap justify-between gap-3">

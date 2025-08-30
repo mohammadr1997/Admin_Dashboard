@@ -62,7 +62,7 @@ const context=useContext(Context)
     }
   }, [notificationsEnabled]);
   return (
-    <div className={`p-4 ${menuOpen ? '':''}`} >
+    <div className={`p-4 mt-6 lg:mt-0 ${menuOpen ? '':''}`} >
       <div className='flex   mt-1 flex-row w-full flex-nowrap justify-between gap-2'>
       {number!==10 ?<> 
        <div className=' flex flex-col w-full lg:w-3/4'>

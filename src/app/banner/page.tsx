@@ -255,18 +255,21 @@ export default function Page() {
   : []
 ).map((banner: bannerType, key: number) => {
                 return (
-                  <div className="mt-2 mb-2" key={key}>
-                    <Card className="w-[350px] mx-auto overflow-hidden">
+                  <div className="mt-2 mb-2 w-full lg:w-[350px] mx-auto" key={key}>
+                    <Card className="w-full  mx-auto overflow-hidden">
                       <CardTitle></CardTitle>
                       <CardDescription></CardDescription>
-                      <CardContent className="w-[350px] h-[480px] grid-cols-1">
-                        <Image
-                          className="w-[350px]  rounded-3xl mt-5 h-[350px] mx-auto cursor-pointer hover:scale-110 transition-all duration-700"
+                      <CardContent className="w-full mx-auto h-[480px] grid-cols-1 text-center ">
+                      
+                           <Image
+                          className="w-[380px]  rounded-3xl mt-5 h-[350px] mx-auto cursor-pointer hover:scale-110 transition-all duration-700"
                           src={banner.src}
                           alt={banner.imageName}
                           width={600}
                           height={600}
                         />
+                     
+                       
                         <CardTitle className="mt-2 text-left p-4 text-md lg:text-xl font-bold">
                           {' '}
                           

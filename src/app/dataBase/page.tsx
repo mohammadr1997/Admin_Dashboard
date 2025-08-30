@@ -74,7 +74,7 @@ const context=useContext(Context)
   return (
     <section className="overflow-x-hidden grid grid-cols-1 lg:flex-nowrap w-full text-white">
       <SideBar />
-      <div className="text-white font-bold gap-4 lg:justify-between p-10 flex flex-col bg-[#189DAC] dark:bg-[#0f4b5c] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center justify-around">
+      <div className="text-white mt-10 lg:mt-0 font-bold gap-4 lg:justify-between p-10 flex flex-col bg-[#189DAC] dark:bg-[#0f4b5c] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center justify-around">
         <div className="flex flex-col md:flex-col lg:flex-row lg:justify-between relative justify-center w-full">
           <div className='w-full flex flex-row justify-between gap-3 '>
             <div className='mx-auto lg:mx-0'>  <h1 className="text-xl lg:text-4xl">Database Management</h1>
@@ -105,7 +105,7 @@ const context=useContext(Context)
                   <DialogTrigger asChild>
                     <Button
                       onClick={() => setSelectedRecord(record)}
-                      className=" bg-[#a5a6a6] cursor-pointer dark:text-white hover:!bg-[#b9babb] text-black  !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1  !border-gray "
+                      className=" bg-[#a5a6a6] cursor-pointer !text-white hover:!bg-[#b9babb]   !font-bold !text-md !lg:text-xl !px-4 !py-2 !rounded-2xl !border-1  !border-gray "
                       variant="ghost"
                     >
                       View Details
