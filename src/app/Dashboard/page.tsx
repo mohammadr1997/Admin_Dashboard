@@ -29,7 +29,7 @@ export default function Page() {
       <div className="mt-12 lg:mt-0   bg-[#189DAC] dark:bg-[#0f4b5c] md:pl-[8px] lg:pl-[268px] md:pr-[8px] w-full text-center flex flex-col    ">
         
         <div className="flex w-full flex-col lg:flex-row gap-4  lg:justify-evenly text-black justify-center  relative  mt-4 h-28 font-bold mx-auto ">
-          <div className='lg:w-3/4  mx-auto flex justify-center'>
+          <div className='lg:w-3/4 p-4 lg:p-1  mx-auto flex justify-center'>
             <h2 className=" text-center lg:text-left flex flex-col gap-3">
             <span className=" text-lg  lg:text-3xl text-white text-center ">
               Dashboard
