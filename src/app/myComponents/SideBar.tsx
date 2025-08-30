@@ -49,7 +49,7 @@ export default function SideBar() {
     <>
    
       <div
-        className={`lg:hidden  fixed text-center p-6 transition-all ${menuOpen ? "h-[70vh]" : ""} lg:h-screen mx-auto  relative w-full ${bgColor}`}
+        className={`lg:hidden  !fixed z-50 text-center p-6 transition-all ${menuOpen ? "h-[70vh]" : ""} lg:h-screen mx-auto  relative w-full ${bgColor}`}
       >
         { menuOpen ? (
           <X

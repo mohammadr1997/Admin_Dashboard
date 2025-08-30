@@ -64,7 +64,7 @@ export default function Page() {
   </button>
 
   <Select value={viewMode} onValueChange={setViewMode}>
-    <SelectTrigger className="bg-black/10 w-48 lg:w-72 backdrop-blur-lg border border-blue-100 rounded-3xl cursor-pointer p-4 text-white font-bold flex flex-row items-center justify-center gap-2 text-lg md:text-xl box-border">
+    <SelectTrigger className=" hidden lg:flex bg-black/10 w-48 lg:w-72 backdrop-blur-lg border border-blue-100 rounded-3xl cursor-pointer p-4 text-white font-bold  flex-row items-center justify-center gap-2 text-lg md:text-xl box-border">
       <SelectValue className="text-lg md:text-xl font-bold" placeholder="Select View" />
     </SelectTrigger>
     <SelectContent className="bg-black/30 text-white rounded-xl">
