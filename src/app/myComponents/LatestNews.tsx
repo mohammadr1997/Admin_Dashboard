@@ -12,6 +12,7 @@ import { Context } from './ContextProvider';
 import { useContext } from 'react';
 import NotificationBell from './NotificationBell';
 import Link from 'next/link';
+
 interface newsNumber {
   number: number;
   title: string;
@@ -21,6 +22,7 @@ interface NewsItem {
   description: string;
   image: string;
   publishedAt: string;
+  
 }
 export default function LatestNews({ number, title }: newsNumber) {
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
@@ -98,6 +100,7 @@ const context=useContext(Context)
           className={`${number > 10 ? '' : 'h-[30rem]'}  overflow-y-auto overflow-x-hidden !mt-7 pb-2`}
         >
           {data.map((news:NewsItem, index) => {
+            console.log('news',news)
             return (
               <div key={index} className="grid grid-cols-2 gap-8  mt-4 mb-4   ">
                 <div className="">
@@ -114,12 +117,28 @@ const context=useContext(Context)
                 </div>
                 <div className="grid grid-cols-1 gap-2 px-3">
                   {number==25 ? <a className="text-md hidden lg:block lg:text-xl ">
-                   <Link href={'/news/n'}>{truncateText(news.description, 14)}</Link> 
+                   <Link href={{
+                    pathname:'news/details',
+                    query:{
+                      title:news.title,
+                      description:news.description,
+                      src:news.image,
+                      content:news.conetnt
+                    }
+                   }}>{truncateText(news.description, 14)}</Link> 
                   </a> : <p className="text-md hidden lg:block lg:text-xl ">
                     {truncateText(news.description, 14)}
                   </p> }
                  {number==25 ?  <a className="text-md mt-4 lg:hidden block lg:text-xl ">
-                   <Link href={'/news/n'}>{truncateText(news.description, 6)}</Link> 
+                   <Link href={{
+                    pathname:'news/details',
+                    query:{
+                      title:news.title,
+                      description:news.description,
+                      src:news.image,
+                      content:news.conetnt
+                    }
+                   }}>{truncateText(news.description, 6)}</Link> 
                   </a> : <p className="text-md mt-4 lg:hidden block lg:text-xl ">
                     {truncateText(news.description, 6)}
                   </p>}
