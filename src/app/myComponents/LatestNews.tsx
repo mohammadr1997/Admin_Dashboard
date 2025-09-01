@@ -123,7 +123,7 @@ const context=useContext(Context)
                       title:news.title,
                       description:news.description,
                       src:news.image,
-                      content:news.conetnt
+                      
                     }
                    }}>{truncateText(news.description, 14)}</Link> 
                   </a> : <p className="text-md hidden lg:block lg:text-xl ">
@@ -136,7 +136,7 @@ const context=useContext(Context)
                       title:news.title,
                       description:news.description,
                       src:news.image,
-                      content:news.conetnt
+                     
                     }
                    }}>{truncateText(news.description, 6)}</Link> 
                   </a> : <p className="text-md mt-4 lg:hidden block lg:text-xl ">
