@@ -18,7 +18,7 @@ export default function Page() {
         <div className='w-[92%] mx-auto flex justify-center'>
             <img   onError={(e) => {
     e.currentTarget.src = "/images/latest-news.jpg";
-  }} className='w-full h-[250px] object-contain mx-auto' src={src} alt="latest news" />
+  }} className='w-full h-[250px] object-contain mx-auto' src={src ?? "/images/latest-news.jpg"} alt="latest news" />
         </div>
         <div className='flex justify-center w-full p-2'>
             <p className='mx-auto mb-2 text-md lg:text-lg p-2 text-center'>{desc}</p>
