@@ -16,13 +16,13 @@ export default function SideBar() {
   type items = { name: string; icon: LucideIcon; url: string };
 
   const pathName = usePathname();
-  // const path = pathName.split("").slice(1).join("");
+ 
    const contextDark = useContext(DarkModeContext);
     if (!contextDark) {
     throw new Error('DarkModeContext must be used within a DarkModeProvider');
   }
   const { darkMode } = contextDark;  
-  // const { darkMode } = useContext(DarkModeContext);
+ 
   const context=useContext(Context)
 
  const menuOpen = context?.menuOpen ;
@@ -45,6 +45,12 @@ export default function SideBar() {
       setNotificationsEnabled(JSON.parse(stored));
     }
   }, [notificationsEnabled]);
+  useEffect(()=>{
+
+    if(setOpenMenu && menuOpen){
+      setOpenMenu(false)
+    }
+  },[pathName])
   return (
     <>
    
