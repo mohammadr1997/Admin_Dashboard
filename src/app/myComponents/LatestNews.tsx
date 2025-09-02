@@ -116,7 +116,7 @@ const context=useContext(Context)
                   
                 </div>
                 <div className="grid grid-cols-1 gap-2 px-3">
-                  {number==25 ? <a className="text-md hidden lg:block lg:text-xl ">
+                  {number==25 ? <a className=" underline text-md hidden lg:block lg:text-xl ">
                    <Link href={{
                     pathname:'news/details',
                     query:{
@@ -129,7 +129,7 @@ const context=useContext(Context)
                   </a> : <p className="text-md hidden lg:block lg:text-xl ">
                     {truncateText(news.description, 14)}
                   </p> }
-                 {number==25 ?  <a className="text-md mt-4 lg:hidden block lg:text-xl ">
+                 {number==25 ?  <a className="underline text-md mt-4 lg:hidden block lg:text-xl ">
                    <Link href={{
                     pathname:'news/details',
                     query:{

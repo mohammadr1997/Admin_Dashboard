@@ -227,8 +227,8 @@ export default function Page() {
         <div className="relative  w-full">
           <Select value={typeValue} onValueChange={setTypeValue}>
             <SelectTrigger className="mx-auto lg:absolute lg:right-4 cursor-pointer flex !text-white text-md md:text-lg bg-black/10  w-64 lg:w-72 backdrop-blur-lg border-1  font-bold  border-blue-100  rounded-3xl px-3 py-2 flex-row gap-2 flex-nowrap">
-              <SelectValue className="" placeholder="filter by days" />
-              {/* <ChevronDown className='absolute right-4 top-3'/> */}
+              <SelectValue className="" placeholder="filter by types" />
+            
             </SelectTrigger>
             <SelectContent className="">
               <SelectGroup>
